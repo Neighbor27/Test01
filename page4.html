@@ -82,7 +82,7 @@
         <div class="px-40 flex flex-col py-16">
           <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] self-center">
             <div class="pb-5">
-              <h2 class="text-[32px] font-bold px-4 leading-tight">
+              <h2 id="target-name" class="text-[32px] font-bold px-4 leading-tight">
                 상대방의 관심사는?
               </h2>
             </div>
@@ -264,7 +264,7 @@
       document.addEventListener('DOMContentLoaded', () => {
         const targetNameElement = document.getElementById('target-name');
         const selectedTargetName = localStorage.getItem('selectedTarget') || '상대방';
-        targetNameElement.textContent = selectedTargetName;
+        targetNameElement.textContent = `${selectedTargetName}의 관심사는?`;
 
         const cards = document.querySelectorAll('.card');
         const nextButton = document.getElementById('submit-button');
@@ -278,6 +278,10 @@
         nextButton.addEventListener('click', () => {
           const selectedCards = document.querySelectorAll('.card.selected');
           if (selectedCards.length > 0) {
+            // 선택된 관심사를 저장
+            const selectedInterests = Array.from(selectedCards).map(card => card.querySelector('h2').textContent);
+            localStorage.setItem('selectedInterests', JSON.stringify(selectedInterests));
+
             // 이름을 URL 파라미터로 추가하여 page5.html로 이동합니다.
             window.location.href = `page5.html?name=${encodeURIComponent(selectedTargetName)}`;
           } else {
