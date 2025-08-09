@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght@400;500;700;900&family=Work+Sans%3Awght@400;500;700;900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      .hidden {
+        display: none;
+      }
+      /* 선택지 카드 스타일 */
+      .card {
+        border: 1px solid #dce0e5; /* 기본 테두리 1px 유지 */
+        transition: box-shadow 0.14s ease-in-out; /* 부드러운 전환 효과를 box-shadow에 적용 */
+        cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+        box-shadow: 0 0 0 0 transparent; /* 선택되지 않았을 때는 투명한 그림자 */
+      }
+      /* 선택된 카드에만 3px 파란색 그림자를 적용 */
+      .card.selected {
+        box-shadow: 0 0 0 3px #1466b8; /* 테두리처럼 보이는 3px 그림자 */
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-auto"
+      style='font-family: "Work Sans", "Noto Sans", sans-serif;'
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-10 py-3"
+        >
+          <a class="flex items-center gap-4 text-[#111418] cursor-pointer" href="index.html">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">
+              Grace & Connect
+            </h2>
+          </a>
+          <div class="flex flex-1 justify-end gap-8">
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f0f2f4] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+            >
+              <div class="text-[#111418]" data-icon="Question" data-size="20px" data-weight="regular">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20px"
+                  height="20px"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+            <a href="login.html">
+              <button
+                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Login</span>
+              </button>
+            </a>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 flex-col py-16">
+          <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] self-center">
+            <div class="pb-5">
+              <h2 class="text-[32px] font-bold px-4 leading-tight">
+                <span id="target-name">상대방</span>의 관심사는?
+              </h2>
+            </div>
+            <div class="grid grid-cols-3 gap-3 p-4 justify-items-center">
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcauIEXUKKMYP30hgNFtVa7ID1-hWICo36ceLnTAP7Obc1hRLwW9j-YtrQAUDap3cSKC8nzAqTNVgwh5_BZ5murIj4o56Ej4FuooaHjQqZ54U5sUQ0YcsQiVQzS7gtILY7L_u0lAyKMCbY-QUot4JUnKmLevY951MB8wQ67AOZedSXSFh8q-ru37XyUodTEoartMRR86RVT-1SpDXvWFVEEFwwtnlMy7lXhosJbhW88RDBjYXquGW2FnJDQSY85s2AcF8u-owGgA");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">영화</h2>
+              </div>
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCLB2vP8P-qw82E-NTcj6G1WBcDL883wvu32QQqJgLkZxSXuc1K6Fjg80hqxIfp951aMOVf-nX6VHQ10lHtZBgLr8vCJPQrpJP-KkQtgX1m3lD6p8RESzgU3UfJAXMzuvoBalCUXBk6DOWyUmZiF_Br_GjQexelD5KLySgm8mBDR_Wo-4NT4DnjWhFITeTVLqkKytD-_68a8ZEIK2zGpOcRv-AjE_OeWBG38kf6TCgegj-DkrlyU6mOtE8i7EaOnJcR0VPnaiNdQQ");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">음악</h2>
+              </div>
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAsvkaU0BRsZFcuU9lGlumxmATVRCyl3o7TMzS4hj6xI8i9v4Kh6foLI12r3mfEplrVKue95pNdpUKQ-e6rWWZtEl4rGRhliTHN-zUqTHV-J_nw1P4xJx7sgsPTuWzqExSLARMasJwHnZgYYb1rNUQVK7BfacTlKJNTVRujwBCzt_ngn16fESx1JRLFugt3Xrfpl74Vb87hwzWeA9W8-pZygDqLvE_Ba34OJa9MMpvd53s3DLTkezTEz2xslmZelb9E1P8AL1PVWA");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">스포츠</h2>
+              </div>
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAl1J7_ZZAzMNwvqn83rrAQuySJDPQpfCkIKgIx7-5XQqI9KvW6700ItRRKiWYpp_cDgE7FyHJrp81ZFTBc70_OlDwiCifMvy5mCtod03WjLPJwmA-MTBSPFvI-FmBgRJiHI_T30MQnvGUZFa9o-apdUQkW1t8aknRjWpJxhNuPcWZuqtF3YZA6CUrAzSG8ufWikipL_8rgw6rOcgDc8shu7B5qEFxL8Teee-0Q1WBSUakZDqRweq8-fk6MWWqrYdxdtvB852HP3g");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">여행</h2>
+              </div>
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCX73n5aJpoHvVG2cUnX_vgT1mQoKYHWP5MYpj-l-aS9JRgeEG3QsArjleRj9dTL6qlytg0NGkrxgVRASX_4QTEPicyPqaY2ncAdpkJABzn4fotm_w8k6icrKvpluBZgDG94L6Rxu0Y2-rvTUAUFMvHxe6fHGP5yNosXIHdKKBcwRQpnKkr56L3JXOt971O3dgjM3NxmuZr5HGm7kl94DfLAhvStFB3ujaxdG9pyfCcXt3xAIXjhykegRnk858wHfF5x3nJBOaMag");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">음식</h2>
+              </div>
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBe9HjLKDNwRZkjtzBz5Mpa_VhXoqv_67VezzJMvVOguw-EEdtmEIeMSZfaWvVtRX02SXzr0SVH2qS_VtYGDxJLSqx73H4AhH17pvnkVutUgOP1V-rJz34AiVWl1aGDM_VqV0fhELTwk0G2TEz6mdqXZq7jqsuGhOmPYJ9TYyHKnum2pTgDgwRdG_ybVOnTMmzTfbYqIdZrHkArCQmfuyOaul321YZfNxV6ijB33V00ucdbc0wyPzVyyiedLt2qryn3hYIFXidYFQ");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">과학</h2>
+              </div>
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAPj6y70kRryTDPTkn7_ttUWG-yrgm1xIGe-IyKWZ5mMUv4NevF4rQ4Hm6bKyuTkznrcJN7GN3mruwwI0Txf9Tk556ysZVxa3oNfIoV5ppkpIQDDkg9EE4W6ExrulusdaQOMqvnVHqfOfeb_fLT0Lu_MDDHZTEZpdKP6dPCbDqrP7blLASndeTE9jpFmsFT2-i18l7JAxhbKBwbpBHVwoa_tHuu6zqhqgM4tHSofc9mHtkonEkfWfIVb6S7cI8piLpaXhXlN9-ZVg");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">패션</h2>
+              </div>
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDqhJhBcCxMzXlS4jo-clujZcZISABbyZaajBkE-1GwSLkaREsrVCAjSE0HjLghWMLUm3eSgx0CMTLEPGBb1OgTq6kHx_w8VqzKdLbrsUgTPx4vfBVXxbawnWO_0al37CR9LmaxsFUo22HGZs4WS-DQWuycojQ4M32gnNIgBV4xkJkkTX2CqEiE18AfXXgdmnPonkvvPywLcAT1kfuasmz2EG3cPAkFGwzpNfe8d0y46jyhkN2FoPsDn70l-sAaKyHSr5veDVD2mg");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">미술</h2>
+              </div>
+              <div
+                class="card flex gap-3 rounded-lg bg-white p-4 items-center w-full max-w-[158px]"
+              >
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDqhJhBcCxMzXlS4jo-clujZcZISABbyZaajBkE-1GwSLkaREsrVCAjSE0HjLghWMLUm3eSgx0CMTLEPGBb1OgTq6kHx_w8VqzKdLbrsUgTPx4vfBVXxbawnWO_0al37CR9LmaxsFUo22HGZs4WS-DQWuycojQ4M32gnNIgBV4xkJkkTX2CqEiE18AfXXgdmnPonkvvPywLcAT1kfuasmz2EG3cPAkFGwzpNfe8d0y46jyhkN2FoPsDn70l-sAaKyHSr5veDVD2mg");'
+                ></div>
+                <h2 class="text-[#111418] text-base font-bold leading-tight">게임</h2>
+              </div>
+            </div>
+            <div class="flex px-4 py-3 justify-end">
+              <button
+                id="submit-button"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">다음</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const targetNameElement = document.getElementById('target-name');
+        const selectedTargetName = localStorage.getItem('selectedTarget') || '상대방';
+        targetNameElement.textContent = selectedTargetName;
+
+        const cards = document.querySelectorAll('.card');
+        const nextButton = document.getElementById('submit-button');
+
+        cards.forEach((card) => {
+          card.addEventListener('click', () => {
+            card.classList.toggle('selected');
+          });
+        });
+
+        nextButton.addEventListener('click', () => {
+          const selectedCards = document.querySelectorAll('.card.selected');
+          if (selectedCards.length > 0) {
+            // 이름을 URL 파라미터로 추가하여 page5.html로 이동합니다.
+            window.location.href = `page5.html?name=${encodeURIComponent(selectedTargetName)}`;
+          } else {
+            alert('상대방의 관심사를 하나 이상 선택해주세요.');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

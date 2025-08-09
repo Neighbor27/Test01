@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght@400;500;700;900&family=Work+Sans%3awght@400;500;700;900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      .hidden {
+        display: none;
+      }
+      /* 선택지 카드 스타일 */
+      .card {
+        border: 1px solid #dce0e5;
+        transition: box-shadow 0.14s ease-in-out, filter 0.3s ease-in-out, transform 0.14s ease-in-out;
+        cursor: pointer;
+        box-shadow: 0 0 0 0 transparent;
+        filter: grayscale(0) blur(0);
+      }
+      /* 선택된 카드 스타일 */
+      .card.selected {
+        box-shadow: 0 0 0 3px #1466b8;
+        filter: grayscale(0) blur(0);
+        transform: scale(1);
+      }
+      /* 선택되지 않은 카드 스타일 (흑백 + 블러) */
+      .card.deselected {
+        filter: grayscale(80%) blur(2px);
+      }
+      /* 호버(Hover) 시 카드 스타일 */
+      .card:hover:not(.deselected) {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .mbti-tab {
+        text-align: center;
+        flex: 1;
+        cursor: pointer;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+      /* '아직 모름' 탭은 너비를 100%로 유지 */
+      .mbti-tab.w-full {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+      .mbti-tab-group .mbti-tab.active {
+        border-bottom-color: #111418;
+        color: #111418;
+      }
+      .mbti-tab-group .mbti-tab:not(.active) {
+        border-bottom-color: transparent;
+        color: #637588;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-auto"
+      style='font-family: "Work Sans", "Noto Sans", sans-serif;'
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-10 py-3"
+        >
+          <a class="flex items-center gap-4 text-[#111418] cursor-pointer" href="index.html">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">
+              Grace & Connect
+            </h2>
+          </a>
+          <div class="flex flex-1 justify-end gap-8">
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f0f2f4] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+            >
+              <div class="text-[#111418]" data-icon="Question" data-size="20px" data-weight="regular">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20px"
+                  height="20px"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+            <a href="login.html">
+              <button
+                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Login</span>
+              </button>
+            </a>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p class="text-[#111418] tracking-light text-[32px] font-bold leading-tight min-w-72">MBTI 유형을 선택하세요</p>
+            </div>
+            <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4">
+              MBTI 유형을 결정하기 위해 다음 질문에 답해주세요.
+            </p>
+            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 1: 당신이 에너지를 얻는 방법은?</h3>
+            <div class="p-4" data-question="q1" data-value="E">
+              <div
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB151yq9xLpJxtOOYAMQKhhHZ4VVDVqb6MbTngvAO1wZgZufgMOz3DafjzJE6cBtDe2UTwsrJlD4NcI8AVfZ7H05vDMMCK-W5_QaE5g1cc_MCEkTaOA_F24jh-u2cEiIubN5PMpZjd4VowCHl1yEdNZptPPdk1O7PP0S4qnrreDyheSjg3raXCD-t8xKfNoltHNvCByNX0xXy2m6Yx3PEQgTrkOz_BvQ2PtLLcSiHCpGL0MvOEUXeA63LgdkQsaYtxg100clsJ7qQ");'
+              >
+                <div class="flex w-full items-end justify-between gap-4 p-4">
+                  <div class="flex max-w-[440px] flex-1 flex-col gap-1">
+                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 A</p>
+                    <p class="text-white text-base font-medium leading-normal">사람들과 어울리며 활동할 때 에너지를 얻습니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-4" data-question="q1" data-value="I">
+              <div
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJHof5k8qC20R-E2lIPToePRWoPkA9QJa08O2ViQqjG_BDuHJ_KfwEn4eB_dF0sV6wfA5M6rKn15l9ErNcmWfJ5N3NJGbznxmAIfm-Fo-Yq4cUHny0CddqjiyGhFvmrcmRKtOeS3EHbtMgsNx5RUBQ6jDHp-BplLtosPLJLrnB5QTCRJJOuDTJzoRdun99z_5At5wxWjfvoUJQyfPl5r7V5aqhomWMNsFg5XVAk_-YSalJOAPEoQi_SMbbtLfx0GLos9c2R-1_fA");'
+              >
+                <div class="flex w-full items-end justify-between gap-4 p-4">
+                  <div class="flex max-w-[440px] flex-1 flex-col gap-1">
+                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 B:</p>
+                    <p class="text-white text-base font-medium leading-normal">혼자 시간을 보내며 생각할 때 에너지를 얻습니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 2: 정보를 처리할 때 더 신뢰하는 것은?</h3>
+            <div class="p-4" data-question="q2" data-value="S">
+              <div
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGfZN7EmSmKAgI9BB0lt462sKaZmLHgIcFK63clZ7Agv5t_l3y0jpMR0ljsX6BIc-W-HSfw0kt-WljAmSd622bOgBAuCLDxw8HHiO4evLCV-qycxRjaZW-Q2AkxMEVoreMgn508Dv3UwwVuoZXYBGgYczp7sN2S6mnAOwjbAqRQ2gNRDsuXyRWaJuRRi6SB2sy9zIYsxsPLOX3wgAbMpa7L9-Fk2d7hJIYgrtdgXqzKrqUkBESE794pQtt2PfV8-81gA8MiWTeKg");'
+              >
+                <div class="flex w-full items-end justify-between gap-4 p-4">
+                  <div class="flex max-w-[440px] flex-1 flex-col gap-1">
+                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 A</p>
+                    <p class="text-white text-base font-medium leading-normal">실제 경험과 구체적인 사실을 더 신뢰합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-4" data-question="q2" data-value="N">
+              <div
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2ilwERQvqLYoawrYlpaglLk2Tx4UN_4dc_BzUYklRMq99o1-kJHimFbTq_iumTizaYrPZo_BJ-NeK8WYVjHSIJzoLYOOkc4AtNFlZIry5Z9iGosMdQsmJ1DUD5WZinSNoAJeOm9a_S6V-25sOHiYW4Ay9f1kM0GQmoybttrNyWJAWayipAapCQhw5RQwMxMbZ5eLrNPCXXkF0S9ZpXJ7pdNjMVgaZo6ec8tqrIA1F8oAYzaN9l3_CPxyJXY0xGP32nuwbEwQY0Q");'
+              >
+                <div class="flex w-full items-end justify-between gap-4 p-4">
+                  <div class="flex max-w-[440px] flex-1 flex-col gap-1">
+                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 B</p>
+                    <p class="text-white text-base font-medium leading-normal">가능성과 의미, 직관적인 통찰을 더 신뢰합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 3: 결정을 내릴 때 우선시하는 것은?</h3>
+            <div class="p-4" data-question="q3" data-value="T">
+              <div
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAIouO5f1oxnQIQ_sf8OBtYD0rvyxIbK9DygD_0q-lXFgN3awWmuomvZvNtwbgbJF7QTS0wum0nZbemrVuHYo5lU5XoXWpqXcsbyoPnasKKnCCSdAdNiFarl5AG2Swl6qkIbdaSkETOF9GlK9avyfjDTX4Rh8dLYxpTjTUF14ce6RbKUcX71N4c7lHh65HF_3Gtg-tfMpuDog57imnoAmSzZfhvFuVUXQ7bl3TN1y4UGJPg2ButHIOGB_dy2523eB6_Hak1X8-l2w");'
+              >
+                <div class="flex w-full items-end justify-between gap-4 p-4">
+                  <div class="flex max-w-[440px] flex-1 flex-col gap-1">
+                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 A</p>
+                    <p class="text-white text-base font-medium leading-normal">논리와 객관적인 기준을 우선시합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-4" data-question="q3" data-value="F">
+              <div
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAQh3-dhcFuP4W4bg-R0ks2dbwj25yJHHoG-s9hSHr_EDNr6CCVSfGF8jZ7KWHu1Zl5bOC0geM4MIiXX7zNujmO8jKpJV0IcbWm9LGn6mC-nAbrlQUJ6x2ZO2T6LOPyjK49HlmP0SmLJE0HxqRT10UpRo2mVUGGeJVNYr0hv3Yw1CKIFBmOndCoitT9fYMOD18EZ9DiVSblPee5D3fRgzOUOYmDh4UXFh9j1fjax0BrT6XXv_RULMuW9itTOVW2thJN1m1qfBmo8g");'
+              >
+                <div class="flex w-full items-end justify-between gap-4 p-4">
+                  <div class="flex max-w-[440px] flex-1 flex-col gap-1">
+                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 B</p>
+                    <p class="text-white text-base font-medium leading-normal">사람들의 감정과 조화를 우선시합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 4: 생활 방식에서 더 가까운 것은?</h3>
+            <div class="p-4" data-question="q4" data-value="J">
+              <div
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhILWhKMlbO0gXYOu0H70oF4x9IzsEP7Y6RbVYgGglFjqaQmlVX3oGiBmQJfug3p4UHA6tFfE8-GVf4b4EWZw7SYEPFppf2h2WLUIc_1afRWnXOmDtxOHXtWVzw-UvhwOv-9CYvQeXGatjsDCzgyRsO4LsYQLC0q3s8a4ZDQV0pgwd6TI2NgR5aZFkLDXo5D1dML5_flLxMcDCQLwmjYUYBXbCrRqdLkF9mWK6_pUaYbNj4DAGggNHwBB6GYOIHe2Me4hiZecuIw");'
+              >
+                <div class="flex w-full items-end justify-between gap-4 p-4">
+                  <div class="flex max-w-[440px] flex-1 flex-col gap-1">
+                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 A</p>
+                    <p class="text-white text-base font-medium leading-normal">계획하고 체계적으로 행동하는 것이 더 가깝습니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-4" data-question="q4" data-value="P">
+              <div
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmaLR0ceRvDILsFF2dXZZLBOhePvFfTLuUUA5ylgWzEbsFUuUFn9crqB8d3jrj_eEB8oAx4LdwBK0ij3R2cGJcGWTe3HjivBkdM61fMvFl4BxhjXWrgA2QbI_leetEP__dG6NhIQmESMeBKStSV3-HB0HqxnoPSGV9hsHheFGhWRg6X7pbO2Ev3NVstHXDom2A17koCG6PD2lFJx39pvDfhw61FfsxRXsF7mICTG4EFljK5XIpQkxOmEORboP919c5xhr0FAQfzw");'
+              >
+                <div class="flex w-full items-end justify-between gap-4 p-4">
+                  <div class="flex max-w-[440px] flex-1 flex-col gap-1">
+                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 B</p>
+                    <p class="text-white text-base font-medium leading-normal">즉흥적이고 유연한 쪽에 가깝습니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex px-4 py-3 justify-end">
+              <button
+                id="submit-button"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">다음</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const questionContainers = document.querySelectorAll('[data-question]');
+        const nextButton = document.getElementById('submit-button');
+        let selections = {};
+
+        const getParamsFromUrl = () => {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name')
+            };
+        };
+        const { name } = getParamsFromUrl();
+
+
+        questionContainers.forEach(container => {
+          container.addEventListener('click', () => {
+            const questionGroup = container.getAttribute('data-question');
+            const clickedCard = container.querySelector('.card');
+            const clickedValue = container.getAttribute('data-value');
+
+            document.querySelectorAll(`[data-question="${questionGroup}"] .card`).forEach(card => {
+              card.classList.add('deselected');
+              card.classList.remove('selected');
+            });
+
+            clickedCard.classList.remove('deselected');
+            clickedCard.classList.add('selected');
+            
+            selections[questionGroup] = clickedValue;
+          });
+        });
+
+        nextButton.addEventListener('click', () => {
+          const allQuestionsAnswered = Object.keys(selections).length === 4;
+
+          if (allQuestionsAnswered) {
+            const mbtiResult = selections['q1'] + selections['q2'] + selections['q3'] + selections['q4'];
+            
+            // 이름이 있을 경우에만 URL에 name 파라미터를 추가합니다.
+            let url = 'page5.html';
+            if (name) {
+                url += `?name=${encodeURIComponent(name)}&mbti=${mbtiResult}`;
+            } else {
+                url += `?mbti=${mbtiResult}`;
+            }
+            
+            window.location.href = url;
+          } else {
+            alert('모든 질문에 답해주세요.');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
