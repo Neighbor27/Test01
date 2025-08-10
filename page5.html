@@ -59,7 +59,7 @@
     >
       <div class="layout-container flex h-full grow flex-col">
         <header
-          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-10 py-3"
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-4 py-3 md:px-10"
         >
           <a class="flex items-center gap-4 text-[#111418] cursor-pointer" href="index.html">
             <div class="size-4">
@@ -74,7 +74,7 @@
               Grace & Connect
             </h2>
           </a>
-          <div class="flex flex-1 justify-end gap-8">
+          <div class="flex flex-1 justify-end gap-2 md:gap-8">
             <button
               class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f0f2f4] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
             >
@@ -101,117 +101,117 @@
             </a>
           </div>
         </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 mx-auto">
-            <h2 class="text-[#111418] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">MBTI</h2>
-            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
-              <span id="target-name">Your mate</span>의 MBTI
+        <div class="flex flex-1 flex-col justify-center py-8 px-4 md:px-40 md:py-16">
+          <div class="layout-content-container mx-auto flex w-full max-w-[700px] flex-col">
+            <h2 class="px-4 pb-3 text-center text-[36px] font-bold leading-tight tracking-light text-[#111418]">MBTI</h2>
+            <h3 class="px-4 pb-2 pt-6 text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">
+              <span id="target-name">상대방</span>의 MBTI
             </h3>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="target_1">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8 justify-center">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="E">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">E</p>
+            <div class="mbti-tab-group pb-3" data-mbti-group="target_1">
+              <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="E">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">E</p>
                 </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="I">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">I</p>
-                </a>
-              </div>
-            </div>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="target_2">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8 justify-center">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="S">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">S</p>
-                </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="N">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">N</p>
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="I">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">I</p>
                 </a>
               </div>
             </div>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="target_3">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8 justify-center">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="T">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">T</p>
+            <div class="mbti-tab-group pb-3" data-mbti-group="target_2">
+              <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="S">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">S</p>
                 </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="F">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">F</p>
-                </a>
-              </div>
-            </div>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="target_4">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8 justify-center">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="J">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">J</p>
-                </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="P">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">P</p>
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="N">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">N</p>
                 </a>
               </div>
             </div>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="target_unknown">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab w-full" href="#" data-mbti-value="unknown">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">아직 모름</p>
+            <div class="mbti-tab-group pb-3" data-mbti-group="target_3">
+              <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="T">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">T</p>
+                </a>
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="F">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">F</p>
                 </a>
               </div>
             </div>
-            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">나의 MBTI</h3>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="my_1">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8 justify-center">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="E">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">E</p>
+            <div class="mbti-tab-group pb-3" data-mbti-group="target_4">
+              <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="J">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">J</p>
                 </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="I">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">I</p>
-                </a>
-              </div>
-            </div>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="my_2">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8 justify-center">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="S">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">S</p>
-                </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="N">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">N</p>
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="P">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">P</p>
                 </a>
               </div>
             </div>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="my_3">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8 justify-center">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="T">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">T</p>
-                </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="F">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">F</p>
+            <div class="mbti-tab-group pb-3" data-mbti-group="target_unknown">
+              <div class="flex gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex w-full flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="unknown">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">아직 모름</p>
                 </a>
               </div>
             </div>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="my_4">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8 justify-center">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="J">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">J</p>
+            <h3 class="px-4 pb-2 pt-8 text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나의 MBTI</h3>
+            <div class="mbti-tab-group pb-3" data-mbti-group="my_1">
+              <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="E">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">E</p>
                 </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab" href="#" data-mbti-value="P">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">P</p>
-                </a>
-              </div>
-            </div>
-            <div class="pb-3 mbti-tab-group" data-mbti-group="my_unknown">
-              <div class="flex border-b border-[#dce0e5] px-4 gap-8">
-                <a class="flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 mbti-tab w-full" href="#" data-mbti-value="unknown">
-                  <p class="text-sm font-bold leading-normal tracking-[0.015em]">아직 모름</p>
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="I">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">I</p>
                 </a>
               </div>
             </div>
-            <div class="flex px-4 py-3 justify-between">
+            <div class="mbti-tab-group pb-3" data-mbti-group="my_2">
+              <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="S">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">S</p>
+                </a>
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="N">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">N</p>
+                </a>
+              </div>
+            </div>
+            <div class="mbti-tab-group pb-3" data-mbti-group="my_3">
+              <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="T">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">T</p>
+                </a>
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="F">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">F</p>
+                </a>
+              </div>
+            </div>
+            <div class="mbti-tab-group pb-3" data-mbti-group="my_4">
+              <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="J">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">J</p>
+                </a>
+                <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="P">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">P</p>
+                </a>
+              </div>
+            </div>
+            <div class="mbti-tab-group pb-3" data-mbti-group="my_unknown">
+              <div class="flex gap-8 border-b border-[#dce0e5] px-4">
+                <a class="mbti-tab flex w-full flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="unknown">
+                  <p class="text-base font-bold leading-normal tracking-[0.015em]">아직 모름</p>
+                </a>
+              </div>
+            </div>
+            <div class="flex justify-between px-4 py-4">
               <button
                 id="learn-mbti-button"
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]"
+                class="flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#f0f2f4] px-5 text-base font-bold leading-normal tracking-[0.015em] text-[#111418]"
               >
                 <span class="truncate">내 MBTI 알아보기</span>
               </button>
               <button
                 id="next-button"
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+                class="flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#1466b8] px-5 text-base font-bold leading-normal tracking-[0.015em] text-white"
               >
                 <span class="truncate">다음</span>
               </button>
@@ -224,10 +224,10 @@
               <div
                 class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around"
               >
-                <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">About</a>
-                <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Contact</a>
-                <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Privacy Policy</a>
-                <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Terms of Service</a>
+                <a class="min-w-40 text-base font-normal leading-normal text-[#637588]" href="#">About</a>
+                <a class="min-w-40 text-base font-normal leading-normal text-[#637588]" href="#">Contact</a>
+                <a class="min-w-40 text-base font-normal leading-normal text-[#637588]" href="#">Privacy Policy</a>
+                <a class="min-w-40 text-base font-normal leading-normal text-[#637588]" href="#">Terms of Service</a>
               </div>
               <div class="flex flex-wrap justify-center gap-4">
                 <a href="#">
@@ -291,7 +291,7 @@
                   </div>
                 </a>
               </div>
-              <p class="text-[#637588] text-base font-normal leading-normal">
+              <p class="text-base font-normal leading-normal text-[#637588]">
                 @2024 Connect. All rights reserved.
               </p>
             </footer>
