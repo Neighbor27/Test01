@@ -13,51 +13,94 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-      .hidden {
-        display: none;
-      }
-      /* 선택지 카드 스타일 */
-      .card {
-        border: 1px solid #dce0e5;
-        transition: box-shadow 0.14s ease-in-out;
-        cursor: pointer;
-        box-shadow: 0 0 0 0 transparent;
-      }
-      /* 선택된 카드에만 3px 파란색 그림자를 적용 */
-      .card.selected {
-        box-shadow: 0 0 0 3px #1466b8;
-      }
-      .mbti-tab {
-        text-align: center;
-        flex: 1;
-        cursor: pointer;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        flex-basis: 50%;
-        max-width: 50%;
-      }
-      /* '아직 모름' 탭은 너비를 100%로 유지 */
-      .mbti-tab.w-full {
-        flex-basis: 100%;
-        max-width: 100%;
-      }
-      .mbti-tab-group .mbti-tab.active {
-        border-bottom-color: #111418;
-        color: #111418;
-      }
-      .mbti-tab-group .mbti-tab:not(.active) {
-        border-bottom-color: transparent;
-        color: #637588;
-      }
-        #next-button {
+  <style>
+  .hidden {
+    display: none;
+  }
+  .card {
+    cursor: pointer;
+    border: 2px solid #dce0e5;
+    transition: outline-color 0.14s ease-in-out;
+    outline: 2px solid transparent;
+  }
+  .card.selected {
+    outline-color: #0d4a8e;
+  }
+
+  /* --- 1. MBTI 탭의 기본 스타일 --- */
+  .mbti-tab {
+    text-align: center;
+    flex: 1;
+    cursor: pointer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    flex-basis: 50%;
+    max-width: 50%;
+    transition: color 0.2s ease-out;
+  }
+  .mbti-tab p {
+    /* p 태그에 transition을 직접 적용합니다. */
+    transition: transform 0.2s ease-out;
+  }
+  .mbti-tab.w-full {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  /* --- 2. 선택된(active) 탭의 스타일 --- */
+  .mbti-tab-group .mbti-tab.active {
+    border-bottom-color: #111418;
+    color: #111418;
+  }
+  /* 선택된 탭 내부의 p 태그에만 애니메이션을 적용합니다. */
+  .mbti-tab-group .mbti-tab.active p {
+    animation: float-animation 3s infinite ease-in-out;
+  }
+
+  /* --- 3. 선택되지 않은 탭의 스타일 --- */
+  .mbti-tab-group .mbti-tab:not(.active) {
+    border-bottom-color: transparent;
+    color: #637588;
+  }
+  /* 선택되지 않은 탭에 호버 시, p 태그에만 애니메이션을 적용합니다. */
+  .mbti-tab-group .mbti-tab:not(.active):hover p {
+    animation: float-animation 3s infinite ease-in-out;
+  }
+  .mbti-tab-group .mbti-tab:not(.active):hover {
+    color: #3e4c59;
+  }
+
+  /* --- 4. 위아래로 둥둥 떠다니는 애니메이션 정의 --- */
+  @keyframes float-animation {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  /* --- 5. 두 버튼에 공통 호버 효과 적용 --- */
+  #next-button, #learn-mbti-button {
     transition: transform 0.2s ease-out, background-color 0.2s ease-out;
   }
-  #next-button:hover {
+  #next-button:hover, #learn-mbti-button:hover {
     transform: translateY(-3px);
+  }
+  
+  /* '다음' 버튼만의 고유한 호버 효과 */
+  #next-button:hover {
     background-color: #1a73c8; 
   }
-    </style>
+
+  /* '내 MBTI 알아보기' 버튼만의 고유한 호버 효과 (그림자 제거) */
+  #learn-mbti-button:hover {
+    background-color: #e4e6e8;
+  }
+</style>
   </head>
   <body>
     <div
