@@ -8,25 +8,44 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght@400;500;700;900&family=Work+Sans%3Awght@400;500;700;900"
     />
-
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <style>
-      .hidden {
-        display: none;
+      .hidden { display: none; }
+      .card {
+        border: 1px solid #dce0e5;
+        transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+        cursor: pointer;
+        position: relative; 
+        background-color: #fff;
+        z-index: 1;
       }
-      /* 라디오 버튼 선택지 카드 스타일 */
-      .radio-card {
-        border: 1px solid #dce0e5; /* 기본 테두리 1px 유지 */
-        transition: box-shadow 0.14s ease-in-out; /* 부드러운 전환 효과를 box-shadow에 적용 */
-        cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
-        box-shadow: 0 0 0 0 transparent; /* 선택되지 않았을 때는 투명한 그림자 */
+      .card:not(.selected):hover {
+        transform: translateY(-4px);
+        border-color: #a0a8b1;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
       }
-      /* 선택된 카드에만 3px 파란색 그림자를 적용 */
-      .radio-card.selected {
-        box-shadow: 0 0 0 3px #1466b8; /* 테두리처럼 보이는 3px 그림자 */
+      .card.selected {
+        animation: subtle-light-pulse 3s infinite alternate ease-in-out;
+      }
+      .card.selected:hover {
+        transform: translateY(-4px);
+      }
+      @keyframes subtle-light-pulse {
+        from {
+          box-shadow: 0 0 8px 1px #1466b8;
+        }
+        to {
+          box-shadow: 0 0 4px 2px #1574c1;
+        }
+      }
+      #next-button {
+        transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+      }
+      #next-button:hover {
+        transform: translateY(-3px);
+        background-color: #1a73c8; 
       }
     </style>
   </head>
@@ -45,63 +64,44 @@
                 <span id="target-name">상대방</span>의 정보를 선택하세요
               </h2>
               <h3 class="px-4 pb-2 text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">성별</h3>
-              <!-- Padding changed from p-3 to p-4 for alignment -->
               <div class="flex flex-wrap gap-4 p-4">
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <!-- *** 클래스 이름을 .card로 통일 *** -->
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   남성
                   <input type="radio" class="absolute invisible" name="target_gender" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   여성
                   <input type="radio" class="absolute invisible" name="target_gender" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   그 외
                   <input type="radio" class="absolute invisible" name="target_gender" />
                 </label>
               </div>
               <h3 class="px-4 pb-2 pt-8 text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나이</h3>
-              <!-- Padding changed from p-3 to p-4 for alignment -->
               <div class="flex flex-wrap gap-4 p-4">
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   10대
                   <input type="radio" class="absolute invisible" name="target_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   20대
                   <input type="radio" class="absolute invisible" name="target_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   30대
                   <input type="radio" class="absolute invisible" name="target_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   40대
                   <input type="radio" class="absolute invisible" name="target_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   50대
                   <input type="radio" class="absolute invisible" name="target_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   60+
                   <input type="radio" class="absolute invisible" name="target_age" />
                 </label>
@@ -113,71 +113,52 @@
                 나의 정보를 선택하세요
               </h2>
               <h3 class="px-4 pb-2 text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">성별</h3>
-              <!-- Padding changed from p-3 to p-4 for alignment -->
               <div class="flex flex-wrap gap-4 p-4">
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   남성
                   <input type="radio" class="absolute invisible" name="my_gender" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   여성
                   <input type="radio" class="absolute invisible" name="my_gender" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   그 외
                   <input type="radio" class="absolute invisible" name="my_gender" />
                 </label>
               </div>
               <h3 class="px-4 pb-2 pt-8 text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나이</h3>
-              <!-- Padding changed from p-3 to p-4 for alignment -->
               <div class="flex flex-wrap gap-4 p-4">
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   10대
                   <input type="radio" class="absolute invisible" name="my_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   20대
                   <input type="radio" class="absolute invisible" name="my_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   30대
                   <input type="radio" class="absolute invisible" name="my_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   40대
                   <input type="radio" class="absolute invisible" name="my_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   50대
                   <input type="radio" class="absolute invisible" name="my_age" />
                 </label>
-                <label
-                  class="radio-card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]"
-                >
+                <label class="card relative flex h-14 cursor-pointer items-center justify-center rounded-lg px-7 text-base font-medium leading-normal text-[#111418]">
                   60+
                   <input type="radio" class="absolute invisible" name="my_age" />
                 </label>
               </div>
             </div>
             <div class="flex justify-end px-4 py-4">
+              <!-- *** 버튼 ID를 #next-button으로 통일 *** -->
               <button
-                id="submit-button"
+                id="next-button"
                 class="flex min-w-[115px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-6 bg-[#1466b8] text-white text-lg font-bold leading-normal tracking-[0.015em]"
               >
                 <span class="truncate">다음</span>
@@ -185,33 +166,32 @@
             </div>
           </div>
         </div>
-      </div>
        <div id="footer-placeholder"></div>
     </div>
     <script>
-      const submitButton = document.getElementById('submit-button');
-      const radioCards = document.querySelectorAll('label[class*="radio-card"]');
+      // *** 스크립트의 버튼 ID를 next-button으로 통일 ***
+      const nextButton = document.getElementById('next-button');
+      // *** 스크립트의 카드 클래스를 .card로 통일 ***
+      const radioCards = document.querySelectorAll('.card');
 
-      // 라디오 버튼 선택 시 테두리 색상 및 checked 상태 변경
       radioCards.forEach(card => {
           card.addEventListener('click', () => {
               const input = card.querySelector('input');
               const name = input.name;
-              const allInputs = document.querySelectorAll(`input[name="${name}"]`);
+              const allInputsInGroup = document.querySelectorAll(`input[name="${name}"]`);
               
-              allInputs.forEach(radioInput => {
+              allInputsInGroup.forEach(radioInput => {
                   radioInput.parentElement.classList.remove('selected');
-                  radioInput.checked = false; // 같은 그룹의 모든 라디오 버튼 unchecked
+                  radioInput.checked = false;
               });
               
-              input.parentElement.classList.add('selected');
-              input.checked = true; // 현재 클릭된 라디오 버튼 checked
+              card.classList.add('selected');
+              input.checked = true;
           });
       });
 
-      // '다음' 버튼 클릭 → 모든 정보 선택 확인 후 이동
-      if (submitButton) {
-        submitButton.addEventListener('click', () => {
+      if (nextButton) {
+        nextButton.addEventListener('click', () => {
           const targetGender = document.querySelector('input[name="target_gender"]:checked');
           const targetAge = document.querySelector('input[name="target_age"]:checked');
           const myGender = document.querySelector('input[name="my_gender"]:checked');
@@ -225,14 +205,12 @@
         });
       }
 
-      // 페이지 로딩 시 제목 텍스트 바꿔주기
       document.addEventListener('DOMContentLoaded', () => {
         const savedTarget = localStorage.getItem('selectedTarget');
         if (savedTarget) {
           document.getElementById('target-name').textContent = savedTarget;
         }
 
-        // 로드 시 이미 선택된 라디오 버튼에 selected 클래스 추가 (새로고침 시 선택 유지)
         const checkedRadios = document.querySelectorAll('input[type="radio"]:checked');
         checkedRadios.forEach(radio => {
             radio.parentElement.classList.add('selected');
