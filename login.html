@@ -14,6 +14,22 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      /* 검색창 placeholder 애니메이션을 위한 스타일 */
+      @keyframes placeholder-wave {
+        from { background-position: 200% center; }
+        to { background-position: 0% center; }
+      }
+      .group:hover input::placeholder,
+      .group:focus-within input::placeholder {
+        background-image: linear-gradient(90deg, #757575, #141414, #757575);
+        background-size: 200% 100%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: placeholder-wave 4s linear infinite;
+      }
+    </style>
   </head>
   <body style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
     <div
@@ -21,18 +37,64 @@
     >
       <div class="layout-container flex h-full grow flex-col">
         
-        <!-- *** 수정된 부분: 뒤로 가기 기능만 있는 심플한 헤더로 교체 *** -->
+        <!-- *** 수정된 부분: 로그인 페이지 전용 헤더를 직접 삽입 *** -->
         <header
-          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-4 md:px-10 py-3"
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f2f2f2] px-4 py-3 md:px-10"
         >
-          <a class="flex items-center gap-4 text-[#111418] cursor-pointer" href="javascript:history.back()">
+          <!-- 왼쪽: 뒤로 가기 아이콘 -->
+          <a class="flex items-center gap-4 text-[#141414] cursor-pointer" href="javascript:history.back()">
             <div class="size-6">
               <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path></svg>
             </div>
           </a>
+          <!-- 오른쪽: 아이콘 그룹 -->
+          <div class="flex flex-1 items-center justify-end gap-2 md:gap-4">
+            <!-- 검색창 -->
+            <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+              <div class="group flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div
+                  class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414]"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  placeholder="Search"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                  value=""
+                />
+              </div>
+            </label>
+            <!-- 알림 아이콘 -->
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-300"
+            >
+              <div class="text-[#141414]" data-icon="Bell" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+            <!-- 고객센터 아이콘 -->
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-300"
+            >
+              <div class="text-[#141414]" data-icon="Headset" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M201.89,54.66A103.43,103.43,0,0,0,128.79,24H128A104,104,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+          </div>
         </header>
 
-        <!-- *** 수정된 부분: justify-center를 추가하여 로그인 폼을 수직 중앙 정렬 *** -->
         <div class="flex flex-1 flex-col justify-center px-4 md:px-40 py-10">
           <div class="layout-content-container flex flex-col w-full max-w-md self-center">
             <h2 class="text-[32px] font-bold pb-5 px-4 leading-tight">Login</h2>
@@ -52,7 +114,6 @@
           </div>
         </div>
 
-        <!-- *** 수정된 부분: 푸터를 placeholder로 교체 *** -->
         <div id="footer-placeholder"></div>
       </div>
     </div>
