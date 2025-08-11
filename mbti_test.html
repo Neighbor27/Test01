@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link
       rel="stylesheet"
@@ -17,7 +18,6 @@
       .hidden {
         display: none;
       }
-      /* 선택지 카드 스타일 */
       .card {
         border: 1px solid #dce0e5;
         transition: box-shadow 0.14s ease-in-out, filter 0.3s ease-in-out, transform 0.14s ease-in-out;
@@ -25,27 +25,24 @@
         box-shadow: 0 0 0 0 transparent;
         filter: grayscale(0) blur(0);
       }
-      /* 선택된 카드 스타일 (파란 테두리 제거) */
       .card.selected {
         filter: grayscale(0) blur(0);
         transform: scale(1);
       }
-      /* 선택되지 않은 카드 스타일 (음영 효과 강화) */
       .card.deselected {
         filter: grayscale(100%) blur(3px) brightness(0.6);
       }
-      /* 호버(Hover) 시 카드 스타일 */
       .card:hover:not(.deselected) {
         transform: scale(1.02);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
-        #submit-button {
-    transition: transform 0.2s ease-out, background-color 0.2s ease-out;
-  }
-  #submit-button:hover {
-    transform: translateY(-3px);
-    background-color: #1a73c8; 
-  }
+      #submit-button {
+        transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+      }
+      #submit-button:hover {
+        transform: translateY(-3px);
+        background-color: #1a73c8; 
+      }
     </style>
   </head>
   <body>
@@ -54,8 +51,9 @@
       style='font-family: "Work Sans", "Noto Sans", sans-serif;'
     >
       <div class="layout-container flex h-full grow flex-col">
+        <!-- *** 수정된 부분: 헤더 여백을 반응형으로 변경 (px-4 md:px-10) *** -->
         <header
-          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-10 py-3"
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-4 md:px-10 py-3"
         >
           <a class="flex items-center gap-4 text-[#111418] cursor-pointer" href="index.html">
             <div class="size-4">
@@ -66,11 +64,12 @@
                 ></path>
               </svg>
             </div>
-            <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">
+            <!-- *** 수정된 부분: 모바일에서 텍스트 로고 숨김 (hidden sm:block) *** -->
+            <h2 class="hidden sm:block text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">
               Grace & Connect
             </h2>
           </a>
-          <div class="flex flex-1 justify-end gap-8">
+          <div class="flex flex-1 justify-end gap-2 sm:gap-8">
             <button
               class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f0f2f4] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
             >
@@ -97,118 +96,123 @@
             </a>
           </div>
         </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
+        <!-- *** 수정된 부분: 메인 콘텐츠 여백을 반응형으로 변경 (px-4 md:px-40) *** -->
+        <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div class="flex flex-wrap justify-between gap-3 p-4">
-              <p class="text-[#111418] tracking-light text-[32px] font-bold leading-tight min-w-72">MBTI 유형을 선택하세요</p>
+              <!-- *** 수정된 부분: 제목 폰트 크기를 반응형으로 변경 *** -->
+              <p class="text-[#111418] tracking-light text-2xl sm:text-3xl font-bold leading-tight min-w-72">MBTI 유형을 선택하세요</p>
             </div>
             <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4">
               MBTI 유형을 결정하기 위해 다음 질문에 답해주세요.
             </p>
-            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 1: 당신이 에너지를 얻는 방법은?</h3>
+            <!-- *** 수정된 부분: 질문 제목(h3) 폰트 크기를 키우고 반응형으로 변경 *** -->
+            <h3 class="text-[#111418] text-xl md:text-2xl font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 1: 당신이 에너지를 얻는 방법은?</h3>
             <div class="p-4" data-question="q1" data-value="E">
+              <!-- *** 수정된 부분: 카드 높이를 반응형으로 변경 (pt-24 sm:pt-[132px]) *** -->
               <div
-                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB151yq9xLpJxtOOYAMQKhhHZ4VVDVqb6MbTngvAO1wZgZufgMOz3DafjzJE6cBtDe2UTwsrJlD4NcI8AVfZ7H05vDMMCK-W5_QaE5g1cc_MCEkTaOA_F24jh-u2cEiIubN5PMpZjd4VowCHl1yEdNZptPPdk1O7PP0S4qnrreDyheSjg3raXCD-t8xKfNoltHNvCByNX0xXy2m6Yx3PEQgTrkOz_BvQ2PtLLcSiHCpGL0MvOEUXeA63LgdkQsaYtxg100clsJ7qQ");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 A</p>
-                    <p class="text-white text-base font-medium leading-normal">사람들과 어울리며 활동할 때 에너지를 얻습니다.</p>
+                    <!-- *** 수정된 부분: 카드 내부 텍스트 크기를 키우고 반응형으로 변경 *** -->
+                    <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 A</p>
+                    <p class="text-white text-base md:text-lg font-medium leading-normal">사람들과 어울리며 활동할 때 에너지를 얻습니다.</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="p-4" data-question="q1" data-value="I">
               <div
-                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJHof5k8qC20R-E2lIPToePRWoPkA9QJa08O2ViQqjG_BDuHJ_KfwEn4eB_dF0sV6wfA5M6rKn15l9ErNcmWfJ5N3NJGbznxmAIfm-Fo-Yq4cUHny0CddqjiyGhFvmrcmRKtOeS3EHbtMgsNx5RUBQ6jDHp-BplLtosPLJLrnB5QTCRJJOuDTJzoRdun99z_5At5wxWjfvoUJQyfPl5r7V5aqhomWMNsFg5XVAk_-YSalJOAPEoQi_SMbbtLfx0GLos9c2R-1_fA");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 B</p>
-                    <p class="text-white text-base font-medium leading-normal">혼자 시간을 보내며 생각할 때 에너지를 얻습니다.</p>
+                    <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 B</p>
+                    <p class="text-white text-base md:text-lg font-medium leading-normal">혼자 시간을 보내며 생각할 때 에너지를 얻습니다.</p>
                   </div>
                 </div>
               </div>
             </div>
-            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 2: 정보를 처리할 때 더 신뢰하는 것은?</h3>
+            <h3 class="text-[#111418] text-xl md:text-2xl font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 2: 정보를 처리할 때 더 신뢰하는 것은?</h3>
             <div class="p-4" data-question="q2" data-value="S">
               <div
-                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGfZN7EmSmKAgI9BB0lt462sKaZmLHgIcFK63clZ7Agv5t_l3y0jpMR0ljsX6BIc-W-HSfw0kt-WljAmSd622bOgBAuCLDxw8HHiO4evLCV-qycxRjaZW-Q2AkxMEVoreMgn508Dv3UwwVuoZXYBGgYczp7sN2S6mnAOwjbAqRQ2gNRDsuXyRWaJuRRi6SB2sy9zIYsxsPLOX3wgAbMpa7L9-Fk2d7hJIYgrtdgXqzKrqUkBESE794pQtt2PfV8-81gA8MiWTeKg");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 A</p>
-                    <p class="text-white text-base font-medium leading-normal">실제 경험과 구체적인 사실을 더 신뢰합니다.</p>
+                    <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 A</p>
+                    <p class="text-white text-base md:text-lg font-medium leading-normal">실제 경험과 구체적인 사실을 더 신뢰합니다.</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="p-4" data-question="q2" data-value="N">
               <div
-                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2ilwERQvqLYoawrYlpaglLk2Tx4UN_4dc_BzUYklRMq99o1-kJHimFbTq_iumTizaYrPZo_BJ-NeK8WYVjHSIJzoLYOOkc4AtNFlZIry5Z9iGosMdQsmJ1DUD5WZinSNoAJeOm9a_S6V-25sOHiYW4Ay9f1kM0GQmoybttrNyWJAWayipAapCQhw5RQwMxMbZ5eLrNPCXXkF0S9ZpXJ7pdNjMVgaZo6ec8tqrIA1F8oAYzaN9l3_CPxyJXY0xGP32nuwbEwQY0Q");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 B</p>
-                    <p class="text-white text-base font-medium leading-normal">가능성, 직관적인 통찰을 더 신뢰합니다.</p>
+                    <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 B</p>
+                    <p class="text-white text-base md:text-lg font-medium leading-normal">가능성, 직관적인 통찰을 더 신뢰합니다.</p>
                   </div>
                 </div>
               </div>
             </div>
-            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 3: 결정을 내릴 때 우선시하는 것은?</h3>
+            <h3 class="text-[#111418] text-xl md:text-2xl font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 3: 결정을 내릴 때 우선시하는 것은?</h3>
             <div class="p-4" data-question="q3" data-value="T">
               <div
-                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAIouO5f1oxnQIQ_sf8OBtYD0rvyxIbK9DygD_0q-lXFgN3awWmuomvZvNtwbgbJF7QTS0wum0nZbemrVuHYo5lU5XoXWpqXcsbyoPnasKKnCCSdAdNiFarl5AG2Swl6qkIbdaSkETOF9GlK9avyfjDTX4Rh8dLYxpTjTUF14ce6RbKUcX71N4c7lHh65HF_3Gtg-tfMpuDog57imnoAmSzZfhvFuVUXQ7bl3TN1y4UGJPg2ButHIOGB_dy2523eB6_Hak1X8-l2w");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 A</p>
-                    <p class="text-white text-base font-medium leading-normal">논리와 객관적인 기준을 우선시합니다.</p>
+                    <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 A</p>
+                    <p class="text-white text-base md:text-lg font-medium leading-normal">논리와 객관적인 기준을 우선시합니다.</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="p-4" data-question="q3" data-value="F">
               <div
-                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAQh3-dhcFuP4W4bg-R0ks2dbwj25yJHHoG-s9hSHr_EDNr6CCVSfGF8jZ7KWHu1Zl5bOC0geM4MIiXX7zNujmO8jKpJV0IcbWm9LGn6mC-nAbrlQUJ6x2ZO2T6LOPyjK49HlmP0SmLJE0HxqRT10UpRo2mVUGGeJVNYr0hv3Yw1CKIFBmOndCoitT9fYMOD18EZ9DiVSblPee5D3fRgzOUOYmDh4UXFh9j1fjax0BrT6XXv_RULMuW9itTOVW2thJN1m1qfBmo8g");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 B</p>
-                    <p class="text-white text-base font-medium leading-normal">사람들의 감정과 조화를 우선시합니다.</p>
+                    <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 B</p>
+                    <p class="text-white text-base md:text-lg font-medium leading-normal">사람들의 감정과 조화를 우선시합니다.</p>
                   </div>
                 </div>
               </div>
             </div>
-            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 4: 생활 방식에서 더 가까운 것은?</h3>
+            <h3 class="text-[#111418] text-xl md:text-2xl font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 4: 생활 방식에서 더 가까운 것은?</h3>
             <div class="p-4" data-question="q4" data-value="J">
               <div
-                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhILWhKMlbO0gXYOu0H70oF4x9IzsEP7Y6RbVYgGglFjqaQmlVX3oGiBmQJfug3p4UHA6tFfE8-GVf4b4EWZw7SYEPFppf2h2WLUIc_1afRWnXOmDtxOHXtWVzw-UvhwOv-9CYvQeXGatjsDCzgyRsO4LsYQLC0q3s8a4ZDQV0pgwd6TI2NgR5aZFkLDXo5D1dML5_flLxMcDCQLwmjYUYBXbCrRqdLkF9mWK6_pUaYbNj4DAGggNHwBB6GYOIHe2Me4hiZecuIw");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 A</p>
-                    <p class="text-white text-base font-medium leading-normal">계획하고 체계적으로 행동하는 것이 더 가깝습니다.</p>
+                    <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 A</p>
+                    <p class="text-white text-base md:text-lg font-medium leading-normal">계획하고 체계적으로 행동하는 것이 더 가깝습니다.</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="p-4" data-question="q4" data-value="P">
               <div
-                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
+                class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmaLR0ceRvDILsFF2dXZZLBOhePvFfTLuUUA5ylgWzEbsFUuUFn9crqB8d3jrj_eEB8oAx4LdwBK0ij3R2cGJcGWTe3HjivBkdM61fMvFl4BxhjXWrgA2QbI_leetEP__dG6NhIQmESMeBKStSV3-HB0HqxnoPSGV9hsHheFGhWRg6X7pbO2Ev3NVstHXDom2A17koCG6PD2lFJx39pvDfhw61FfsxRXsF7mICTG4EFljK5XIpQkxOmEORboP919c5xhr0FAQfzw");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <p class="text-white tracking-light text-2xl font-bold leading-tight max-w-[440px]">옵션 B</p>
-                    <p class="text-white text-base font-medium leading-normal">즉흥적이고 유연한 쪽에 가깝습니다.</p>
+                    <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 B</p>
+                    <p class="text-white text-base md:text-lg font-medium leading-normal">즉흥적이고 유연한 쪽에 가깝습니다.</p>
                   </div>
                 </div>
               </div>
@@ -229,12 +233,12 @@
           <div class="flex max-w-[960px] flex-1 flex-col">
             <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
               <div
-                class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around"
+                class="flex flex-col @[480px]:flex-row @[480px]:flex-wrap items-center justify-center gap-6 @[480px]:justify-around"
               >
-                <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">About</a>
-                <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Contact</a>
-                <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Privacy Policy</a>
-                <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Terms of Service</a>
+                <a class="text-[#637588] text-base font-normal leading-normal" href="#">About</a>
+                <a class="text-[#637588] text-base font-normal leading-normal" href="#">Contact</a>
+                <a class="text-[#637588] text-base font-normal leading-normal" href="#">Privacy Policy</a>
+                <a class="text-[#637588] text-base font-normal leading-normal" href="#">Terms of Service</a>
               </div>
               <div class="flex flex-wrap justify-center gap-4">
                 <a href="#">
