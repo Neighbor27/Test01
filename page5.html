@@ -242,6 +242,16 @@
                 tab.addEventListener('click', (e) => {
                     e.preventDefault();
                     const groupName = group.getAttribute('data-mbti-group');
+                    
+                    // *** 수정된 부분: '나의 MBTI'의 '아직 모름' 탭에 대한 특별 처리 ***
+                    if (groupName === 'my_unknown') {
+                        if (confirm('MBTI 테스트를 해보시겠습니까?')) {
+                            const url = `mbti_test.html?name=${encodeURIComponent(name || '')}`;
+                            window.location.href = url;
+                        }
+                        return; // 팝업 후 선택 로직을 실행하지 않고 종료
+                    }
+
                     const isUnknownTab = tab.getAttribute('data-mbti-value') === 'unknown';
                     const groupPrefix = groupName.split('_')[0];
 
@@ -317,7 +327,7 @@
         
         if (learnMbtiButton) {
             learnMbtiButton.addEventListener('click', () => {
-                const url = `mbti_test.html?name=${encodeURIComponent(name)}`;
+                const url = `mbti_test.html?name=${encodeURIComponent(name || '')}`;
                 window.location.href = url;
             });
         }
