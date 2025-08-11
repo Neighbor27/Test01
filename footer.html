@@ -1,13 +1,15 @@
 <footer id="main-footer" class="flex justify-center">
   <div class="flex max-w-[960px] flex-1 flex-col">
     <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
+      <!-- *** 수정된 부분: flex-wrap을 flex-col로 변경하여 모바일에서 세로로 쌓이도록 함 *** -->
       <div
-        class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around"
+        class="flex flex-col items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around"
       >
-        <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">About</a>
-        <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Contact</a>
-        <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Privacy Policy</a>
-        <a class="text-[#637588] text-base font-normal leading-normal min-w-40" href="#">Terms of Service</a>
+        <!-- *** 수정된 부분: min-w-40 클래스를 제거하여 자연스러운 너비를 갖도록 함 *** -->
+        <a class="text-[#637588] text-base font-normal leading-normal" href="#">About</a>
+        <a class="text-[#637588] text-base font-normal leading-normal" href="#">Contact</a>
+        <a class="text-[#637588] text-base font-normal leading-normal" href="#">Privacy Policy</a>
+        <a class="text-[#637588] text-base font-normal leading-normal" href="#">Terms of Service</a>
       </div>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="#">
