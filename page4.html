@@ -67,7 +67,6 @@
         <div class="flex flex-col flex-1 py-8 px-4 md:px-40 md:py-16">
           <div class="layout-content-container flex w-full max-w-[700px] flex-col self-center">
             <div class="pb-5 px-4 md:px-0">
-              <!-- *** 수정된 부분: 제목 폰트 크기를 화면 크기별로 세분화 (기본 28px, sm 이상 32px, md 이상 43px) *** -->
               <h2 id="target-name" class="text-[28px] sm:text-[32px] md:text-[43px] font-bold leading-tight">
                 상대방의 관심사는?
               </h2>
@@ -75,10 +74,6 @@
             
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 md:p-0 md:mt-5 justify-items-center">
               
-              <!-- *** 수정된 부분: 모든 카드에 반응형 스타일 적용 *** -->
-              <!-- 내부 패딩: 기본 p-4, sm 이상 p-5 -->
-              <!-- 아이콘 크기: 기본 h-6 w-6, sm 이상 h-8 w-8 -->
-              <!-- 텍스트 크기: 기본 text-base, sm 이상 text-lg -->
               <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
                 <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M216,104H102.09L210,75.51a8,8,0,0,0,5.68-9.84l-8.16-30a15.93,15.93,0,0,0-19.42-11.13L35.81,64.74a15.75,15.75,0,0,0-9.7,7.4,15.51,15.51,0,0,0-1.55,12L32,111.56c0,.14,0,.29,0,.44v88a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V112A8,8,0,0,0,216,104ZM192.16,40l6,22.07-22.62,6L147.42,51.83Zm-66.69,17.6,28.12,16.24-36.94,9.75L88.53,67.37Zm-79.4,44.62-6-22.08,26.5-7L94.69,89.4ZM208,200H48V120H208v80Z"></path></svg></div>
                 <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">영화</h2>
@@ -116,17 +111,8 @@
                 <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">게임</h2>
               </div>
             </div>
-            <div class="flex justify-end px-4 py-4">
-              <!-- *** 수정된 부분: 버튼 크기와 텍스트를 반응형으로 변경 *** -->
-              <!-- 높이: 기본 h-12, md 이상 h-14 -->
-              <!-- 패딩: 기본 px-5, md 이상 px-6 -->
-              <!-- 텍스트: 기본 text-base, md 이상 text-lg -->
-              <button
-                id="next-button"
-                class="flex h-12 md:h-14 min-w-[115px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#1466b8] px-5 md:px-6 text-base md:text-lg font-bold leading-normal tracking-[0.015em] text-white"
-              >
-                <span class="truncate">다음</span>
-              </button>
+            <div class="flex px-4 md:px-0 py-4 justify-end">
+              <div id="next-button-placeholder"></div>
             </div>
           </div>
         </div>
@@ -135,7 +121,8 @@
       </div>
     </div>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
+      // 'componentsLoaded' 이벤트가 발생하면 페이지 초기화 함수를 실행합니다.
+      document.addEventListener('componentsLoaded', () => {
         const targetNameElement = document.getElementById('target-name');
         const selectedTargetName = localStorage.getItem('selectedTarget') || '상대방';
         targetNameElement.textContent = `${selectedTargetName}의 관심사는?`;

@@ -67,17 +67,14 @@
 
         <div class="flex flex-1 flex-col py-8 px-4 md:px-40 md:py-16">
             <div class="layout-content-container flex flex-col w-full max-w-[700px] self-center">
-                <!-- *** 수정된 부분: 제목을 div로 감싸고 반응형 패딩과 하단 여백을 적용합니다. *** -->
                 <div class="pb-5 px-4 md:px-0">
                     <h2 class="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#111418] leading-tight">
                         마음 가는 상대는?
                     </h2>
                 </div>
                 
-                <!-- *** 수정된 부분: 그리드에 반응형 패딩과 데스크톱용 상단 마진을 추가합니다. *** -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 md:p-0 md:mt-5 justify-items-center">
                   
-                  <!-- *** 수정된 부분: 모든 카드에 반응형 스타일(패딩, 아이콘/텍스트 크기)을 적용하고 max-w-를 제거합니다. *** -->
                   <div class="card flex flex-col justify-center items-center gap-2 rounded-lg border bg-white p-4 sm:p-5 w-full">
                     <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path></svg>
@@ -115,14 +112,9 @@
                     <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">그 외</h2>
                   </div>
                 </div>
-                <!-- *** 수정된 부분: 버튼을 감싸는 div에 반응형 패딩을 적용합니다. *** -->
                 <div class="flex px-4 md:px-0 py-4 justify-end">
-                    <button
-                        id="next-button"
-                        class="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 md:h-14 px-5 md:px-6 bg-[#1466b8] text-white text-base md:text-lg font-bold leading-normal tracking-[0.015em]"
-                    >
-                        <span class="truncate">다음</span>
-                    </button>
+                    <!-- *** 수정된 부분: 버튼을 placeholder로 교체 *** -->
+                    <div id="next-button-placeholder"></div>
                 </div>
             </div>
         </div>
@@ -132,31 +124,43 @@
     </div>
 
     <script>
-      const cards = document.querySelectorAll('.card');
-      const nextButton = document.getElementById('next-button');
+      // *** 수정된 부분: DOMContentLoaded 이벤트 리스너를 loadComponents.js가 실행된 후에 실행되도록 변경 ***
+      // loadComponents.js가 버튼을 생성한 후에 이 스크립트가 실행되어야 합니다.
+      const initializePage = () => {
+        const cards = document.querySelectorAll('.card');
+        const nextButton = document.getElementById('next-button');
 
-      cards.forEach((card) => {
-        card.addEventListener('click', () => {
-          const selectedBefore = document.querySelector('.card.selected');
-          if (selectedBefore) {
-            selectedBefore.classList.remove('selected');
-          }
-          card.classList.add('selected');
-        });
-      });
+        if (!nextButton) {
+          // 버튼이 아직 로드되지 않았다면 잠시 후 다시 시도
+          setTimeout(initializePage, 50);
+          return;
+        }
 
-      if (nextButton) {
-        nextButton.addEventListener('click', () => {
-          const selectedCard = document.querySelector('.card.selected');
-          if (selectedCard) {
-            const selectedValue = selectedCard.querySelector('h2').textContent;
-            localStorage.setItem('selectedTarget', selectedValue);
-            window.location.href = 'page3.html';
-          } else {
-            alert('상대방을 선택해 주세요.');
-          }
+        cards.forEach((card) => {
+          card.addEventListener('click', () => {
+            const selectedBefore = document.querySelector('.card.selected');
+            if (selectedBefore) {
+              selectedBefore.classList.remove('selected');
+            }
+            card.classList.add('selected');
+          });
         });
-      }
+
+        if (nextButton) {
+          nextButton.addEventListener('click', () => {
+            const selectedCard = document.querySelector('.card.selected');
+            if (selectedCard) {
+              const selectedValue = selectedCard.querySelector('h2').textContent;
+              localStorage.setItem('selectedTarget', selectedValue);
+              window.location.href = 'page3.html';
+            } else {
+              alert('상대방을 선택해 주세요.');
+            }
+          });
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', initializePage);
     </script>
     <script src="loadComponents.js"></script>
   </body>

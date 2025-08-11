@@ -175,54 +175,52 @@
                 </div>
               </div>
             </div>
-            <div class="flex justify-end px-4 md:px-0 py-4">
-              <button
-                id="next-button"
-                class="flex min-w-[115px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 md:h-14 px-5 md:px-6 bg-[#1466b8] text-white text-base md:text-lg font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate">다음</span>
-              </button>
+            <div class="flex px-4 md:px-0 py-4 justify-end">
+              <div id="next-button-placeholder"></div>
             </div>
           </div>
         </div>
        <div id="footer-placeholder"></div>
     </div>
+    
+    <!-- *** 수정된 부분: 스크립트 실행 순서를 보장하기 위해 로직 변경 *** -->
     <script>
-      const nextButton = document.getElementById('next-button');
-      const radioCards = document.querySelectorAll('.card');
+      // 'componentsLoaded' 이벤트가 발생하면 페이지 초기화 함수를 실행합니다.
+      document.addEventListener('componentsLoaded', () => {
+        const nextButton = document.getElementById('next-button');
+        const radioCards = document.querySelectorAll('.card');
 
-      radioCards.forEach(card => {
-          card.addEventListener('click', () => {
-              const input = card.querySelector('input');
-              const name = input.name;
-              const allInputsInGroup = document.querySelectorAll(`input[name="${name}"]`);
-              
-              allInputsInGroup.forEach(radioInput => {
-                  radioInput.parentElement.classList.remove('selected');
-                  radioInput.checked = false;
-              });
-              
-              card.classList.add('selected');
-              input.checked = true;
-          });
-      });
-
-      if (nextButton) {
-        nextButton.addEventListener('click', () => {
-          const targetGender = document.querySelector('input[name="target_gender"]:checked');
-          const targetAge = document.querySelector('input[name="target_age"]:checked');
-          const myGender = document.querySelector('input[name="my_gender"]:checked');
-          const myAge = document.querySelector('input[name="my_age"]:checked');
-
-          if (targetGender && targetAge && myGender && myAge) {
-            window.location.href = 'page4.html';
-          } else {
-            alert('모든 정보를 선택해주세요.');
-          }
+        radioCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const input = card.querySelector('input');
+                const name = input.name;
+                const allInputsInGroup = document.querySelectorAll(`input[name="${name}"]`);
+                
+                allInputsInGroup.forEach(radioInput => {
+                    radioInput.parentElement.classList.remove('selected');
+                    radioInput.checked = false;
+                });
+                
+                card.classList.add('selected');
+                input.checked = true;
+            });
         });
-      }
 
-      document.addEventListener('DOMContentLoaded', () => {
+        if (nextButton) {
+          nextButton.addEventListener('click', () => {
+            const targetGender = document.querySelector('input[name="target_gender"]:checked');
+            const targetAge = document.querySelector('input[name="target_age"]:checked');
+            const myGender = document.querySelector('input[name="my_gender"]:checked');
+            const myAge = document.querySelector('input[name="my_age"]:checked');
+
+            if (targetGender && targetAge && myGender && myAge) {
+              window.location.href = 'page4.html';
+            } else {
+              alert('모든 정보를 선택해주세요.');
+            }
+          });
+        }
+
         const savedTarget = localStorage.getItem('selectedTarget');
         if (savedTarget) {
           document.getElementById('target-name').textContent = savedTarget;
