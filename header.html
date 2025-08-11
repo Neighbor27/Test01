@@ -1,4 +1,36 @@
 <!-- header.html -->
+<!-- *** 수정된 부분: 검색창 placeholder에 대한 애니메이션 스타일 추가 *** -->
+<style>
+  @keyframes placeholder-wave {
+    from {
+      background-position: 200% center;
+    }
+    to {
+      background-position: 0% center;
+    }
+  }
+
+  /* 그룹에 호버했을 때, 내부의 input placeholder에 애니메이션 적용 */
+  .group:hover input::placeholder {
+    /* 1. 배경으로 그라데이션을 만듭니다 (기본색 -> 강조색 -> 기본색) */
+    background-image: linear-gradient(
+      90deg,
+      #757575,
+      #141414,
+      #757575
+    );
+    /* 2. 배경 크기를 200%로 늘려 움직일 공간을 확보합니다 */
+    background-size: 200% 100%;
+    /* 3. 배경을 텍스트 모양으로 잘라냅니다 (핵심) */
+    background-clip: text;
+    -webkit-background-clip: text; /* 웹킷 브라우저 호환성 */
+    /* 4. 원래 텍스트 색상을 투명하게 만들어 배경 그라데이션이 보이게 합니다 */
+    color: transparent;
+    /* 5. 위에서 정의한 애니메이션을 적용합니다 */
+    animation: placeholder-wave 4s linear infinite;
+  }
+</style>
+
 <header
   class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f2f2f2] px-4 py-3 md:px-10"
 >
@@ -67,9 +99,8 @@
 
     <!-- Login 버튼 -->
     <a href="login.html">
-      <!-- *** 수정된 부분: hover 효과를 다른 페이지의 '다음' 버튼과 동일하게 변경 *** -->
       <button
-        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-all duration-200 ease-out hover:bg-[#1a73c8]
+        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-all duration-200 ease-out hover:bg-[#1a73c8] hover:-translate-y-[3px]"
       >
         <span class="truncate">Login</span>
       </button>
