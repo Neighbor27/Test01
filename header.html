@@ -1,20 +1,4 @@
 <!-- header.html -->
-<!-- *** 수정된 부분: 로그인 버튼에 빛나는 효과를 주기 위한 CSS 추가 *** -->
-<style>
-  #login-button {
-    animation: subtle-light-pulse 3s infinite alternate ease-in-out;
-  }
-
-  @keyframes subtle-light-pulse {
-    from {
-      box-shadow: 0 0 8px 1px #1466b8;
-    }
-    to {
-      box-shadow: 0 0 4px 2px #1574c1;
-    }
-  }
-</style>
-
 <header
   class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f2f2f2] px-4 py-3 md:px-10"
 >
@@ -83,13 +67,12 @@
 
     <!-- Login 버튼 -->
     <a href="login.html">
-      <!-- *** 수정된 부분: id="login-button" 추가 *** -->
-      <button
-        id="login-button"
-        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors duration-200 hover:bg-blue-700"
-      >
-        <span class="truncate">Login</span>
-      </button>
+        <!-- *** 수정된 부분: hover 시 빛나는 효과 추가 *** -->
+        <button
+            class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-shadow duration-200 hover:shadow-[0_0_8px_1px_#1466b8]"
+        >
+            <span class="truncate">Login</span>
+        </button>
     </a>
   </div>
 </header>
