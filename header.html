@@ -21,9 +21,11 @@
   <div class="flex flex-1 items-center justify-end gap-2 md:gap-4">
     <!-- 검색창 -->
     <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
-      <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+      <!-- *** 수정된 부분: group 클래스 추가 *** -->
+      <div class="group flex w-full flex-1 items-stretch rounded-lg h-full">
+        <!-- *** 수정된 부분: hover 및 focus-within 효과, transition 추가 *** -->
         <div
-          class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0"
+          class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414]"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
             <path
@@ -40,7 +42,6 @@
     </label>
 
     <!-- 알림 아이콘 -->
-    <!-- *** 수정된 부분: hover 효과 및 transition 추가 *** -->
     <button
       class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-300"
     >
@@ -54,7 +55,6 @@
     </button>
 
     <!-- 고객센터 아이콘 -->
-    <!-- *** 수정된 부분: hover 효과 및 transition 추가 *** -->
     <button
       class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-300"
     >
@@ -69,7 +69,6 @@
 
     <!-- Login 버튼 -->
     <a href="login.html">
-      <!-- *** 수정된 부분: hover 효과 및 transition 추가 *** -->
       <button
         class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors duration-200 hover:bg-blue-700"
       >
