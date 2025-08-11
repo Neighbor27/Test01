@@ -51,72 +51,26 @@
       style='font-family: "Work Sans", "Noto Sans", sans-serif;'
     >
       <div class="layout-container flex h-full grow flex-col">
-        <!-- *** 수정된 부분: 헤더 여백을 반응형으로 변경 (px-4 md:px-10) *** -->
-        <header
-          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-4 md:px-10 py-3"
-        >
-          <a class="flex items-center gap-4 text-[#111418] cursor-pointer" href="index.html">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </div>
-            <!-- *** 수정된 부분: 모바일에서 텍스트 로고 숨김 (hidden sm:block) *** -->
-            <h2 class="hidden sm:block text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">
-              Grace & Connect
-            </h2>
-          </a>
-          <div class="flex flex-1 justify-end gap-2 sm:gap-8">
-            <button
-              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f0f2f4] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
-            >
-              <div class="text-[#111418]" data-icon="Question" data-size="20px" data-weight="regular">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20px"
-                  height="20px"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
-                >
-                  <path
-                    d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-            <a href="login.html">
-              <button
-                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate">Login</span>
-              </button>
-            </a>
-          </div>
-        </header>
-        <!-- *** 수정된 부분: 메인 콘텐츠 여백을 반응형으로 변경 (px-4 md:px-40) *** -->
+        
+        <!-- *** 수정된 부분: 헤더를 placeholder로 교체 *** -->
+        <div id="header-placeholder"></div>
+
         <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div class="flex flex-wrap justify-between gap-3 p-4">
-              <!-- *** 수정된 부분: 제목 폰트 크기를 반응형으로 변경 *** -->
               <p class="text-[#111418] tracking-light text-2xl sm:text-3xl font-bold leading-tight min-w-72">MBTI 유형을 선택하세요</p>
             </div>
             <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4">
               MBTI 유형을 결정하기 위해 다음 질문에 답해주세요.
             </p>
-            <!-- *** 수정된 부분: 질문 제목(h3) 폰트 크기를 키우고 반응형으로 변경 *** -->
             <h3 class="text-[#111418] text-xl md:text-2xl font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Q 1: 당신이 에너지를 얻는 방법은?</h3>
             <div class="p-4" data-question="q1" data-value="E">
-              <!-- *** 수정된 부분: 카드 높이를 반응형으로 변경 (pt-24 sm:pt-[132px]) *** -->
               <div
                 class="card bg-cover bg-center flex flex-col items-stretch justify-end rounded-lg pt-24 sm:pt-[132px] shadow-[0_0_4px_rgba(0,0,0,0.1)]"
                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB151yq9xLpJxtOOYAMQKhhHZ4VVDVqb6MbTngvAO1wZgZufgMOz3DafjzJE6cBtDe2UTwsrJlD4NcI8AVfZ7H05vDMMCK-W5_QaE5g1cc_MCEkTaOA_F24jh-u2cEiIubN5PMpZjd4VowCHl1yEdNZptPPdk1O7PP0S4qnrreDyheSjg3raXCD-t8xKfNoltHNvCByNX0xXy2m6Yx3PEQgTrkOz_BvQ2PtLLcSiHCpGL0MvOEUXeA63LgdkQsaYtxg100clsJ7qQ");'
               >
                 <div class="flex w-full items-end justify-between gap-4 p-4">
                   <div class="flex max-w-[440px] flex-1 flex-col gap-1">
-                    <!-- *** 수정된 부분: 카드 내부 텍스트 크기를 키우고 반응형으로 변경 *** -->
                     <p class="text-white tracking-light text-xl sm:text-2xl md:text-3xl font-bold leading-tight max-w-[440px]">옵션 A</p>
                     <p class="text-white text-base md:text-lg font-medium leading-normal">사람들과 어울리며 활동할 때 에너지를 얻습니다.</p>
                   </div>
@@ -227,87 +181,12 @@
             </div>
           </div>
         </div>
+        
+        <!-- *** 수정된 부분: 푸터를 placeholder로 교체 *** -->
+        <div id="footer-placeholder"></div>
+
       </div>
     </div>
-              <footer id="main-footer" class="flex justify-center">
-          <div class="flex max-w-[960px] flex-1 flex-col">
-            <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
-              <div
-                class="flex flex-col @[480px]:flex-row @[480px]:flex-wrap items-center justify-center gap-6 @[480px]:justify-around"
-              >
-                <a class="text-[#637588] text-base font-normal leading-normal" href="#">About</a>
-                <a class="text-[#637588] text-base font-normal leading-normal" href="#">Contact</a>
-                <a class="text-[#637588] text-base font-normal leading-normal" href="#">Privacy Policy</a>
-                <a class="text-[#637588] text-base font-normal leading-normal" href="#">Terms of Service</a>
-              </div>
-              <div class="flex flex-wrap justify-center gap-4">
-                <a href="#">
-                  <div
-                    class="text-[#637588]"
-                    data-icon="TwitterLogo"
-                    data-size="24px"
-                    data-weight="regular"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24px"
-                      height="24px"
-                      fill="currentColor"
-                      viewBox="0 0 256 256"
-                    >
-                      <path
-                        d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-                <a href="#">
-                  <div
-                    class="text-[#637588]"
-                    data-icon="InstagramLogo"
-                    data-size="24px"
-                    data-weight="regular"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24px"
-                      height="24px"
-                      fill="currentColor"
-                      viewBox="0 0 256 256"
-                    >
-                      <path
-                        d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-                <a href="#">
-                  <div
-                    class="text-[#637588]"
-                    data-icon="FacebookLogo"
-                    data-size="24px"
-                    data-weight="regular"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24px"
-                      height="24px"
-                      fill="currentColor"
-                      viewBox="0 0 256 256"
-                    >
-                      <path
-                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-              </div>
-              <p class="text-[#637588] text-base font-normal leading-normal">
-                @2024 Connect. All rights reserved.
-              </p>
-            </footer>
-          </div>
-        </footer>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const questionContainers = document.querySelectorAll('[data-question]');
@@ -347,7 +226,6 @@
           if (allQuestionsAnswered) {
             const mbtiResult = selections['q1'] + selections['q2'] + selections['q3'] + selections['q4'];
             
-            // 이름이 있을 경우에만 URL에 name 파라미터를 추가합니다.
             let url = 'page5.html';
             if (name) {
                 url += `?name=${encodeURIComponent(name)}&mbti=${mbtiResult}`;
@@ -362,5 +240,9 @@
         });
       });
     </script>
+    
+    <!-- *** 수정된 부분: 컴포넌트를 불러오는 스크립트 추가 *** -->
+    <script src="loadComponents.js"></script>
+
   </body>
 </html>
