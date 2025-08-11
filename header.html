@@ -67,12 +67,12 @@
 
     <!-- Login 버튼 -->
     <a href="login.html">
-        <!-- *** 수정된 부분: hover 시 빛나는 효과 추가 *** -->
-        <button
-            class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-shadow duration-200 hover:shadow-[0_0_8px_1px_#1466b8]"
-        >
-            <span class="truncate">Login</span>
-        </button>
+      <!-- *** 수정된 부분: hover:shadow 효과를 제거하고 원래의 hover:bg-blue-700으로 되돌림 *** -->
+      <button
+        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors duration-200 hover:bg-blue-700"
+      >
+        <span class="truncate">Login</span>
+      </button>
     </a>
   </div>
 </header>
