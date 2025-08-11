@@ -215,6 +215,36 @@
             targetNameElement.textContent = name;
         }
 
+        // *** 추가된 함수: 상대방 MBTI 선택 값을 sessionStorage에 저장 ***
+        const saveTargetMbtiSelections = () => {
+            const targetSelections = {};
+            document.querySelectorAll('.mbti-tab-group[data-mbti-group^="target_"]').forEach(group => {
+                const activeTab = group.querySelector('.mbti-tab.active');
+                if (activeTab) {
+                    targetSelections[group.getAttribute('data-mbti-group')] = activeTab.getAttribute('data-mbti-value');
+                }
+            });
+            sessionStorage.setItem('savedTargetMbti', JSON.stringify(targetSelections));
+        };
+
+        // *** 추가된 함수: sessionStorage에서 상대방 MBTI 선택 값을 복원 ***
+        const restoreTargetMbtiSelections = () => {
+            const savedSelections = sessionStorage.getItem('savedTargetMbti');
+            if (savedSelections) {
+                const targetSelections = JSON.parse(savedSelections);
+                for (const groupName in targetSelections) {
+                    const value = targetSelections[groupName];
+                    const group = document.querySelector(`.mbti-tab-group[data-mbti-group="${groupName}"]`);
+                    if (group) {
+                        const tabToActivate = group.querySelector(`.mbti-tab[data-mbti-value="${value}"]`);
+                        if (tabToActivate) {
+                            tabToActivate.classList.add('active');
+                        }
+                    }
+                }
+            }
+        };
+
         const activateMyMbtiTabs = (mbtiString) => {
             if (!mbtiString || mbtiString.length !== 4) return;
             const mbtiChars = mbtiString.split('');
@@ -232,9 +262,11 @@
             });
         };
 
+        // --- 페이지 로드 시 실행 ---
         if (myMbti) {
             activateMyMbtiTabs(myMbti);
         }
+        restoreTargetMbtiSelections(); // 저장된 상대방 MBTI 복원
 
         mbtiTabGroups.forEach(group => {
             const tabs = group.querySelectorAll('.mbti-tab');
@@ -243,13 +275,13 @@
                     e.preventDefault();
                     const groupName = group.getAttribute('data-mbti-group');
                     
-                    // *** 수정된 부분: '나의 MBTI'의 '아직 모름' 탭에 대한 특별 처리 ***
                     if (groupName === 'my_unknown') {
                         if (confirm('MBTI 테스트를 해보시겠습니까?')) {
+                            saveTargetMbtiSelections(); // 이동 전에 상대방 선택 저장
                             const url = `mbti_test.html?name=${encodeURIComponent(name || '')}`;
                             window.location.href = url;
                         }
-                        return; // 팝업 후 선택 로직을 실행하지 않고 종료
+                        return; 
                     }
 
                     const isUnknownTab = tab.getAttribute('data-mbti-value') === 'unknown';
@@ -327,6 +359,7 @@
         
         if (learnMbtiButton) {
             learnMbtiButton.addEventListener('click', () => {
+                saveTargetMbtiSelections(); // 이동 전에 상대방 선택 저장
                 const url = `mbti_test.html?name=${encodeURIComponent(name || '')}`;
                 window.location.href = url;
             });
