@@ -20,14 +20,31 @@ document.addEventListener("DOMContentLoaded", () => {
     loadComponent("header.html", "header-placeholder"),
     loadComponent("footer.html", "footer-placeholder"),
     loadComponent("next-button.html", "next-button-placeholder"),
+    // *** 추가된 부분: 새로운 모바일 메뉴 컴포넌트 로드 ***
+    loadComponent("mobile-menu.html", "mobile-menu-placeholder"),
   ]).then(() => {
     // --- 헤더 기능 초기화 시작 ---
 
-    // 모바일 메뉴 관련 요소
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    // *** 수정된 부분: 새로운 슬라이드 메뉴 로직 ***
+    const hamburgerButton = document.getElementById('hamburger-button');
+    const closeMenuButton = document.getElementById('close-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    // 알림 관련 요소
+    const toggleMenu = () => {
+      if (mobileMenu) {
+        mobileMenu.classList.toggle('menu-open');
+        mobileMenu.classList.toggle('menu-closed');
+      }
+    };
+
+    if (hamburgerButton) {
+      hamburgerButton.addEventListener('click', toggleMenu);
+    }
+    if (closeMenuButton) {
+      closeMenuButton.addEventListener('click', toggleMenu);
+    }
+
+    // 알림 관련 요소 (기존 로직 유지)
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
     const notificationButtonMobile = document.getElementById('notification-button-mobile');
     const notificationPanel = document.getElementById('notification-panel');
@@ -35,35 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyState = document.getElementById('notification-empty-state');
     const notificationFooter = document.getElementById('notification-footer');
 
-    // *** 수정된 부분: 햄버거 메뉴 토글 기능을 더 확실한 방식으로 변경 ***
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', () => {
-        // 현재 메뉴가 숨겨져 있는지 확인
-        const isCurrentlyHidden = mobileMenu.classList.contains('hidden');
-
-        if (isCurrentlyHidden) {
-          // 메뉴를 연다
-          mobileMenu.classList.remove('hidden');
-          mobileMenuButton.classList.add('active'); // 버튼 활성화
-          document.body.style.overflow = 'hidden';
-          
-          if (notificationPanel) {
-            notificationPanel.classList.add('hidden');
-          }
-        } else {
-          // 메뉴를 닫는다
-          mobileMenu.classList.add('hidden');
-          mobileMenuButton.classList.remove('active'); // 버튼 비활성화 (불 끄기)
-          document.body.style.overflow = '';
-        }
-      });
-    }
-
-    // 2. 알림 상태 체크 함수 (기존과 동일)
     const checkNotifications = () => {
       if (!notificationList || !emptyState || !notificationFooter) return;
       const notificationItemsCount = notificationList.children.length;
-
       if (notificationItemsCount > 0) {
         emptyState.classList.add('hidden');
         notificationFooter.classList.remove('hidden');
@@ -73,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    // 3. 알림창 토글 기능 (데스크톱) (기존과 동일)
     if (notificationButtonDesktop && notificationPanel) {
       notificationButtonDesktop.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -84,26 +74,16 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 4. 알림창 열기 기능 (모바일 메뉴 안에서)
     if (notificationButtonMobile && notificationPanel) {
       notificationButtonMobile.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        
-        // 모바일 메뉴 닫기 및 버튼 활성 상태 제거
-        if (mobileMenu && mobileMenuButton) {
-          mobileMenu.classList.add('hidden');
-          mobileMenuButton.classList.remove('active'); 
-          document.body.style.overflow = '';
-        }
-        
-        // 알림창 열기
-        notificationPanel.classList.remove('hidden');
+        toggleMenu(); // 메뉴를 닫고
+        notificationPanel.classList.remove('hidden'); // 알림창을 연다
         checkNotifications();
       });
     }
 
-    // 5. 외부 클릭 시 패널 닫기 (기존과 동일)
     document.addEventListener('click', (event) => {
       if (notificationPanel && !notificationPanel.classList.contains('hidden')) {
         if (!notificationPanel.contains(event.target) && 
@@ -114,12 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // 초기 로드 시 알림 상태 확인
     checkNotifications();
 
     // --- 헤더 기능 초기화 종료 ---
-
-    // 모든 컴포넌트 로드가 완료되었음을 알림
     document.dispatchEvent(new Event('componentsLoaded'));
   });
 });
