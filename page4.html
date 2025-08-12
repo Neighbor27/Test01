@@ -3,7 +3,6 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- 수정 1: Google Fonts 링크 교체 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -12,7 +11,6 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <!-- 수정 2: Tailwind CSS 폰트 설정 스크립트 추가 -->
     <script>
       tailwind.config = {
         theme: {
@@ -33,17 +31,29 @@
         background-color: #fff;
         z-index: 1;
       }
-      .card:not(.selected):hover {
-        transform: translateY(-4px);
-        border-color: #a0a8b1;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-      }
       .card.selected {
         animation: subtle-light-pulse 3s infinite alternate ease-in-out;
       }
-      .card.selected:hover {
-        transform: translateY(-4px);
+
+      /* *** 수정 1: 데스크탑 호버 효과를 미디어 쿼리로 분리 *** */
+      @media (hover: hover) and (pointer: fine) {
+        .card:not(.selected):hover {
+          transform: translateY(-4px);
+          border-color: #a0a8b1;
+          box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+        .card.selected:hover {
+          transform: translateY(-4px);
+        }
       }
+
+      /* *** 수정 2: 터치 기기에서 선택 시 올라간 상태를 유지하는 스타일 추가 *** */
+      @media (hover: none) and (pointer: coarse) {
+        .card.selected {
+          transform: translateY(-4px) !important;
+        }
+      }
+
       @keyframes subtle-light-pulse {
         from {
           box-shadow: 0 0 8px 1px #1466b8;
@@ -67,9 +77,8 @@
     </style>
   </head>
   <body>
-    <!-- 수정 3: 인라인 style 속성 제거 -->
     <div
-      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-auto md:overflow-x-hidden"
+      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-auto md:overflow-x-hidden font-sans"
     >
       <div class="layout-container flex h-full grow flex-col">
         
