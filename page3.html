@@ -247,7 +247,7 @@ if (isTouchDevice) {
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       // 선택 전 살짝 올렸다가 내려오기
-      card.style.transition = 'transform 0.2s ease-out';
+      card.style.transition = 'transform 1s ease-out';
       card.style.transform = 'translateY(-4px)';
 
       setTimeout(() => {
