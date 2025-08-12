@@ -27,6 +27,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
+    // 터치(pointer) 로 버튼 누를 때, 포커스가 남지 않도록 blur()
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'touch') {
+          mobileMenuButton.blur();
+        }
+      });
+    }
+
+    // 모바일 메뉴 토글 (aria-expanded 기반)
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        const isOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+
+        mobileMenu.classList.toggle('hidden', isOpen);
+        document.body.style.overflow = isOpen ? '' : 'hidden';
+        mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
+
+        if (!isOpen && notificationPanel) {
+          notificationPanel.classList.add('hidden');
+        }
+      });
+    }
+
     // 알림 관련 요소
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
     const notificationButtonMobile = document.getElementById('notification-button-mobile');
@@ -34,26 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const notificationList = document.getElementById('notification-list');
     const emptyState = document.getElementById('notification-empty-state');
     const notificationFooter = document.getElementById('notification-footer');
-
-    // 모바일 메뉴 토글 (aria-expanded 기반)
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', () => {
-        // 현재 열림 상태 확인
-        const isOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-
-        // 메뉴 열기/닫기
-        mobileMenu.classList.toggle('hidden', isOpen);
-        document.body.style.overflow = isOpen ? '' : 'hidden';
-
-        // aria-expanded 속성 토글
-        mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
-
-        // 메뉴 열 때 알림 패널 닫기
-        if (!isOpen && notificationPanel) {
-          notificationPanel.classList.add('hidden');
-        }
-      });
-    }
 
     // 2. 알림 상태 체크 함수
     const checkNotifications = () => {
@@ -86,14 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         event.stopPropagation();
 
-        // 모바일 메뉴 닫기
         if (mobileMenu && mobileMenuButton) {
           mobileMenu.classList.add('hidden');
           mobileMenuButton.setAttribute('aria-expanded', 'false');
           document.body.style.overflow = '';
         }
 
-        // 알림창 열기
         notificationPanel.classList.remove('hidden');
         checkNotifications();
       });
