@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 모바일 메뉴 관련 요소
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-    const hamburgerIcon = document.getElementById('hamburger-icon');
-    const closeIcon = document.getElementById('close-icon');
+    // const hamburgerIcon = document.getElementById('hamburger-icon'); // 더 이상 필요 없음
+    // const closeIcon = document.getElementById('close-icon'); // X 아이콘 삭제
 
     // 알림 관련 요소
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
@@ -37,15 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyState = document.getElementById('notification-empty-state');
     const notificationFooter = document.getElementById('notification-footer');
 
-    // 1. 햄버거 메뉴 토글 기능
-    if (mobileMenuButton && mobileMenu && hamburgerIcon && closeIcon) {
+    // *** 수정된 부분: 햄버거 메뉴 토글 기능 ***
+    if (mobileMenuButton && mobileMenu) {
       mobileMenuButton.addEventListener('click', () => {
         const isMenuHidden = mobileMenu.classList.contains('hidden');
         
-        mobileMenu.classList.toggle('hidden', !isMenuHidden);
-        hamburgerIcon.classList.toggle('hidden', !isMenuHidden);
-        closeIcon.classList.toggle('hidden', isMenuHidden);
+        // 메뉴 패널 보이기/숨기기
+        mobileMenu.classList.toggle('hidden');
         
+        // 버튼에 'active' 클래스를 토글하여 불 들어온 효과 주기
+        mobileMenuButton.classList.toggle('active');
+        
+        // body 스크롤 제어
         document.body.style.overflow = isMenuHidden ? 'hidden' : '';
 
         // 메뉴가 열릴 때, 혹시 열려있을 수 있는 알림창은 닫기
@@ -55,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 2. 알림 상태 체크 함수
+    // 2. 알림 상태 체크 함수 (기존과 동일)
     const checkNotifications = () => {
       if (!notificationList || !emptyState || !notificationFooter) return;
       const notificationItemsCount = notificationList.children.length;
@@ -69,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    // 3. 알림창 토글 기능 (데스크톱)
+    // 3. 알림창 토글 기능 (데스크톱) (기존과 동일)
     if (notificationButtonDesktop && notificationPanel) {
       notificationButtonDesktop.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -89,8 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 모바일 메뉴 닫기
         if (mobileMenu) {
           mobileMenu.classList.add('hidden');
-          hamburgerIcon.classList.remove('hidden');
-          closeIcon.classList.add('hidden');
+          mobileMenuButton.classList.remove('active'); // 버튼 활성 상태 제거
           document.body.style.overflow = '';
         }
         
@@ -100,10 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 5. 외부 클릭 시 패널 닫기
+    // 5. 외부 클릭 시 패널 닫기 (기존과 동일)
     document.addEventListener('click', (event) => {
       if (notificationPanel && !notificationPanel.classList.contains('hidden')) {
-        // 클릭된 곳이 알림 패널이나, 데스크톱/모바일 알림 버튼이 아닐 경우에만 닫기
         if (!notificationPanel.contains(event.target) && 
             !notificationButtonDesktop.contains(event.target) &&
             !notificationButtonMobile.contains(event.target)) {
