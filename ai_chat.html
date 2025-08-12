@@ -58,7 +58,7 @@
                   <div class="flex border-none bg-[#f0f2f5] items-center justify-center pr-4 rounded-r-xl border-l-0 !pr-2">
                     <div class="flex items-center gap-4 justify-end">
                       <div class="flex items-center gap-1">
-                        <button class="flex items-center justify-center p-1.5">
+                        <button class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
                           <div class="text-[#60758a]" data-icon="Image" data-size="20px" data-weight="regular">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
                               <path
@@ -67,7 +67,8 @@
                             </svg>
                           </div>
                         </button>
-                        <button class="flex items-center justify-center p-1.5">
+                        <!-- *** 수정된 부분: 마이크 버튼에 id="mic-button" 추가 *** -->
+                        <button id="mic-button" class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
                           <div class="text-[#60758a]" data-icon="Microphone" data-size="20px" data-weight="regular">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
                               <path
@@ -101,6 +102,8 @@
         const chatContainer = document.getElementById('chat-container');
         const chatInput = document.getElementById('chat-input');
         const sendButton = document.getElementById('send-button');
+        // *** 수정된 부분: 마이크 버튼 요소 가져오기 ***
+        const micButton = document.getElementById('mic-button');
 
         const addMessage = (message, isUser = false) => {
           const messageWrapper = document.createElement('div');
@@ -148,14 +151,30 @@
 
         sendButton.addEventListener('click', sendMessage);
         
-        // *** 수정된 부분: IME 중복 전송 방지 로직 추가 ***
         chatInput.addEventListener('keydown', (event) => {
-          // event.isComposing이 true일 때는 한글 등 조합문자 입력 중이므로,
-          // 이 상태에서 Enter를 눌러도 전송되지 않도록 막습니다.
           if (event.key === 'Enter' && !event.isComposing) {
             sendMessage();
           }
         });
+
+        // *** 수정된 부분: 마이크 버튼 클릭 시 권한 요청 기능 ***
+        if (micButton) {
+          micButton.addEventListener('click', () => {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+              navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                  alert('마이크 접근이 허용되었습니다!');
+                  stream.getTracks().forEach(track => track.stop());
+                })
+                .catch(err => {
+                  console.error(`마이크 접근 오류: ${err}`);
+                  alert('마이크 접근이 거부되었거나 오류가 발생했습니다.');
+                });
+            } else {
+              alert('사용하시는 브라우저는 음성 입력을 지원하지 않습니다.');
+            }
+          });
+        }
       });
     </script>
   </body>
