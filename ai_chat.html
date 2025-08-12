@@ -103,11 +103,12 @@
         const sendButton = document.getElementById('send-button');
         const micButton = document.getElementById('mic-button');
 
-        // 음성 인식을 위한 변수 선언
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition;
         let isListening = false;
         let final_transcript = '';
+        // *** 수정된 부분: 제안해주신 재시작 제어 플래그 ***
+        let shouldRestart = false; 
 
         const addMessage = (message, isUser = false) => {
           const messageWrapper = document.createElement('div');
@@ -144,21 +145,26 @@
           }, 1000);
         };
 
+        // *** 수정된 부분: 제안해주신 sendMessage 로직 ***
         const sendMessage = () => {
           const message = chatInput.value.trim();
           if (message) {
             addMessage(message, true);
             chatInput.value = '';
-            // *** 수정된 부분: 메시지 전송 후, 음성 인식 텍스트 버퍼도 초기화 ***
             final_transcript = ''; 
             aiResponse();
+
+            if (isListening && recognition) {
+              shouldRestart = true;
+              isListening = false;
+              recognition.stop();
+            }
           }
         };
 
         sendButton.addEventListener('click', sendMessage);
         
         chatInput.addEventListener('keydown', (event) => {
-          // *** 수정된 부분: Enter 키는 마이크 상태에 영향을 주지 않음 ***
           if (event.key === 'Enter' && !event.isComposing) {
             event.preventDefault();
             sendMessage();
@@ -180,23 +186,30 @@
             micIconDiv.classList.add('text-blue-600');
           };
 
+          // *** 수정된 부분: 제안해주신 onend 로직 ***
           recognition.onend = () => {
-            micButton.classList.remove('bg-blue-100');
-            micIconDiv.classList.add('text-[#60758a]');
-            micIconDiv.classList.remove('text-blue-600');
-            isListening = false;
+            if (shouldRestart) {
+              shouldRestart = false;
+              isListening = true; 
+              recognition.start();
+            } else {
+              micButton.classList.remove('bg-blue-100');
+              micIconDiv.classList.add('text-[#60758a]');
+              micIconDiv.classList.remove('text-blue-600');
+            }
           };
 
           recognition.onresult = (event) => {
             let interim_transcript = '';
-            final_transcript = ''; // 결과를 받을 때마다 초기화하여 누적 방지
-            for (let i = 0; i < event.results.length; ++i) {
+            let final_transcript_result = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
               if (event.results[i].isFinal) {
-                final_transcript += event.results[i][0].transcript;
+                final_transcript_result += event.results[i][0].transcript;
               } else {
                 interim_transcript += event.results[i][0].transcript;
               }
             }
+            final_transcript += final_transcript_result;
             chatInput.value = final_transcript + interim_transcript;
           };
 
@@ -207,13 +220,15 @@
 
           micButton.addEventListener('click', () => {
             if (isListening) {
+              isListening = false;
               recognition.stop();
             } else {
+              isListening = true;
               chatInput.value = '';
               final_transcript = '';
               recognition.start();
+              chatInput.focus();
             }
-            isListening = !isListening;
           });
 
         } else if (micButton) {
