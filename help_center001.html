@@ -2,24 +2,32 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <!-- *** 수정된 부분: 모바일 반응형을 위한 필수 메타 태그 추가 *** -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
-    />
+    <!-- 수정 1: Google Fonts 링크 교체 (Montserrat 추가) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
 
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- 수정 2: Tailwind CSS 폰트 설정 스크립트 추가 -->
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
+          }
+        }
+      }
+    </script>
   </head>
   <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
+    <!-- 수정 3: 인라인 style 속성 제거 -->
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden font-sans">
       <div class="layout-container flex h-full grow flex-col">
         
         <div id="header-placeholder"></div>
