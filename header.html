@@ -158,14 +158,14 @@
     // 햄버거 메뉴 토글 기능
     if (mobileMenuButton) {
       mobileMenuButton.addEventListener('click', () => {
-        const isMenuOpen = !mobileMenu.classList.contains('hidden');
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
+        const isMenuOpen = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden', !isMenuOpen);
+        hamburgerIcon.classList.toggle('hidden', !isMenuOpen);
+        closeIcon.classList.toggle('hidden', isMenuOpen);
         
-        document.body.style.overflow = isMenuOpen ? '' : 'hidden';
+        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
 
-        if (!isMenuOpen) {
+        if (isMenuOpen) {
           notificationPanel.classList.add('hidden');
         }
       });
@@ -191,7 +191,7 @@
         closeIcon.classList.add('hidden');
         document.body.style.overflow = '';
         
-        // 알림창을 엽니다 (토글 대신 열기만 하도록 수정).
+        // 알림창을 엽니다.
         notificationPanel.classList.remove('hidden');
       });
     }
