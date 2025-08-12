@@ -1,105 +1,84 @@
-<!-- header.html -->
-<style>
-  @keyframes placeholder-wave {
-    from {
-      background-position: 200% center;
-    }
-    to {
-      background-position: 0% center;
-    }
-  }
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Footer Animation</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    /* 기존 애니메이션 코드를 모두 제거했습니다. */
+  </style>
+</head>
+<body>
 
-  /* 그룹에 호버했을 때, 내부의 input placeholder에 애니메이션 적용 */
-  .group:hover input::placeholder {
-    background-image: linear-gradient(
-      90deg,
-      #757575,
-      #141414,
-      #757575
-    );
-    background-size: 200% 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: placeholder-wave 4s linear infinite;
-  }
-</style>
-
-<header
-  class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f2f2f2] px-4 py-3 md:px-10"
->
-  <a class="flex items-center gap-4 text-[#141414] cursor-pointer" href="index.html">
-    <div class="size-4">
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
-          fill="currentColor"
-        ></path>
-      </svg>
-    </div>
-    <h2 class="sm:hidden text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
-      Ga&Co
-    </h2>
-    <h2 class="hidden sm:block text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
-      Grace & Connect
-    </h2>
-  </a>
-  <div class="flex flex-1 items-center justify-end gap-2 md:gap-4">
-    <!-- 검색창 -->
-    <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
-      <div class="group flex w-full flex-1 items-stretch rounded-lg h-full">
-        <!-- *** 수정된 부분: group-hover:bg-gray-300 추가 *** -->
+  <footer id="main-footer" class="flex justify-center">
+    <div class="flex max-w-[960px] flex-1 flex-col">
+      <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
         <div
-          class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414] group-hover:bg-gray-300"
+          class="flex flex-col items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-            <path
-              d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
-            ></path>
-          </svg>
+          <!-- *** 수정된 부분: hover:text-blue-500, transition-colors 클래스 추가 *** -->
+          <a class="text-[#637588] text-base font-normal leading-normal hover:text-blue-500 transition-colors" href="#">About</a>
+          <a class="text-[#637588] text-base font-normal leading-normal hover:text-blue-500 transition-colors" href="#">Contact</a>
+          <a class="text-[#637588] text-base font-normal leading-normal hover:text-blue-500 transition-colors" href="#">Privacy Policy</a>
+          <a class="text-[#637588] text-base font-normal leading-normal hover:text-blue-500 transition-colors" href="#">Terms of Service</a>
         </div>
-        <!-- *** 수정된 부분: transition-colors, duration-200, group-hover:bg-gray-300 추가 *** -->
-        <input
-          placeholder="Search"
-          class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal transition-colors duration-200 group-hover:bg-gray-300"
-          value=""
-        />
-      </div>
-    </label>
+        <div class="flex flex-wrap justify-center gap-4">
+          <!-- *** 수정된 부분: hover:text-red-500, transition-colors 클래스 추가 *** -->
+          <a href="#" class="text-[#637588] hover:text-red-500 transition-colors">
+            <div data-icon="YoutubeLogo" data-size="24px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                <path
+                  d="M164.44,121.34l-48-32A8,8,0,0,0,104,96v64a8,8,0,0,0,12.44,6.66l48-32a8,8,0,0,0,0-13.32ZM120,145.05V111l25.58,17ZM234.33,69.52a24,24,0,0,0-14.49-16.4C185.56,39.88,131,40,128,40s-57.56-.12-91.84,13.12a24,24,0,0,0-14.49,16.4C19.08,79.5,16,97.74,16,128s3.08,48.5,5.67,58.48a24,24,0,0,0,14.49,16.41C69,215.56,120.4,216,127.34,216h1.32c6.94,0,58.37-.44,91.18-13.11a24,24,0,0,0,14.49-16.41c2.59-10,5.67-28.22,5.67-58.48S236.92,79.5,234.33,69.52Zm-15.49,113a8,8,0,0,1-4.77,5.49c-31.65,12.22-85.48,12-86,12H128c-.54,0-54.33.2-86-12a8,8,0,0,1-4.77-5.49C34.8,173.39,32,156.57,32,128s2.8-45.39,5.16-54.47A8,8,0,0,1,41.93,68c30.52-11.79,81.66-12,85.85-12h.27c.54,0,54.38-.18,86,12a8,8,0,0,1,4.77,5.49C221.2,82.61,224,99.43,224,128S221.2,173.39,218.84,182.47Z"
+                ></path>
+              </svg>
+            </div>
+          </a>
+          <!-- *** 수정된 부분: hover:text-pink-500, transition-colors 클래스 추가 *** -->
+          <a href="#" class="text-[#637588] hover:text-pink-500 transition-colors">
+            <div
+              data-icon="InstagramLogo"
+              data-size="24px"
+              data-weight="regular"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24px"
+                height="24px"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"
+                ></path>
+              </svg>
+            </div>
+          </a>
+          <!-- *** 수정된 부분: hover:text-blue-600, transition-colors 클래스 추가 *** -->
+          <a href="#" class="text-[#637588] hover:text-blue-600 transition-colors">
+            <div
+              data-icon="FacebookLogo"
+              data-size="24px"
+              data-weight="regular"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24px"
+                height="24px"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"
+                ></path>
+              </svg>
+            </div>
+          </a>
+        </div>
+        <p class="text-[#637588] text-base font-normal leading-normal">
+          @2024 Connect. All rights reserved.
+        </p>
+      </footer>
+    </div>
+  </footer>
 
-    <!-- 알림 아이콘 -->
-    <button
-      class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-300"
-    >
-      <div class="text-[#141414]" data-icon="Bell" data-size="20px" data-weight="regular">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-          <path
-            d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
-          ></path>
-        </svg>
-      </div>
-    </button>
-
-    <!-- 고객센터 아이콘 -->
-    <button
-      class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-300"
-    >
-      <div class="text-[#141414]" data-icon="Headset" data-size="20px" data-weight="regular">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-          <path
-            d="M201.89,54.66A103.43,103.43,0,0,0,128.79,24H128A104,104,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"
-          ></path>
-        </svg>
-      </div>
-    </button>
-
-    <!-- Login 버튼 -->
-    <a href="login.html">
-      <button
-        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-all duration-200 ease-out hover:bg-[#1a73c8]"
-      >
-        <span class="truncate">Login</span>
-      </button>
-    </a>
-  </div>
-</header>
+</body>
+</html>
