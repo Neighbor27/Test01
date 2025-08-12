@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- head에는 모든 페이지 공통 설정만 남깁니다 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
     <script>
       tailwind.config = {
         theme: {
@@ -20,120 +18,94 @@
         }
       }
     </script>
-
-    <style>
-      .hidden { display: none; }
-      .card {
-        border: 1px solid #dce0e5;
-        /* *** 수정된 부분: box-shadow 트랜지션을 추가하여 부드러운 효과 적용 *** */
-        transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.3s ease-out;
-        cursor: pointer;
-        position: relative; 
-        background-color: #fff;
-        z-index: 1;
-      }
-      .card.selected {
-        animation: subtle-light-pulse 3s infinite alternate ease-in-out;
-      }
-      @media (hover: hover) and (pointer: fine) {
-        .card:not(.selected):hover {
-          transform: translateY(-4px);
-          border-color: #a0a8b1;
-          box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-        }
-        .card.selected:hover {
-          transform: translateY(-4px);
-        }
-      }
-      @media (hover: none) and (pointer: coarse) {
-        .card.selected {
-          transform: translateY(-4px) !important;
-        }
-      }
-      @keyframes subtle-light-pulse {
-        from {
-          box-shadow: 0 0 8px 1px #1466b8;
-        }
-        to {
-          box-shadow: 0 0 4px 2px #1574c1;
-        }
-      }
-      #next-button {
-        transition: transform 0.2s ease-out, background-color 0.2s ease-out;
-      }
-      #next-button:hover {
-        transform: translateY(-3px);
-        background-color: #1a73c8; 
-      }
-      @media (min-width: 768px) {
-        .layout-container {
-          min-width: 720px;
-        }
-      }
-    </style>
   </head>
   <body>
-    <div
-      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-auto md:overflow-x-hidden font-sans"
-    >
-      <div class="layout-container flex h-full grow flex-col">
-        
-        <div id="header-placeholder"></div>
+    <!-- 레이아웃을 불러올 자리 -->
+    <div id="layout-placeholder"></div>
 
-        <div class="flex flex-col flex-1 py-8 px-4 md:px-40 md:py-16">
-          <div class="layout-content-container flex w-full max-w-[700px] flex-col self-center">
-            <div class="pb-5 px-4 md:px-0">
-              <h2 id="target-name" class="text-[28px] sm:text-[32px] md:text-[43px] font-bold leading-tight">
-                상대방의 관심사는?
-              </h2>
+    <!-- 페이지 고유 콘텐츠 (스타일 포함) -->
+    <div id="page-content" class="hidden">
+      <!-- 이 페이지에서만 사용하는 스타일 -->
+      <style>
+        .card {
+          border: 1px solid #dce0e5;
+          transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.3s ease-out;
+          cursor: pointer;
+        }
+        .card.selected {
+          animation: subtle-light-pulse 3s infinite alternate ease-in-out;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .card:not(.selected):hover {
+            transform: translateY(-4px);
+            border-color: #a0a8b1;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+          }
+          .card.selected:hover {
+            transform: translateY(-4px);
+          }
+        }
+        @media (hover: none) and (pointer: coarse) {
+          .card.selected {
+            transform: translateY(-4px) !important;
+          }
+        }
+        @keyframes subtle-light-pulse {
+          from { box-shadow: 0 0 8px 1px #1466b8; }
+          to { box-shadow: 0 0 4px 2px #1574c1; }
+        }
+      </style>
+
+      <!-- 페이지 실제 내용 -->
+      <div class="flex flex-col flex-1 py-8 px-4 md:px-40 md:py-16">
+        <div class="layout-content-container flex w-full max-w-[700px] flex-col self-center">
+          <div class="pb-5 px-4 md:px-0">
+            <h2 id="target-name" class="text-[28px] sm:text-[32px] md:text-[43px] font-bold leading-tight">
+              상대방의 관심사는?
+            </h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 md:p-0 md:mt-5 justify-items-center">
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M216,104H102.09L210,75.51a8,8,0,0,0,5.68-9.84l-8.16-30a15.93,15.93,0,0,0-19.42-11.13L35.81,64.74a15.75,15.75,0,0,0-9.7,7.4,15.51,15.51,0,0,0-1.55,12L32,111.56c0,.14,0,.29,0,.44v88a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V112A8,8,0,0,0,216,104ZM192.16,40l6,22.07-22.62,6L147.42,51.83Zm-66.69,17.6,28.12,16.24-36.94,9.75L88.53,67.37Zm-79.4,44.62-6-22.08,26.5-7L94.69,89.4ZM208,200H48V120H208v80Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">영화</h2>
             </div>
-            
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 md:p-0 md:mt-5 justify-items-center">
-              
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M216,104H102.09L210,75.51a8,8,0,0,0,5.68-9.84l-8.16-30a15.93,15.93,0,0,0-19.42-11.13L35.81,64.74a15.75,15.75,0,0,0-9.7,7.4,15.51,15.51,0,0,0-1.55,12L32,111.56c0,.14,0,.29,0,.44v88a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V112A8,8,0,0,0,216,104ZM192.16,40l6,22.07-22.62,6L147.42,51.83Zm-66.69,17.6,28.12,16.24-36.94,9.75L88.53,67.37Zm-79.4,44.62-6-22.08,26.5-7L94.69,89.4ZM208,200H48V120H208v80Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">영화</h2>
-              </div>
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M210.3,56.34l-80-24A8,8,0,0,0,120,40V148.26A48,48,0,1,0,136,184V98.75l69.7,20.91A8,8,0,0,0,216,112V64A8,8,0,0,0,210.3,56.34ZM88,216a32,32,0,1,1,32-32A32,32,0,0,1,88,216ZM200,101.25l-64-19.2V50.75L200,70Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">음악</h2>
-              </div>
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm76.52,147.42H170.9l-9.26-12.76,12.63-36.78,15-4.89,26.24,20.13A87.38,87.38,0,0,1,204.52,171.42Zm-164-34.3L66.71,117l15,4.89,12.63,36.78L85.1,171.42H51.48A87.38,87.38,0,0,1,40.47,137.12Zm10-50.64,5.51,18.6L40.71,116.77A87.33,87.33,0,0,1,50.43,86.48ZM109,152,97.54,118.65,128,97.71l30.46,20.94L147,152Zm91.07-46.92,5.51-18.6a87.33,87.33,0,0,1,9.72,30.29Zm-6.2-35.38-9.51,32.08-15.07,4.89L136,83.79V68.21l29.09-20A88.58,88.58,0,0,1,193.86,69.7ZM146.07,41.87,128,54.29,109.93,41.87a88.24,88.24,0,0,1,36.14,0ZM90.91,48.21l29.09,20V83.79L86.72,106.67l-15.07-4.89L62.14,69.7A88.58,88.58,0,0,1,90.91,48.21ZM63.15,187.42H83.52l7.17,20.27A88.4,88.4,0,0,1,63.15,187.42ZM110,214.13,98.12,180.71,107.35,168h41.3l9.23,12.71-11.83,33.42a88,88,0,0,1-36.1,0Zm55.36-6.44,7.17-20.27h20.37A88.4,88.4,0,0,1,165.31,207.69Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">스포츠</h2>
-              </div>
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M235.58,128.84,160,91.06V48a32,32,0,0,0-64,0V91.06L20.42,128.84A8,8,0,0,0,16,136v32a8,8,0,0,0,9.57,7.84L96,161.76v18.93L82.34,194.34A8,8,0,0,0,80,200v32a8,8,0,0,0,11,7.43l37-14.81,37,14.81A8,8,0,0,0,176,232V200a8,8,0,0,0-2.34-5.66L160,180.69V161.76l70.43,14.08A8,8,0,0,0,240,168V136A8,8,0,0,0,235.58,128.84ZM224,158.24l-70.43-14.08A8,8,0,0,0,144,152v32a8,8,0,0,0,2.34,5.66L160,203.31v16.87l-29-11.61a8,8,0,0,0-5.94,0L96,220.18V203.31l13.66-13.65A8,8,0,0,0,112,184V152a8,8,0,0,0-9.57-7.84L32,158.24v-17.3l75.58-37.78A8,8,0,0,0,112,96V48a16,16,0,0,1,32,0V96a8,8,0,0,0,4.42,7.16L224,140.94Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">여행</h2>
-              </div>
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M239.54,63a15.91,15.91,0,0,0-7.25-9.9,201.49,201.49,0,0,0-208.58,0,16,16,0,0,0-5.37,22l96,157.27a16,16,0,0,0,27.36,0l96-157.27A15.82,15.82,0,0,0,239.54,63ZM63.59,118.5a24,24,0,1,1,24.47,40.09Zm87.92,66.95A24,24,0,0,1,176,145.37Zm32.93-53.93a40,40,0,0,0-41.38,67.77L128,224,96.5,172.43a40,40,0,1,0-41.35-67.76L48.8,94.26a152,152,0,0,1,158.39,0Zm31.1-50.93a168.12,168.12,0,0,0-175.08,0L32,66.77a185.6,185.6,0,0,1,192,0Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">음식</h2>
-              </div>
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M221.69,199.77,160,96.92V40h8a8,8,0,0,0,0-16H88a8,8,0,0,0,0,16h8V96.92L34.31,199.77A16,16,0,0,0,48,224H208a16,16,0,0,0,13.72-24.23ZM110.86,103.25A7.93,7.93,0,0,0,112,99.14V40h32V99.14a7.93,7.93,0,0,0,1.14,4.11L183.36,167c-12,2.37-29.07,1.37-51.75-10.11-15.91-8.05-31.05-12.32-45.22-12.81ZM48,208l28.54-47.58c14.25-1.74,30.31,1.85,47.82,10.72,19,9.61,35,12.88,48,12.88a69.89,69.89,0,0,0,19.55-2.7L208,208Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">과학</h2>
-              </div>
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M214.7,209.7a1.89,1.89,0,0,0-.11-.25l-45.48-96.86,20.5-32.18a1.74,1.74,0,0,0,.11-.18,16,16,0,0,0,0-16.46c-.09-.16-.2-.32-.3-.47L168,32.7V8a8,8,0,0,0-16,0V32.42L146.74,39a24,24,0,0,1-37.48,0L104,32.42V8A8,8,0,0,0,88,8V32.7L66.58,63.3c-.1.15-.21.31-.3.47a16,16,0,0,0,0,16.46,1.74,1.74,0,0,0,.11.18l20.5,32.18L41.41,209.45a1.89,1.89,0,0,0-.11.25A16,16,0,0,0,56,232H200a16,16,0,0,0,14.71-22.3ZM80,72,96.43,48.57l.33.42a40,40,0,0,0,62.48,0l.33-.42L176,72l-20.38,32H100.39ZM56,216l45.07-96h53.84L200,216Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">패션</h2>
-              </div>
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">미술</h2>
-              </div>
-              <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
-                <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M176,112H152a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM104,96H96V88a8,8,0,0,0-16,0v8H72a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0v-8h8a8,8,0,0,0,0-16ZM241.48,200.65a36,36,0,0,1-54.94,4.81c-.12-.12-.24-.24-.35-.37L146.48,160h-37L69.81,205.09l-.35.37A36.08,36.08,0,0,1,44,216,36,36,0,0,1,8.56,173.75a.68.68,0,0,1,0-.14L24.93,89.52A59.88,59.88,0,0,1,83.89,40H172a60.08,60.08,0,0,1,59,49.25c0,.06,0,.12,0,.18l16.37,84.17a.68.68,0,0,1,0,.14A35.74,35.74,0,0,1,241.48,200.65ZM172,144a44,44,0,0,0,0-88H83.89A43.9,43.9,0,0,0,40.68,92.37l0,.13L24.3,176.59A20,20,0,0,0,58,194.3l41.92-47.59a8,8,0,0,1,6-2.71Zm59.7,32.59-8.74-45A60,60,0,0,1,172,160h-4.2L198,194.31a20.09,20.09,0,0,0,17.46,5.39,20,20,0,0,0,16.23-23.11Z"></path></svg></div>
-                <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">게임</h2>
-              </div>
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M210.3,56.34l-80-24A8,8,0,0,0,120,40V148.26A48,48,0,1,0,136,184V98.75l69.7,20.91A8,8,0,0,0,216,112V64A8,8,0,0,0,210.3,56.34ZM88,216a32,32,0,1,1,32-32A32,32,0,0,1,88,216ZM200,101.25l-64-19.2V50.75L200,70Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">음악</h2>
             </div>
-            <div class="flex px-4 md:px-0 py-4 justify-end">
-              <div id="next-button-placeholder"></div>
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm76.52,147.42H170.9l-9.26-12.76,12.63-36.78,15-4.89,26.24,20.13A87.38,87.38,0,0,1,204.52,171.42Zm-164-34.3L66.71,117l15,4.89,12.63,36.78L85.1,171.42H51.48A87.38,87.38,0,0,1,40.47,137.12Zm10-50.64,5.51,18.6L40.71,116.77A87.33,87.33,0,0,1,50.43,86.48ZM109,152,97.54,118.65,128,97.71l30.46,20.94L147,152Zm91.07-46.92,5.51-18.6a87.33,87.33,0,0,1,9.72,30.29Zm-6.2-35.38-9.51,32.08-15.07,4.89L136,83.79V68.21l29.09-20A88.58,88.58,0,0,1,193.86,69.7ZM146.07,41.87,128,54.29,109.93,41.87a88.24,88.24,0,0,1,36.14,0ZM90.91,48.21l29.09,20V83.79L86.72,106.67l-15.07-4.89L62.14,69.7A88.58,88.58,0,0,1,90.91,48.21ZM63.15,187.42H83.52l7.17,20.27A88.4,88.4,0,0,1,63.15,187.42ZM110,214.13,98.12,180.71,107.35,168h41.3l9.23,12.71-11.83,33.42a88,88,0,0,1-36.1,0Zm55.36-6.44,7.17-20.27h20.37A88.4,88.4,0,0,1,165.31,207.69Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">스포츠</h2>
+            </div>
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M235.58,128.84,160,91.06V48a32,32,0,0,0-64,0V91.06L20.42,128.84A8,8,0,0,0,16,136v32a8,8,0,0,0,9.57,7.84L96,161.76v18.93L82.34,194.34A8,8,0,0,0,80,200v32a8,8,0,0,0,11,7.43l37-14.81,37,14.81A8,8,0,0,0,176,232V200a8,8,0,0,0-2.34-5.66L160,180.69V161.76l70.43,14.08A8,8,0,0,0,240,168V136A8,8,0,0,0,235.58,128.84ZM224,158.24l-70.43-14.08A8,8,0,0,0,144,152v32a8,8,0,0,0,2.34,5.66L160,203.31v16.87l-29-11.61a8,8,0,0,0-5.94,0L96,220.18V203.31l13.66-13.65A8,8,0,0,0,112,184V152a8,8,0,0,0-9.57-7.84L32,158.24v-17.3l75.58-37.78A8,8,0,0,0,112,96V48a16,16,0,0,1,32,0V96a8,8,0,0,0,4.42,7.16L224,140.94Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">여행</h2>
+            </div>
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M239.54,63a15.91,15.91,0,0,0-7.25-9.9,201.49,201.49,0,0,0-208.58,0,16,16,0,0,0-5.37,22l96,157.27a16,16,0,0,0,27.36,0l96-157.27A15.82,15.82,0,0,0,239.54,63ZM63.59,118.5a24,24,0,1,1,24.47,40.09Zm87.92,66.95A24,24,0,0,1,176,145.37Zm32.93-53.93a40,40,0,0,0-41.38,67.77L128,224,96.5,172.43a40,40,0,1,0-41.35-67.76L48.8,94.26a152,152,0,0,1,158.39,0Zm31.1-50.93a168.12,168.12,0,0,0-175.08,0L32,66.77a185.6,185.6,0,0,1,192,0Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">음식</h2>
+            </div>
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M221.69,199.77,160,96.92V40h8a8,8,0,0,0,0-16H88a8,8,0,0,0,0,16h8V96.92L34.31,199.77A16,16,0,0,0,48,224H208a16,16,0,0,0,13.72-24.23ZM110.86,103.25A7.93,7.93,0,0,0,112,99.14V40h32V99.14a7.93,7.93,0,0,0,1.14,4.11L183.36,167c-12,2.37-29.07,1.37-51.75-10.11-15.91-8.05-31.05-12.32-45.22-12.81ZM48,208l28.54-47.58c14.25-1.74,30.31,1.85,47.82,10.72,19,9.61,35,12.88,48,12.88a69.89,69.89,0,0,0,19.55-2.7L208,208Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">과학</h2>
+            </div>
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M214.7,209.7a1.89,1.89,0,0,0-.11-.25l-45.48-96.86,20.5-32.18a1.74,1.74,0,0,0,.11-.18,16,16,0,0,0,0-16.46c-.09-.16-.2-.32-.3-.47L168,32.7V8a8,8,0,0,0-16,0V32.42L146.74,39a24,24,0,0,1-37.48,0L104,32.42V8A8,8,0,0,0,88,8V32.7L66.58,63.3c-.1.15-.21.31-.3.47a16,16,0,0,0,0,16.46,1.74,1.74,0,0,0,.11.18l20.5,32.18L41.41,209.45a1.89,1.89,0,0,0-.11.25A16,16,0,0,0,56,232H200a16,16,0,0,0,14.71-22.3ZM80,72,96.43,48.57l.33.42a40,40,0,0,0,62.48,0l.33-.42L176,72l-20.38,32H100.39ZM56,216l45.07-96h53.84L200,216Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">패션</h2>
+            </div>
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">미술</h2>
+            </div>
+            <div class="card flex flex-col justify-center items-center gap-2 rounded-lg bg-white p-4 sm:p-5 w-full">
+              <div class="text-[#111418] h-6 w-6 sm:h-8 sm:w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M176,112H152a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM104,96H96V88a8,8,0,0,0-16,0v8H72a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0v-8h8a8,8,0,0,0,0-16ZM241.48,200.65a36,36,0,0,1-54.94,4.81c-.12-.12-.24-.24-.35-.37L146.48,160h-37L69.81,205.09l-.35.37A36.08,36.08,0,0,1,44,216,36,36,0,0,1,8.56,173.75a.68.68,0,0,1,0-.14L24.93,89.52A59.88,59.88,0,0,1,83.89,40H172a60.08,60.08,0,0,1,59,49.25c0,.06,0,.12,0,.18l16.37,84.17a.68.68,0,0,1,0,.14A35.74,35.74,0,0,1,241.48,200.65ZM172,144a44,44,0,0,0,0-88H83.89A43.9,43.9,0,0,0,40.68,92.37l0,.13L24.3,176.59A20,20,0,0,0,58,194.3l41.92-47.59a8,8,0,0,1,6-2.71Zm59.7,32.59-8.74-45A60,60,0,0,1,172,160h-4.2L198,194.31a20.09,20.09,0,0,0,17.46,5.39,20,20,0,0,0,16.23-23.11Z"></path></svg></div>
+              <h2 class="text-base sm:text-lg font-bold leading-tight text-[#111418] whitespace-nowrap">게임</h2>
             </div>
           </div>
+          <div class="flex px-4 md:px-0 py-4 justify-end">
+            <div id="next-button-placeholder"></div>
+          </div>
         </div>
-        
-        <div id="footer-placeholder"></div>
       </div>
     </div>
     <script>
