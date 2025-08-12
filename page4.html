@@ -26,41 +26,48 @@
     <!-- 페이지 고유 콘텐츠 (스타일 포함) -->
     <div id="page-content" class="hidden">
       <!-- 이 페이지에서만 사용하는 스타일 -->
-      <style>
+         <style>
         .card {
           border: 1px solid #dce0e5;
           transition: transform 0.2s ease-out, border-color 0.2s ease-out;
           cursor: pointer;
           position: relative;
-          overflow: hidden; /* 가상 요소가 밖으로 나가지 않도록 함 */
+          /* overflow: hidden을 카드 자체에 걸면 안됩니다. 빛이 잘려요. */
           z-index: 1;
+        }
+        
+        /* 카드 내용물 (아이콘, 텍스트)을 담을 컨테이너 */
+        .card-content {
+            position: relative; /* 가상요소 위에 위치하도록 */
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem; /* 원래 gap-2 */
+            background-color: white; /* 중요: 배경색이 있어야 뒤의 빛이 안비침 */
+            border-radius: 0.5rem; /* 원래 rounded-lg */
+            overflow: hidden; /* 중요: 내용물이 둥근 모서리를 넘지 않도록 */
         }
         
         /* 빛 효과를 담당할 가상 요소 */
         .card::before {
           content: '';
           position: absolute;
-          top: -4px; left: -4px; right: -4px; bottom: -4px;
-          background: #1574c1;
-          filter: blur(6px);
-          z-index: -1; /* 내용물보다 뒤에 위치 */
+          top: 0; left: 0; right: 0; bottom: 0;
+          border-radius: inherit; /* 부모의 둥근 모서리를 따라감 */
+          z-index: 1; /* 내용물 바로 뒤에 위치 */
           opacity: 0;
-          /* 취소 시 안으로 빨려 들어가는 효과를 위해 scale 사용 */
-          transform: scale(1.05); 
-          transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+          transition: opacity 0.3s ease-out;
+          box-shadow: 0 0 0px 0px transparent; /* 초기값 */
         }
 
-        /* 선택되었을 때, 가상 요소를 보이게 하고 애니메이션 적용 */
+        /* 선택되었을 때, 가상 요소에 빛 효과와 애니메이션 적용 */
         .card.selected::before {
-          opacity: 0.8;
-          transform: scale(1.05); /* 카드보다 약간 큰 상태 유지 */
+          opacity: 1;
           animation: subtle-glow-pulse 3s infinite alternate ease-in-out;
-        }
-        
-        /* 선택이 풀릴 때, 가상 요소는 투명해지고 카드보다 작아지면서 사라짐 */
-        .card:not(.selected)::before {
-            transform: scale(0.9);
-            opacity: 0;
         }
 
         @media (hover: hover) and (pointer: fine) {
@@ -72,6 +79,7 @@
             transform: translateY(-4px);
           }
         }
+
         @media (hover: none) and (pointer: coarse) {
           .card.selected {
             transform: translateY(-4px) !important;
@@ -80,8 +88,8 @@
 
         /* 빛이 부드럽게 깜빡이는 효과 */
         @keyframes subtle-glow-pulse {
-          from { opacity: 0.6; }
-          to { opacity: 0.9; }
+          from { box-shadow: 0 0 8px 1px #1466b8; }
+          to { box-shadow: 0 0 4px 2px #1574c1; }
         }
       </style>
 
