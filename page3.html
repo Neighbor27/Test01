@@ -92,7 +92,6 @@
                 <div class="px-4 md:px-0 pb-2">
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">성별</h3>
                 </div>
-                <!-- *** 수정된 부분: w-24 클래스 제거, px-6 유지 *** -->
                 <div class="flex flex-wrap gap-4 p-4 md:p-0">
                   <label class="card relative flex h-12 cursor-pointer items-center justify-center rounded-lg px-6 text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     남성
@@ -113,7 +112,6 @@
                 <div class="px-4 md:px-0 pb-2">
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나이</h3>
                 </div>
-                <!-- *** 수정된 부분: w-24 클래스 제거, px-6 추가 *** -->
                 <div class="flex flex-wrap justify-start gap-4 p-4 md:p-0">
                   <label class="card relative flex h-12 cursor-pointer items-center justify-center rounded-lg px-6 text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     10대 <input type="radio" class="absolute invisible" name="target_age" />
@@ -151,7 +149,6 @@
                 <div class="px-4 md:px-0 pb-2">
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">성별</h3>
                 </div>
-                <!-- *** 수정된 부분: w-24 클래스 제거, px-6 유지 *** -->
                 <div class="flex flex-wrap gap-4 p-4 md:p-0">
                   <label class="card relative flex h-12 cursor-pointer items-center justify-center rounded-lg px-6 text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     남성 <input type="radio" class="absolute invisible" name="my_gender" />
@@ -169,7 +166,6 @@
                 <div class="px-4 md:px-0 pb-2">
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나이</h3>
                 </div>
-                <!-- *** 수정된 부분: w-24 클래스 제거, px-6 추가 *** -->
                 <div class="flex flex-wrap justify-start gap-4 p-4 md:p-0">
                   <label class="card relative flex h-12 cursor-pointer items-center justify-center rounded-lg px-6 text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     10대 <input type="radio" class="absolute invisible" name="my_age" />
@@ -201,24 +197,24 @@
     </div>
     
     <script>
-      // *** 수정된 부분: 모든 카드의 너비를 통일하는 함수 추가 ***
+      // *** 수정된 부분: 줄바꿈을 방지하고 모든 카드의 너비를 통일하는 새로운 함수 ***
       function unifyCardWidths() {
         const allCards = document.querySelectorAll('.card');
         let maxWidth = 0;
 
-        // 이전에 설정된 인라인 너비 스타일을 초기화합니다.
+        // 모든 카드의 '진짜' 너비를 측정 (줄바꿈 방지)
         allCards.forEach(card => {
-          card.style.width = '';
-        });
-
-        // 모든 카드의 최대 너비를 찾습니다.
-        allCards.forEach(card => {
+          card.style.width = 'auto'; // 이전에 설정된 너비 초기화
+          card.style.whiteSpace = 'nowrap'; // 줄바꿈을 강제로 막음
+          
           if (card.offsetWidth > maxWidth) {
             maxWidth = card.offsetWidth;
           }
+          
+          card.style.whiteSpace = ''; // 원래 상태로 복원
         });
 
-        // 찾은 최대 너비를 모든 카드에 적용합니다.
+        // 찾은 최대 너비를 모든 카드에 적용
         if (maxWidth > 0) {
           allCards.forEach(card => {
             card.style.width = `${maxWidth}px`;
@@ -271,7 +267,7 @@
             radio.parentElement.classList.add('selected');
         });
 
-        // *** 수정된 부분: 페이지 로드 및 화면 크기 변경 시 카드 너비 통일 함수 호출 ***
+        // 페이지 로드 및 화면 크기 변경 시 카드 너비 통일 함수 호출
         unifyCardWidths();
         window.addEventListener('resize', unifyCardWidths);
       });
