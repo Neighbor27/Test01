@@ -5,7 +5,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
 
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
@@ -15,7 +15,7 @@
       tailwind.config = {
         theme: {
           fontFamily: {
-            sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
+            sans: ['Montserrat', 'Noto Sans KR', 'sans-serif'],
           }
         }
       }
@@ -25,7 +25,8 @@
       .hidden { display: none; }
       .card {
         border: 1px solid #dce0e5;
-        transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+        /* *** 수정된 부분: box-shadow 트랜지션을 추가하여 부드러운 효과 적용 *** */
+        transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.3s ease-out;
         cursor: pointer;
         position: relative; 
         background-color: #fff;
@@ -34,8 +35,6 @@
       .card.selected {
         animation: subtle-light-pulse 3s infinite alternate ease-in-out;
       }
-
-      /* *** 수정 1: 데스크탑 호버 효과를 미디어 쿼리로 분리 *** */
       @media (hover: hover) and (pointer: fine) {
         .card:not(.selected):hover {
           transform: translateY(-4px);
@@ -46,14 +45,11 @@
           transform: translateY(-4px);
         }
       }
-
-      /* *** 수정 2: 터치 기기에서 선택 시 올라간 상태를 유지하는 스타일 추가 *** */
       @media (hover: none) and (pointer: coarse) {
         .card.selected {
           transform: translateY(-4px) !important;
         }
       }
-
       @keyframes subtle-light-pulse {
         from {
           box-shadow: 0 0 8px 1px #1466b8;
