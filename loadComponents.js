@@ -35,33 +35,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyState = document.getElementById('notification-empty-state');
     const notificationFooter = document.getElementById('notification-footer');
 
-    // *** 수정된 부분: 햄버거 메뉴 토글 기능을 더 확실한 방식으로 변경 ***
-if (mobileMenuButton && mobileMenu) {
-  mobileMenuButton.addEventListener('click', () => {
-    // 현재 열림 상태
-    const isOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+    // 모바일 메뉴 토글 (aria-expanded 기반)
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        // 현재 열림 상태 확인
+        const isOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
 
-    // 메뉴 열기/닫기
-    mobileMenu.classList.toggle('hidden', isOpen);
-    document.body.style.overflow = isOpen ? '' : 'hidden';
+        // 메뉴 열기/닫기
+        mobileMenu.classList.toggle('hidden', isOpen);
+        document.body.style.overflow = isOpen ? '' : 'hidden';
 
-    // aria-expanded 토글
-    mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
+        // aria-expanded 속성 토글
+        mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
 
-    // 알림 패널은 닫아두기
-    if (!isOpen && notificationPanel) {
-      notificationPanel.classList.add('hidden');
+        // 메뉴 열 때 알림 패널 닫기
+        if (!isOpen && notificationPanel) {
+          notificationPanel.classList.add('hidden');
+        }
+      });
     }
-  });
-}
 
-
-    // 2. 알림 상태 체크 함수 (기존과 동일)
+    // 2. 알림 상태 체크 함수
     const checkNotifications = () => {
       if (!notificationList || !emptyState || !notificationFooter) return;
-      const notificationItemsCount = notificationList.children.length;
+      const count = notificationList.children.length;
 
-      if (notificationItemsCount > 0) {
+      if (count > 0) {
         emptyState.classList.add('hidden');
         notificationFooter.classList.remove('hidden');
       } else {
@@ -70,7 +69,7 @@ if (mobileMenuButton && mobileMenu) {
       }
     };
 
-    // 3. 알림창 토글 기능 (데스크톱) (기존과 동일)
+    // 3. 데스크톱 알림창 토글
     if (notificationButtonDesktop && notificationPanel) {
       notificationButtonDesktop.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -81,33 +80,35 @@ if (mobileMenuButton && mobileMenu) {
       });
     }
 
-    // 4. 알림창 열기 기능 (모바일 메뉴 안에서)
+    // 4. 모바일 메뉴 안에서 알림창 열기
     if (notificationButtonMobile && notificationPanel) {
       notificationButtonMobile.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        
-        // 모바일 메뉴 닫기 및 버튼 활성 상태 제거
+
+        // 모바일 메뉴 닫기
         if (mobileMenu && mobileMenuButton) {
           mobileMenu.classList.add('hidden');
-          mobileMenuButton.classList.remove('active'); 
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
           document.body.style.overflow = '';
         }
-        
+
         // 알림창 열기
         notificationPanel.classList.remove('hidden');
         checkNotifications();
       });
     }
 
-    // 5. 외부 클릭 시 패널 닫기 (기존과 동일)
+    // 5. 외부 클릭 시 알림창 닫기
     document.addEventListener('click', (event) => {
-      if (notificationPanel && !notificationPanel.classList.contains('hidden')) {
-        if (!notificationPanel.contains(event.target) && 
-            !notificationButtonDesktop.contains(event.target) &&
-            !notificationButtonMobile.contains(event.target)) {
-          notificationPanel.classList.add('hidden');
-        }
+      if (
+        notificationPanel &&
+        !notificationPanel.classList.contains('hidden') &&
+        !notificationPanel.contains(event.target) &&
+        !notificationButtonDesktop.contains(event.target) &&
+        !notificationButtonMobile.contains(event.target)
+      ) {
+        notificationPanel.classList.add('hidden');
       }
     });
 
@@ -116,7 +117,7 @@ if (mobileMenuButton && mobileMenu) {
 
     // --- 헤더 기능 초기화 종료 ---
 
-    // 모든 컴포넌트 로드가 완료되었음을 알림
+    // 모든 컴포넌트 로드 완료 알림
     document.dispatchEvent(new Event('componentsLoaded'));
   });
 });
