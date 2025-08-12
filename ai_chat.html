@@ -1,5 +1,6 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link
       rel="stylesheet"
@@ -16,121 +17,40 @@
   <body>
     <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Spline Sans", "Noto Sans", sans-serif;'>
       <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
-          <div class="flex items-center gap-4 text-[#111418]">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M39.5563 34.1455V13.8546C39.5563 15.708 36.8773 17.3437 32.7927 18.3189C30.2914 18.916 27.263 19.2655 24 19.2655C20.737 19.2655 17.7086 18.916 15.2073 18.3189C11.1227 17.3437 8.44365 15.708 8.44365 13.8546V34.1455C8.44365 35.9988 11.1227 37.6346 15.2073 38.6098C17.7086 39.2069 20.737 39.5564 24 39.5564C27.263 39.5564 30.2914 39.2069 32.7927 38.6098C36.8773 37.6346 39.5563 35.9988 39.5563 34.1455Z"
-                  fill="currentColor"
-                ></path>
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M10.4485 13.8519C10.4749 13.9271 10.6203 14.246 11.379 14.7361C12.298 15.3298 13.7492 15.9145 15.6717 16.3735C18.0007 16.9296 20.8712 17.2655 24 17.2655C27.1288 17.2655 29.9993 16.9296 32.3283 16.3735C34.2508 15.9145 35.702 15.3298 36.621 14.7361C37.3796 14.246 37.5251 13.9271 37.5515 13.8519C37.5287 13.7876 37.4333 13.5973 37.0635 13.2931C36.5266 12.8516 35.6288 12.3647 34.343 11.9175C31.79 11.0295 28.1333 10.4437 24 10.4437C19.8667 10.4437 16.2099 11.0295 13.657 11.9175C12.3712 12.3647 11.4734 12.8516 10.9365 13.2931C10.5667 13.5973 10.4713 13.7876 10.4485 13.8519ZM37.5563 18.7877C36.3176 19.3925 34.8502 19.8839 33.2571 20.2642C30.5836 20.9025 27.3973 21.2655 24 21.2655C20.6027 21.2655 17.4164 20.9025 14.7429 20.2642C13.1498 19.8839 11.6824 19.3925 10.4436 18.7877V34.1275C10.4515 34.1545 10.5427 34.4867 11.379 35.027C12.298 35.6207 13.7492 36.2054 15.6717 36.6644C18.0007 37.2205 20.8712 37.5564 24 37.5564C27.1288 37.5564 29.9993 37.2205 32.3283 36.6644C34.2508 36.2054 35.702 35.6207 36.621 35.027C37.4573 34.4867 37.5485 34.1546 37.5563 34.1275V18.7877ZM41.5563 13.8546V34.1455C41.5563 36.1078 40.158 37.5042 38.7915 38.3869C37.3498 39.3182 35.4192 40.0389 33.2571 40.5551C30.5836 41.1934 27.3973 41.5564 24 41.5564C20.6027 41.5564 17.4164 41.1934 14.7429 40.5551C12.5808 40.0389 10.6502 39.3182 9.20848 38.3869C7.84205 37.5042 6.44365 36.1078 6.44365 34.1455L6.44365 13.8546C6.44365 12.2684 7.37223 11.0454 8.39581 10.2036C9.43325 9.3505 10.8137 8.67141 12.343 8.13948C15.4203 7.06909 19.5418 6.44366 24 6.44366C28.4582 6.44366 32.5797 7.06909 35.657 8.13948C37.1863 8.67141 38.5667 9.3505 39.6042 10.2036C40.6278 11.0454 41.5563 12.2684 41.5563 13.8546Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </div>
-            <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">ConnectAI</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-[#111418] text-sm font-medium leading-normal" href="#">Home</a>
-              <a class="text-[#111418] text-sm font-medium leading-normal" href="#">Profile</a>
-              <a class="text-[#111418] text-sm font-medium leading-normal" href="#">Settings</a>
-            </div>
-            <button
-              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#f0f2f5] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
-            >
-              <div class="text-[#111418]" data-icon="Bell" data-size="20px" data-weight="regular">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                  <path
-                    d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-            <div
-              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAGHlMrkqnWEdOtpOISq7pShaGMsH8cQ6b3IcbcKRCva51eBO_PiHAo3cRYfIzny9AqalnQwGNJG9L24nTp3UMUUMLeoXxvz5PGUR0wKSwF_LSb1u2I4rN3v4zH2qhvD7QSjCkUnGLoIU3HH-HaalqWeYq2RmPsF44exk-wwmw7pQwma7amCDC9KdQnI5gX9e_LqfBlGVTv_wAqo2SuWViRtVSSikKPDyyMmfyQ0Cb7c7uxyYLgElR6Jcq5hM9Z7poABYdHmwwHxQ");'
-            ></div>
-          </div>
-        </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
+        
+        <div id="header-placeholder"></div>
+
+        <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <h2 class="text-[#111418] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">AI Analysis Summary</h2>
+            <h2 class="text-[#111418] tracking-light text-2xl md:text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">AI Analysis Summary</h2>
             <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
               Based on the information you provided, the person you're interested in is likely to be interested in the latest trends in technology and artificial intelligence. They
               may also enjoy discussions about innovative startups and the future of work.
             </p>
-            <h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Chat with AI</h2>
-            <div class="flex items-end gap-3 p-4">
-              <div
-                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAm0_lLVCpj8mkydB_N7I5Tp62KPh7naPP69vD6x5x0bDx0kbHKRS_T6g2IQCgr_dgCbP1j0m5SDfJoMab8Z3m1y5w_Kwz3_Ty7Ht9rpSX3yBLpxtMyqfGqxkClDyY5Y72tYoKRbeUYmsFtCol8dlcqPZBChn5igQhi55092xNosRDeIOhoOft3V6PzVkXS0G1oGqo8I9Cp3MvZWzlqT8jckXOa8iC3EMz0-BZEJP53XWtU5QtB3iOS9MHW4r5WYhIgoLba_oQlHQ");'
-              ></div>
-              <div class="flex flex-1 flex-col gap-1 items-start">
-                <p class="text-[#60758a] text-[13px] font-normal leading-normal max-w-[360px]">AI Assistant</p>
-                <p class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#f0f2f5] text-[#111418]">
-                  Hello! I'm here to help you practice conversations based on the analysis. How can I assist you today?
-                </p>
+            <h2 class="text-[#111418] text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Chat with AI</h2>
+            
+            <div id="chat-container" class="flex flex-col gap-4 p-4 h-96 overflow-y-auto border rounded-lg mb-4">
+              <!-- AI의 첫 인사 메시지 -->
+              <div class="flex items-end gap-3">
+                <div
+                  class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAm0_lLVCpj8mkydB_N7I5Tp62KPh7naPP69vD6x5x0bDx0kbHKRS_T6g2IQCgr_dgCbP1j0m5SDfJoMab8Z3m1y5w_Kwz3_Ty7Ht9rpSX3yBLpxtMyqfGqxkClDyY5Y72tYoKRbeUYmsFtCol8dlcqPZBChn5igQhi55092xNosRDeIOhoOft3V6PzVkXS0G1oGqo8I9Cp3MvZWzlqT8jckXOa8iC3EMz0-BZEJP53XWtU5QtB3iOS9MHW4r5WYhIgoLba_oQlHQ");'
+                ></div>
+                <div class="flex flex-1 flex-col gap-1 items-start">
+                  <p class="text-[#60758a] text-[13px] font-normal leading-normal max-w-[360px]">AI Assistant</p>
+                  <p class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#f0f2f5] text-[#111418]">
+                    Hello! I'm here to help you practice conversations based on the analysis. How can I assist you today?
+                  </p>
+                </div>
               </div>
             </div>
-            <div class="flex items-end gap-3 p-4 justify-end">
-              <div class="flex flex-1 flex-col gap-1 items-end">
-                <p class="text-[#60758a] text-[13px] font-normal leading-normal max-w-[360px] text-right">User</p>
-                <p class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#3d99f5] text-white">
-                  Hi! Can you give me some conversation starters about AI in healthcare?
-                </p>
-              </div>
-              <div
-                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBHzyFnXa4MfLpkm-lIV88VSHdzJZ2vHMyrhATU7utPNr_-WPZOuBVoJ7ijC2ubdnZyx6sPNj1-zPQ6eGEfkgqPL1tamVgFC_ziyy5RUrqFoxiI5wGWGopfDoif9i5pTSJDCryyx5peowLFUyk-7_wLzhZ1qJVEecZ3ke-YhGCg9u3dTu5iiOgCZiF8GyS-oa0WzkVLPYs6Ehw6wdl0tzDMtawKpV1O4cjBjQKWTSBgv_MT6s_kknTSAA0udOBymEdXvk4zibyT9Q");'
-              ></div>
-            </div>
-            <div class="flex items-end gap-3 p-4">
-              <div
-                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDe9f3CyzCPkpEzSa0iL1Z2oxt5xS8zzZ02Pr4GXlhuypT58iKibpan-SAOf-BNlTvLqNnNa4Y5n2rDHUXBj89gHlPmLIuYwoSqJtHHk1FSpBZamM2ckaX-0iCLLLz134eLonnHUt_lBydVAvQ02835CDm_YVMFKI1lbFhyGOXGHVQ-Rr2zia8P30ftOP-cozg9M73F3BqHrGEGBC13yqtKTq6N-vOM-wAsgb3DIROB6cCmkRHFiJYxiIzLPV1N9n632ne39ZTSAQ");'
-              ></div>
-              <div class="flex flex-1 flex-col gap-1 items-start">
-                <p class="text-[#60758a] text-[13px] font-normal leading-normal max-w-[360px]">AI Assistant</p>
-                <p class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#f0f2f5] text-[#111418]">
-                  Sure! You could start by asking about their thoughts on the use of AI in medical diagnostics or personalized medicine. For example, you could say, 'I was reading
-                  about how AI is being used to improve diagnostic accuracy in healthcare. What are your thoughts on that?'
-                </p>
-              </div>
-            </div>
-            <div class="flex items-end gap-3 p-4 justify-end">
-              <div class="flex flex-1 flex-col gap-1 items-end">
-                <p class="text-[#60758a] text-[13px] font-normal leading-normal max-w-[360px] text-right">User</p>
-                <p class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#3d99f5] text-white">
-                  That's a great idea! I'll try that. What are some other areas where AI is making a big impact?
-                </p>
-              </div>
-              <div
-                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrQQVGb7w_XPBRpB6YZTXRdz1_0BRJZebcr56InL2RQ-bgp6NkQ873OLijxCMZlb9OM9uN53uDrFd9s4-afm9WiGILtWwvhyt4XHn-hTLknmpHEJ0M4Qmak7qHRP4EZCaSmUqSl5RF0wjqgorVnSwQBjbIcSjUjOBwTIIC3ya-y-SitONyJM1p54TkToQru2UGzpWuYSy6hdfo_8khHkJI6zBGVj0Ujr1sqSL_PZvY8QQ3y0WSIfKXvcj6dFQ0iCjSEcL962k75Q");'
-              ></div>
-            </div>
-            <div class="flex items-end gap-3 p-4">
-              <div
-                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBXDAoUW5TIfVf2XPKm1tdjTdrr6dPzKU9UyZv7-cs9HDjmT6vLUBE_XZMG4Idn51o6bIpduqM_xggVEoHLu1AdGmVlOBpPrVrfIPeLfHYQXx-2lJ91QIcZ7KRPyu71ySI40ETXE12CJNm1r5D9oDyKWkPl0L0QodEaBhhAtUOpHlBnJdbBwma4uuFDRUF7V0nyyKC5FqRGQNjAddYtD9g96V3UF5ohEset07TnwRJSiYMyiAUjiYg3WrdiTyuoWc1oYFLjDfL2qA");'
-              ></div>
-              <div class="flex flex-1 flex-col gap-1 items-start">
-                <p class="text-[#60758a] text-[13px] font-normal leading-normal max-w-[360px]">AI Assistant</p>
-                <p class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#f0f2f5] text-[#111418]">
-                  AI is also revolutionizing drug discovery and patient monitoring. You could ask, 'Have you heard about the latest advancements in AI-driven drug discovery?' or
-                  'What do you think about AI's role in remote patient monitoring?'
-                </p>
-              </div>
-            </div>
+
+            <!-- 메시지 입력창 -->
             <div class="flex items-center px-4 py-3 gap-3 @container">
               <label class="flex flex-col min-w-40 h-12 flex-1">
                 <div class="flex w-full flex-1 items-stretch rounded-xl h-full">
                   <input
+                    id="chat-input"
                     placeholder="Type your message..."
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f5] focus:border-none h-full placeholder:text-[#60758a] px-4 rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
                     value=""
@@ -158,7 +78,8 @@
                         </button>
                       </div>
                       <button
-                        class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#3d99f5] text-white text-sm font-medium leading-normal hidden @[480px]:block"
+                        id="send-button"
+                        class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#1466b8] text-white text-sm font-medium leading-normal hidden @[480px]:block transition-all duration-200 ease-out hover:bg-[#1a73c8]"
                       >
                         <span class="truncate">Send</span>
                       </button>
@@ -169,7 +90,73 @@
             </div>
           </div>
         </div>
+        
+        <div id="footer-placeholder"></div>
       </div>
     </div>
+
+    <script src="loadComponents.js"></script>
+    <script>
+      document.addEventListener('componentsLoaded', () => {
+        const chatContainer = document.getElementById('chat-container');
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-button');
+
+        const addMessage = (message, isUser = false) => {
+          const messageWrapper = document.createElement('div');
+          
+          if (isUser) {
+            messageWrapper.className = 'flex items-end gap-3 justify-end';
+            messageWrapper.innerHTML = `
+              <div class="flex flex-1 flex-col gap-1 items-end">
+                <p class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#1466b8] text-white">
+                  ${message}
+                </p>
+              </div>
+            `;
+          } else {
+            messageWrapper.className = 'flex items-end gap-3';
+            messageWrapper.innerHTML = `
+              <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAm0_lLVCpj8mkydB_N7I5Tp62KPh7naPP69vD6x5x0bDx0kbHKRS_T6g2IQCgr_dgCbP1j0m5SDfJoMab8Z3m1y5w_Kwz3_Ty7Ht9rpSX3yBLpxtMyqfGqxkClDyY5Y72tYoKRbeUYmsFtCol8dlcqPZBChn5igQhi55092xNosRDeIOhoOft3V6PzVkXS0G1oGqo8I9Cp3MvZWzlqT8jckXOa8iC3EMz0-BZEJP53XWtU5QtB3iOS9MHW4r5WYhIgoLba_oQlHQ");'></div>
+              <div class="flex flex-1 flex-col gap-1 items-start">
+                <p class="text-[#60758a] text-[13px] font-normal leading-normal max-w-[360px]">AI Assistant</p>
+                <p class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#f0f2f5] text-[#111418]">
+                  ${message}
+                </p>
+              </div>
+            `;
+          }
+          
+          chatContainer.appendChild(messageWrapper);
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        };
+
+        const aiResponse = () => {
+          setTimeout(() => {
+            addMessage("That's a great topic! Tell me more about your thoughts on that.", false);
+          }, 1000);
+        };
+
+        const sendMessage = () => {
+          const message = chatInput.value.trim();
+          if (message) {
+            addMessage(message, true);
+            chatInput.value = '';
+            aiResponse();
+          }
+        };
+
+        sendButton.addEventListener('click', sendMessage);
+        
+        // *** 수정된 부분: IME 중복 전송 방지 로직 추가 ***
+        chatInput.addEventListener('keydown', (event) => {
+          // event.isComposing이 true일 때는 한글 등 조합문자 입력 중이므로,
+          // 이 상태에서 Enter를 눌러도 전송되지 않도록 막습니다.
+          if (event.key === 'Enter' && !event.isComposing) {
+            sendMessage();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
