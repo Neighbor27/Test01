@@ -1,86 +1,62 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <!-- head에는 모든 페이지 공통 설정만 남깁니다 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- 수정 1: Google Fonts 링크 교체 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Be+Vietnam+Pro:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-    <!-- 수정 2: Tailwind CSS 폰트 설정 스크립트 추가 -->
     <script>
       tailwind.config = {
         theme: {
           fontFamily: {
-            sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
+            sans: ['Montserrat', 'Noto Sans KR', 'sans-serif'],
           }
         }
       }
     </script>
-    
-    <style>
-      @keyframes gentle-float {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-8px);
-        }
-      }
-      .animated-bear {
-        animation: gentle-float 5s ease-in-out infinite;
-      }
-    </style>
   </head>
   <body>
-    <!-- 수정 3: 인라인 style 속성 제거 -->
-    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
-      <div class="layout-container flex h-full grow flex-col">
-        
-        <div id="header-placeholder"></div>
+    <!-- 레이아웃을 불러올 자리 -->
+    <div id="layout-placeholder"></div>
 
-        <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <h2 class="text-[#111418] tracking-light text-2xl md:text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">AI가 맞춤 대화 주제를 찾고 있어요</h2>
-            <div class="flex flex-col gap-3 p-4">
-              <div class="flex gap-6 justify-between"><p class="text-[#111418] text-base font-medium leading-normal">분석 중...</p></div>
-              <div class="rounded bg-[#dbe0e6]"><div class="h-2 rounded bg-[#111418]" style="width: 50%;"></div></div>
-              <p class="text-[#60758a] text-sm font-normal leading-normal">잠시만 기다려 주세요</p>
-            </div>
-            <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
-              입력하신 정보를 바탕으로 상대방이 좋아할 만한 최신 대화 주제를 추천해 드리고, AI와 함께 대화 연습도 할 수 있어요.
-            </p>
-            
-            <div class="flex w-full grow bg-white @container pt-2 pb-4 px-4 justify-center items-center">
-              
-              <a href="ai_chat.html" class="w-full max-w-sm gap-1 overflow-hidden bg-white @[480px]:gap-2 aspect-[2/3] rounded-lg flex">
-                
-                <div class="relative w-full flex-1">
-                  <!-- 1. 배경 레이어 (움직이지 않음) -->
-                  <div
-                    class="absolute inset-0 bg-center bg-no-repeat bg-cover"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS5S203aedw1imyT8sWIYhVkTsGHVpzpOaB5TlPCNWfO29mShYXpmSRghwIIeR2_WUeYw9jmZ7nBYPqVevY40zQanfjXCBe_b6GsmYcdwCwnTlvYzLn7Z2c5LAmhz1gUIqUGAsfZdMtJI-8OoCPGYn5sWwDklZ5zSv-_lhlq__uB1Z7wUciCPFug0_zQuJno61qsY7o4l6sS6bsOMO2jmM70puBytf0njkDAqhuRi60nioLJ8396JQMCYCh9kQknCVvsA3d-7oQg");'
-                  ></div>
-                  <!-- 2. 곰(전경) 레이어 (움직임) -->
-                  <div
-                    class="absolute inset-0 bg-center bg-no-repeat bg-cover animated-bear"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS5S203aedw1imyT8sWIYhVkTsGHVpzpOaB5TlPCNWfO29mShYXpmSRghwIIeR2_WUeYw9jmZ7nBYPqVevY40zQanfjXCBe_b6GsmYcdwCwnTlvYzLn7Z2c5LAmhz1gUIqUGAsfZdMtJI-8OoCPGYn5sWwDklZ5zSv-_lhlq__uB1Z7wUciCPFug0_zQuJno61qsY7o4l6sS6bsOMO2jmM70puBytf0njkDAqhuRi60nioLJ8396JQMCYCh9kQknCVvsA3d-7oQg");'
-                  ></div>
-                </div>
+    <!-- 페이지 고유 콘텐츠 (스타일 포함) -->
+    <div id="page-content" class="hidden">
+      <!-- 이 페이지에서만 사용하는 스타일 -->
+      <style>
+        @keyframes gentle-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        .animated-bear {
+          animation: gentle-float 5s ease-in-out infinite;
+        }
+      </style>
 
-              </a>
-
-            </div>
-
+      <!-- 페이지 실제 내용 -->
+      <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+          <h2 class="text-[#111418] tracking-light text-2xl md:text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">AI가 맞춤 대화 주제를 찾고 있어요</h2>
+          <div class="flex flex-col gap-3 p-4">
+            <div class="flex gap-6 justify-between"><p class="text-[#111418] text-base font-medium leading-normal">분석 중...</p></div>
+            <div class="rounded bg-[#dbe0e6]"><div class="h-2 rounded bg-[#111418]" style="width: 50%;"></div></div>
+            <p class="text-[#60758a] text-sm font-normal leading-normal">잠시만 기다려 주세요</p>
+          </div>
+          <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
+            입력하신 정보를 바탕으로 상대방이 좋아할 만한 최신 대화 주제를 추천해 드리고, AI와 함께 대화 연습도 할 수 있어요.
+          </p>
+          <div class="flex w-full grow bg-white @container pt-2 pb-4 px-4 justify-center items-center">
+            <a href="ai_chat.html" class="w-full max-w-sm gap-1 overflow-hidden bg-white @[480px]:gap-2 aspect-[2/3] rounded-lg flex">
+              <div class="relative w-full flex-1">
+                <div class="absolute inset-0 bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS5S203aedw1imyT8sWIYhVkTsGHVpzpOaB5TlPCNWfO29mShYXpmSRghwIIeR2_WUeYw9jmZ7nBYPqVevY40zQanfjXCBe_b6GsmYcdwCwnTlvYzLn7Z2c5LAmhz1gUIqUGAsfZdMtJI-8OoCPGYn5sWwDklZ5zSv-_lhlq__uB1Z7wUciCPFug0_zQuJno61qsY7o4l6sS6bsOMO2jmM70puBytf0njkDAqhuRi60nioLJ8396JQMCYCh9kQknCVvsA3d-7oQg");'></div>
+                <div class="absolute inset-0 bg-center bg-no-repeat bg-cover animated-bear" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS5S203aedw1imyT8sWIYhVkTsGHVpzpOaB5TlPCNWfO29mShYXpmSRghwIIeR2_WUeYw9jmZ7nBYPqVevY40zQanfjXCBe_b6GsmYcdwCwnTlvYzLn7Z2c5LAmhz1gUIqUGAsfZdMtJI-8OoCPGYn5sWwDklZ5zSv-_lhlq__uB1Z7wUciCPFug0_zQuJno61qsY7o4l6sS6bsOMO2jmM70puBytf0njkDAqhuRi60nioLJ8396JQMCYCh9kQknCVvsA3d-7oQg");'></div>
+              </div>
+            </a>
           </div>
         </div>
-        
-        <div id="footer-placeholder"></div>
       </div>
     </div>
     
