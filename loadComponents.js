@@ -2,32 +2,94 @@
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-  // --- 헤더 기능 초기화 함수 ---
+  // --- 헤더의 모든 기능을 초기화하는 함수 ---
   const initializeHeader = () => {
+    // 모바일 메뉴 관련 요소
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-    // ... (기존 헤더의 다른 요소들: notificationButtonDesktop 등)
 
+    // 알림 관련 요소
+    const notificationButtonDesktop = document.getElementById('notification-button-desktop');
+    const notificationButtonMobile = document.getElementById('notification-button-mobile');
+    const notificationPanel = document.getElementById('notification-panel');
+    const notificationList = document.getElementById('notification-list');
+    const emptyState = document.getElementById('notification-empty-state');
+    const notificationFooter = document.getElementById('notification-footer');
+
+    // 1. 햄버거 메뉴 토글 기능
     if (mobileMenuButton && mobileMenu) {
       mobileMenuButton.addEventListener('click', () => {
         const isHidden = mobileMenu.classList.toggle('hidden');
         mobileMenuButton.classList.toggle('active', !isHidden);
         document.body.style.overflow = isHidden ? '' : 'hidden';
+        
+        // 메뉴 열 때 다른 패널(알림창)은 닫기
+        if (!isHidden && notificationPanel) {
+          notificationPanel.classList.add('hidden');
+        }
       });
     }
-    // ... (기존 헤더의 다른 기능들: 알림창 토글, 외부 클릭 등)
+
+    // 2. 알림 상태 체크 함수
+    const checkNotifications = () => {
+      if (!notificationList || !emptyState || !notificationFooter) return;
+      const notificationItemsCount = notificationList.children.length;
+      emptyState.classList.toggle('hidden', notificationItemsCount > 0);
+      notificationFooter.classList.toggle('hidden', notificationItemsCount === 0);
+    };
+
+    // 3. 알림창 토글 기능 (데스크톱)
+    if (notificationButtonDesktop && notificationPanel) {
+      notificationButtonDesktop.addEventListener('click', (event) => {
+        event.stopPropagation();
+        notificationPanel.classList.toggle('hidden');
+        if (!notificationPanel.classList.contains('hidden')) {
+          checkNotifications();
+        }
+      });
+    }
+
+    // 4. 알림창 열기 기능 (모바일 메뉴 안에서)
+    if (notificationButtonMobile && notificationPanel) {
+      notificationButtonMobile.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        if (mobileMenu && mobileMenuButton) {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.classList.remove('active'); 
+          document.body.style.overflow = '';
+        }
+        
+        notificationPanel.classList.remove('hidden');
+        checkNotifications();
+      });
+    }
+
+    // 5. 외부 클릭 시 알림창 닫기
+    document.addEventListener('click', (event) => {
+      if (notificationPanel && !notificationPanel.classList.contains('hidden')) {
+        if (!notificationPanel.contains(event.target) && 
+            !notificationButtonDesktop.contains(event.target) &&
+            !notificationButtonMobile.contains(event.target)) {
+          notificationPanel.classList.add('hidden');
+        }
+      }
+    });
+
+    // 초기 로드 시 알림 상태 확인 (필요 시)
+    checkNotifications();
   };
 
-  // --- 컴포넌트 로딩 로직 ---
+
+  // --- 컴포넌트 로딩 로직 (이전과 동일) ---
   const loadComponent = (url, elementId) => {
     const element = document.getElementById(elementId);
     if (!element) return Promise.resolve();
     
     return fetch(url)
       .then(response => response.ok ? response.text() : Promise.reject(`Failed to load ${url}`))
-      .then(data => {
-        element.innerHTML = data;
-      })
+      .then(data => { element.innerHTML = data; })
       .catch(error => console.error(error));
   };
   
@@ -57,9 +119,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   Promise.all([
     loadComponent("header.html", "header-placeholder"),
     loadComponent("footer.html", "footer-placeholder"),
-    loadComponent("next-button.html", "next-button-placeholder"),
+    loadComponent("next_button.html", "next-button-placeholder"),
   ]).then(() => {
-    // 4. 헤더 기능 초기화
+    // 4. 모든 부품이 로드된 후, 헤더 기능 초기화
     initializeHeader();
     
     // 5. 페이지별 스크립트 실행 신호
