@@ -29,6 +29,7 @@
         animation: subtle-light-pulse 3s infinite alternate ease-in-out;
       }
 
+      /* 데스크탑 호버 효과 */
       @media (hover: hover) and (pointer: fine) {
         .card:not(.selected):hover {
           transform: translateY(-4px);
@@ -40,12 +41,10 @@
         }
       }
 
+      /* *** 수정된 부분: 터치 기기에서 선택 시 올라간 상태 유지 *** */
       @media (hover: none) and (pointer: coarse) {
         .card.selected {
-          transform: translateY(0) !important;
-        }
-        .card.touched {
-          animation: touch-bounce 1s ease-in-out;
+          transform: translateY(-4px) !important;
         }
       }
       
@@ -55,15 +54,6 @@
         }
         to {
           box-shadow: 0 0 4px 2px #1574c1;
-        }
-      }
-
-      @keyframes touch-bounce {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-4px);
         }
       }
 
@@ -122,24 +112,24 @@
                 <div class="px-4 md:px-0 pb-2">
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나이</h3>
                 </div>
-                <!-- *** 수정된 부분: grid, grid-cols-3, md:grid-cols-6 클래스 적용 *** -->
-                <div class="grid grid-cols-3 md:grid-cols-6 gap-4 p-4 md:p-0">
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                <!-- *** 수정된 부분: flex-wrap과 w-24 클래스 적용 *** -->
+                <div class="flex flex-wrap gap-4 p-4 md:p-0">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     10대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     20대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     30대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     40대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     50대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     60+ <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
                 </div>
@@ -177,24 +167,24 @@
                 <div class="px-4 md:px-0 pb-2">
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나이</h3>
                 </div>
-                <!-- *** 수정된 부분: grid, grid-cols-3, md:grid-cols-6 클래스 적용 *** -->
-                <div class="grid grid-cols-3 md:grid-cols-6 gap-4 p-4 md:p-0">
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                <!-- *** 수정된 부분: flex-wrap과 w-24 클래스 적용 *** -->
+                <div class="flex flex-wrap gap-4 p-4 md:p-0">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     10대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     20대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     30대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     40대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     50대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 md:h-14 cursor-pointer items-center justify-center rounded-lg px-4 text-base md:text-lg font-medium leading-normal text-[#111418] text-center">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-medium leading-normal text-[#111418] md:h-14 md:text-lg">
                     60+ <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
                 </div>
@@ -208,6 +198,7 @@
        <div id="footer-placeholder"></div>
     </div>
     
+    <!-- *** 수정된 부분: 스크립트에서 터치 애니메이션 관련 코드 제거 *** -->
     <script>
       document.addEventListener('componentsLoaded', () => {
         const nextButton = document.getElementById('next-button');
@@ -226,17 +217,6 @@
                 
                 card.classList.add('selected');
                 input.checked = true;
-            });
-
-            // 터치 기반 기기를 위한 애니메이션 효과 추가
-            card.addEventListener('touchstart', () => {
-              if (!card.classList.contains('selected')) {
-                card.classList.add('touched');
-              }
-            }, { passive: true });
-
-            card.addEventListener('animationend', () => {
-              card.classList.remove('touched');
             });
         });
 
@@ -268,4 +248,4 @@
     </script>
     <script src="loadComponents.js"></script>
   </body>
-</html>
+</html>```
