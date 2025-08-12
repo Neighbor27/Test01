@@ -2,16 +2,23 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght@400;500;700;900&family=Work+Sans%3Awght@400;500;700;900"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
+          }
+        }
+      }
+    </script>
     <style>
       .hidden { display: none; }
       #select-match-button {
@@ -54,8 +61,8 @@
   </head>
   <body>
     <div
-      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
-      style='font-family: "Work Sans", "Noto Sans", sans-serif;'
+  class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+
     >
       <div class="layout-container flex h-full grow flex-col">
         <div id="header-placeholder"></div>
