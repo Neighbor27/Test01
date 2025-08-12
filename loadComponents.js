@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   Promise.all([
     loadComponent("header.html", "header-placeholder"),
     loadComponent("footer.html", "footer-placeholder"),
-    loadComponent("next_button.html", "next-button-placeholder"),
+    loadComponent("next-button.html", "next-button-placeholder"),
   ]).then(() => {
     // 4. 모든 부품이 로드된 후, 헤더 기능 초기화
     initializeHeader();
