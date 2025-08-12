@@ -35,23 +35,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyState = document.getElementById('notification-empty-state');
     const notificationFooter = document.getElementById('notification-footer');
 
-    // *** 수정된 부분: 햄버거 메뉴 토글 기능 ***
+    // *** 수정된 부분: 햄버거 메뉴 토글 기능을 더 확실한 방식으로 변경 ***
     if (mobileMenuButton && mobileMenu) {
       mobileMenuButton.addEventListener('click', () => {
-        const isMenuHidden = mobileMenu.classList.contains('hidden');
-        
-        // 메뉴 패널 보이기/숨기기
-        mobileMenu.classList.toggle('hidden');
-        
-        // 버튼에 'active' 클래스를 토글하여 불 들어온 효과 주기
-        mobileMenuButton.classList.toggle('active');
-        
-        // body 스크롤 제어
-        document.body.style.overflow = isMenuHidden ? 'hidden' : '';
+        // 현재 메뉴가 숨겨져 있는지 확인
+        const isCurrentlyHidden = mobileMenu.classList.contains('hidden');
 
-        // 메뉴가 열릴 때, 혹시 열려있을 수 있는 알림창은 닫기
-        if (isMenuHidden && notificationPanel) {
-          notificationPanel.classList.add('hidden');
+        if (isCurrentlyHidden) {
+          // 메뉴를 연다
+          mobileMenu.classList.remove('hidden');
+          mobileMenuButton.classList.add('active'); // 버튼 활성화
+          document.body.style.overflow = 'hidden';
+          
+          if (notificationPanel) {
+            notificationPanel.classList.add('hidden');
+          }
+        } else {
+          // 메뉴를 닫는다
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.classList.remove('active'); // 버튼 비활성화 (불 끄기)
+          document.body.style.overflow = '';
         }
       });
     }
