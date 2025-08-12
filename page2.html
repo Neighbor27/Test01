@@ -2,17 +2,27 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght@400;500;700;900&family=Work+Sans%3Awght@400;500;700;900"
-    />
+    <!-- 수정 1: Google Fonts 링크 교체 (Montserrat 추가) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- 수정 2: Tailwind CSS 폰트 설정 스크립트 추가 -->
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
+          }
+        }
+      }
+    </script>
+
     <style>
       .hidden { display: none; }
       .card {
@@ -57,9 +67,9 @@
     </style>
   </head>
   <body>
+    <!-- 수정 3: 인라인 style 속성 제거 -->
     <div
       class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-auto md:overflow-x-hidden"
-      style='font-family: "Work Sans", "Noto Sans", sans-serif;'
     >
       <div class="layout-container flex h-full grow flex-col">
         
@@ -113,7 +123,6 @@
                   </div>
                 </div>
                 <div class="flex px-4 md:px-0 py-4 justify-end">
-                    <!-- *** 수정된 부분: 버튼을 placeholder로 교체 *** -->
                     <div id="next-button-placeholder"></div>
                 </div>
             </div>
@@ -124,14 +133,11 @@
     </div>
 
     <script>
-      // *** 수정된 부분: DOMContentLoaded 이벤트 리스너를 loadComponents.js가 실행된 후에 실행되도록 변경 ***
-      // loadComponents.js가 버튼을 생성한 후에 이 스크립트가 실행되어야 합니다.
       const initializePage = () => {
         const cards = document.querySelectorAll('.card');
         const nextButton = document.getElementById('next-button');
 
         if (!nextButton) {
-          // 버튼이 아직 로드되지 않았다면 잠시 후 다시 시도
           setTimeout(initializePage, 50);
           return;
         }
