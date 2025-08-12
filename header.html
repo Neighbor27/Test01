@@ -22,6 +22,11 @@
     color: transparent;
     animation: placeholder-wave 4s linear infinite;
   }
+
+  /* *** 추가된 부분: 메뉴가 활성화되었을 때 버튼 스타일 *** */
+  #mobile-menu-button.active {
+    @apply bg-gray-200 text-blue-600;
+  }
 </style>
 
 <header
@@ -113,12 +118,10 @@
 
   <!-- 모바일 햄버거 메뉴 버튼 (데스크톱에서는 숨김) -->
   <div class="md:hidden z-30">
-    <button id="mobile-menu-button" class="p-2 rounded-md text-gray-600 hover:bg-gray-100">
+    <!-- *** 수정된 부분: X 아이콘 삭제, hover 효과 클래스 변경 *** -->
+    <button id="mobile-menu-button" class="p-2 rounded-lg text-gray-600 transition-colors duration-200 hover:bg-gray-100">
       <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-      <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
