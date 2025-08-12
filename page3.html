@@ -44,7 +44,11 @@
         .card.selected {
           transform: translateY(0) !important;
         }
+        .card.touched {
+          animation: touch-bounce 1s ease-in-out;
+        }
       }
+      
       @keyframes subtle-light-pulse {
         from {
           box-shadow: 0 0 8px 1px #1466b8;
@@ -53,6 +57,16 @@
           box-shadow: 0 0 4px 2px #1574c1;
         }
       }
+
+      @keyframes touch-bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+
       #next-button {
         transition: transform 0.2s ease-out, background-color 0.2s ease-out;
       }
@@ -192,9 +206,7 @@
        <div id="footer-placeholder"></div>
     </div>
     
-    <!-- *** 수정된 부분: 스크립트 실행 순서를 보장하기 위해 로직 변경 *** -->
     <script>
-      // 'componentsLoaded' 이벤트가 발생하면 페이지 초기화 함수를 실행합니다.
       document.addEventListener('componentsLoaded', () => {
         const nextButton = document.getElementById('next-button');
         const radioCards = document.querySelectorAll('.card');
@@ -212,6 +224,17 @@
                 
                 card.classList.add('selected');
                 input.checked = true;
+            });
+
+            // 터치 기반 기기를 위한 애니메이션 효과 추가
+            card.addEventListener('touchstart', () => {
+              if (!card.classList.contains('selected')) {
+                card.classList.add('touched');
+              }
+            }, { passive: true });
+
+            card.addEventListener('animationend', () => {
+              card.classList.remove('touched');
             });
         });
 
@@ -240,22 +263,6 @@
             radio.parentElement.classList.add('selected');
         });
       });
-      // 터치 기기 감지
-const isTouchDevice = matchMedia('(hover: none) and (pointer: coarse)').matches;
-
-if (isTouchDevice) {
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('click', () => {
-      // 선택 전 살짝 올렸다가 내려오기
-      card.style.transition = 'transform 1s ease-out';
-      card.style.transform = 'translateY(-4px)';
-
-      setTimeout(() => {
-        card.style.transform = 'translateY(0)';
-      }, 150); // 0.15초 후 내려옴
-    });
-  });
-}
     </script>
     <script src="loadComponents.js"></script>
   </body>
