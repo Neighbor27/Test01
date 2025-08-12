@@ -72,15 +72,20 @@
                           <div class="text-[#60758a]" data-icon="Microphone" data-size="20px" data-weight="regular">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
                               <path
-                                d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"
+                                d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,a8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"
                               ></path>
                             </svg>
                           </div>
                         </button>
                       </div>
+                      <!-- 모바일용 보내기 아이콘 버튼 -->
+                      <button id="send-icon-button" class="flex items-center justify-center rounded-full h-8 w-8 bg-[#1466b8] text-white transition-colors duration-200 ease-out hover:bg-[#1a73c8] @[480px]:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M221.22,34.78a15.86,15.86,0,0,0-14.74-4.55L35.22,82.45a16,16,0,0,0-1.1,29.69l84.21,33.68,33.68,84.21a16,16,0,0,0,29.69-1.1L225.77,49.52A15.86,15.86,0,0,0,221.22,34.78Zm-44.34,148.1L143.2,115.7a16,16,0,0,0-14.9-14.9L61.12,67.12,204.4,51.6Z"></path></svg>
+                      </button>
+                      <!-- 데스크톱용 보내기 텍스트 버튼 -->
                       <button
                         id="send-button"
-                        class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#1466b8] text-white text-sm font-medium leading-normal hidden @[480px]:block transition-all duration-200 ease-out hover:bg-[#1a73c8]"
+                        class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#1466b8] text-white text-sm font-medium leading-normal hidden @[480px]:flex transition-all duration-200 ease-out hover:bg-[#1a73c8]"
                       >
                         <span class="truncate">Send</span>
                       </button>
@@ -103,6 +108,7 @@
         const chatInput = document.getElementById('chat-input');
         const sendButton = document.getElementById('send-button');
         const micButton = document.getElementById('mic-button');
+        const sendIconButton = document.getElementById('send-icon-button'); // 모바일 아이콘 버튼 추가
 
         const addMessage = (message, isUser = false) => {
           const messageWrapper = document.createElement('div');
@@ -149,6 +155,7 @@
         };
 
         sendButton.addEventListener('click', sendMessage);
+        sendIconButton.addEventListener('click', sendMessage); // 모바일 아이콘 버튼에도 클릭 이벤트 추가
         
         chatInput.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' && !event.isComposing) {
