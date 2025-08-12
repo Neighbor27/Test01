@@ -108,7 +108,7 @@
         const chatInput = document.getElementById('chat-input');
         const sendButton = document.getElementById('send-button');
         const micButton = document.getElementById('mic-button');
-        const sendIconButton = document.getElementById('send-icon-button'); // 모바일 아이콘 버튼 추가
+        const sendIconButton = document.getElementById('send-icon-button');
 
         const addMessage = (message, isUser = false) => {
           const messageWrapper = document.createElement('div');
@@ -145,17 +145,24 @@
           }, 1000);
         };
 
+        // *** 원본 코드로 복원된 sendMessage 로직 ***
         const sendMessage = () => {
           const message = chatInput.value.trim();
           if (message) {
             addMessage(message, true);
             chatInput.value = '';
+            final_transcript = ''; 
             aiResponse();
+
+            if (isListening && recognition) {
+              shouldRestart = true;
+              recognition.stop();
+            }
           }
         };
 
         sendButton.addEventListener('click', sendMessage);
-        sendIconButton.addEventListener('click', sendMessage); // 모바일 아이콘 버튼에도 클릭 이벤트 추가
+        sendIconButton.addEventListener('click', sendMessage);
         
         chatInput.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' && !event.isComposing) {
@@ -164,10 +171,12 @@
           }
         });
 
-        // 음성 인식 기능
+        // *** 원본 코드로 복원된 음성 인식 기능 ***
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition;
         let isListening = false;
+        let final_transcript = '';
+        let shouldRestart = false; 
 
         if (micButton && SpeechRecognition) {
           recognition = new SpeechRecognition();
@@ -175,7 +184,7 @@
 
           recognition.lang = 'ko-KR';
           recognition.interimResults = true;
-          recognition.continuous = false; 
+          recognition.continuous = true; // <-- 원래대로 true로 변경
 
           recognition.onstart = () => {
             isListening = true;
@@ -189,11 +198,16 @@
             micButton.classList.remove('bg-blue-100');
             micIconDiv.classList.add('text-[#60758a]');
             micIconDiv.classList.remove('text-blue-600');
+            
+            // 메시지 전송 후 자동 재시작 로직
+            if (shouldRestart) {
+              shouldRestart = false;
+              recognition.start();
+            }
           };
 
           recognition.onresult = (event) => {
             let interim_transcript = '';
-            let final_transcript = '';
             for (let i = event.resultIndex; i < event.results.length; ++i) {
               if (event.results[i].isFinal) {
                 final_transcript += event.results[i][0].transcript;
@@ -213,6 +227,7 @@
             if (isListening) {
               recognition.stop();
             } else {
+              final_transcript = '';
               chatInput.value = '';
               recognition.start();
               chatInput.focus();
