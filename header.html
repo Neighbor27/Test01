@@ -40,16 +40,6 @@
   #mobile-menu-button.active {
     @apply bg-gray-200 text-blue-600;
   }
-  /* aria-expanded가 true일 때만 배경·텍스트 색 변경 */
-#mobile-menu-button[aria-expanded="true"] {
-  @apply bg-gray-200 text-blue-600;
-}
-
-/* 키보드 전용 포커스 링 (touch/mouse일 땐 안 보여요) */
-#mobile-menu-button:focus-visible {
-  @apply ring-2 ring-blue-600;
-}
-
 </style>
 
 <header
@@ -140,23 +130,13 @@
   </div>
 
   <!-- 모바일 햄버거 메뉴 버튼 (데스크톱에서는 숨김) -->
-<!-- 모바일 햄버거 메뉴 버튼 -->
-<div class="md:hidden z-30">
-  <button
-    id="mobile-menu-button"
-    aria-expanded="false"
-    class="p-2 rounded-lg text-gray-600 hover:bg-gray-100
-           focus:outline-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-blue-600
-           transition-colors duration-200"
-  >
-    <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg"
-         class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  </button>
-</div>
-
+  <div class="md:hidden z-30">
+    <button id="mobile-menu-button" class="p-2 rounded-lg text-gray-600 transition-colors duration-200 hover:bg-gray-100">
+      <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
 
   <!-- 모바일 메뉴 패널 -->
   <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-white z-20 pt-20">
