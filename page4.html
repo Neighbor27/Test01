@@ -2,16 +2,27 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght@400;500;700;900&family=Work+Sans%3Awght@400;500;700;900"
-    />
+    
+    <!-- 수정 1: Google Fonts 링크 교체 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- 수정 2: Tailwind CSS 폰트 설정 스크립트 추가 -->
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
+          }
+        }
+      }
+    </script>
+
     <style>
       .hidden { display: none; }
       .card {
@@ -56,9 +67,9 @@
     </style>
   </head>
   <body>
+    <!-- 수정 3: 인라인 style 속성 제거 -->
     <div
       class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-auto md:overflow-x-hidden"
-      style='font-family: "Work Sans", "Noto Sans", sans-serif;'
     >
       <div class="layout-container flex h-full grow flex-col">
         
@@ -121,7 +132,6 @@
       </div>
     </div>
     <script>
-      // 'componentsLoaded' 이벤트가 발생하면 페이지 초기화 함수를 실행합니다.
       document.addEventListener('componentsLoaded', () => {
         const targetNameElement = document.getElementById('target-name');
         const selectedTargetName = localStorage.getItem('selectedTarget') || '상대방';
