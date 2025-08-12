@@ -26,8 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 모바일 메뉴 관련 요소
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-    // const hamburgerIcon = document.getElementById('hamburger-icon'); // 더 이상 필요 없음
-    // const closeIcon = document.getElementById('close-icon'); // X 아이콘 삭제
 
     // 알림 관련 요소
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
@@ -89,10 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         event.stopPropagation();
         
-        // 모바일 메뉴 닫기
-        if (mobileMenu) {
+        // 모바일 메뉴 닫기 및 버튼 활성 상태 제거
+        if (mobileMenu && mobileMenuButton) {
           mobileMenu.classList.add('hidden');
-          mobileMenuButton.classList.remove('active'); // 버튼 활성 상태 제거
+          mobileMenuButton.classList.remove('active'); 
           document.body.style.overflow = '';
         }
         
