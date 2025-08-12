@@ -1,5 +1,6 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link
       rel="stylesheet"
@@ -12,13 +13,30 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <style>
+      @keyframes gentle-float {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .animated-bear {
+        animation: gentle-float 5s ease-in-out infinite;
+      }
+    </style>
   </head>
   <body>
     <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Be Vietnam Pro", "Noto Sans", sans-serif;'>
       <div class="layout-container flex h-full grow flex-col">
-        <div class="px-40 flex flex-1 justify-center py-5">
+        
+        <div id="header-placeholder"></div>
+
+        <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <h2 class="text-[#111418] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">AI가 맞춤 대화 주제를 찾고 있어요.</h2>
+            <h2 class="text-[#111418] tracking-light text-2xl md:text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">AI가 맞춤 대화 주제를 찾고 있어요.</h2>
             <div class="flex flex-col gap-3 p-4">
               <div class="flex gap-6 justify-between"><p class="text-[#111418] text-base font-medium leading-normal">분석 중...</p></div>
               <div class="rounded bg-[#dbe0e6]"><div class="h-2 rounded bg-[#111418]" style="width: 50%;"></div></div>
@@ -27,17 +45,34 @@
             <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
               입력하신 정보를 바탕으로 상대방이 좋아할 만한 최신 대화 주제를 추천해 드리고, AI와 함께 대화 연습도 할 수 있어요.
             </p>
-            <div class="flex w-full grow bg-white @container p-4">
-              <div class="w-full gap-1 overflow-hidden bg-white @[480px]:gap-2 aspect-[2/3] rounded-lg flex">
-                <div
-                  class="w-full bg-center bg-no-repeat bg-cover aspect-auto rounded-none flex-1"
-                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS5S203aedw1imyT8sWIYhVkTsGHVpzpOaB5TlPCNWfO29mShYXpmSRghwIIeR2_WUeYw9jmZ7nBYPqVevY40zQanfjXCBe_b6GsmYcdwCwnTlvYzLn7Z2c5LAmhz1gUIqUGAsfZdMtJI-8OoCPGYn5sWwDklZ5zSv-_lhlq__uB1Z7wUciCPFug0_zQuJno61qsY7o4l6sS6bsOMO2jmM70puBytf0njkDAqhuRi60nioLJ8396JQMCYCh9kQknCVvsA3d-7oQg");'
-                ></div>
+            
+            <div class="flex w-full grow bg-white @container pt-2 pb-4 px-4 justify-center items-center">
+              <div class="w-full max-w-sm gap-1 overflow-hidden bg-white @[480px]:gap-2 aspect-[2/3] rounded-lg flex">
+                
+                <!-- *** 수정된 부분: 배경과 곰을 분리하는 이중 레이어 구조 *** -->
+                <div class="relative w-full flex-1">
+                  <!-- 1. 배경 레이어 (움직이지 않음) -->
+                  <div
+                    class="absolute inset-0 bg-center bg-no-repeat bg-cover"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS5S203aedw1imyT8sWIYhVkTsGHVpzpOaB5TlPCNWfO29mShYXpmSRghwIIeR2_WUeYw9jmZ7nBYPqVevY40zQanfjXCBe_b6GsmYcdwCwnTlvYzLn7Z2c5LAmhz1gUIqUGAsfZdMtJI-8OoCPGYn5sWwDklZ5zSv-_lhlq__uB1Z7wUciCPFug0_zQuJno61qsY7o4l6sS6bsOMO2jmM70puBytf0njkDAqhuRi60nioLJ8396JQMCYCh9kQknCVvsA3d-7oQg");'
+                  ></div>
+                  <!-- 2. 곰(전경) 레이어 (움직임) -->
+                  <div
+                    class="absolute inset-0 bg-center bg-no-repeat bg-cover animated-bear"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS5S203aedw1imyT8sWIYhVkTsGHVpzpOaB5TlPCNWfO29mShYXpmSRghwIIeR2_WUeYw9jmZ7nBYPqVevY40zQanfjXCBe_b6GsmYcdwCwnTlvYzLn7Z2c5LAmhz1gUIqUGAsfZdMtJI-8OoCPGYn5sWwDklZ5zSv-_lhlq__uB1Z7wUciCPFug0_zQuJno61qsY7o4l6sS6bsOMO2jmM70puBytf0njkDAqhuRi60nioLJ8396JQMCYCh9kQknCVvsA3d-7oQg");'
+                  ></div>
+                </div>
+
               </div>
             </div>
+
           </div>
         </div>
+        
+        <div id="footer-placeholder"></div>
       </div>
     </div>
+    
+    <script src="loadComponents.js"></script>
   </body>
 </html>
