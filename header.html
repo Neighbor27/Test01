@@ -1,5 +1,4 @@
 <!-- header.html -->
-<!-- *** 수정된 부분: 검색창 placeholder에 대한 애니메이션 스타일 추가 *** -->
 <style>
   @keyframes placeholder-wave {
     from {
@@ -12,21 +11,16 @@
 
   /* 그룹에 호버했을 때, 내부의 input placeholder에 애니메이션 적용 */
   .group:hover input::placeholder {
-    /* 1. 배경으로 그라데이션을 만듭니다 (기본색 -> 강조색 -> 기본색) */
     background-image: linear-gradient(
       90deg,
       #757575,
       #141414,
       #757575
     );
-    /* 2. 배경 크기를 200%로 늘려 움직일 공간을 확보합니다 */
     background-size: 200% 100%;
-    /* 3. 배경을 텍스트 모양으로 잘라냅니다 (핵심) */
     background-clip: text;
-    -webkit-background-clip: text; /* 웹킷 브라우저 호환성 */
-    /* 4. 원래 텍스트 색상을 투명하게 만들어 배경 그라데이션이 보이게 합니다 */
+    -webkit-background-clip: text;
     color: transparent;
-    /* 5. 위에서 정의한 애니메이션을 적용합니다 */
     animation: placeholder-wave 4s linear infinite;
   }
 </style>
@@ -54,8 +48,9 @@
     <!-- 검색창 -->
     <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
       <div class="group flex w-full flex-1 items-stretch rounded-lg h-full">
+        <!-- *** 수정된 부분: group-hover:bg-gray-300 추가 *** -->
         <div
-          class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414]"
+          class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414] group-hover:bg-gray-300"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
             <path
@@ -63,9 +58,10 @@
             ></path>
           </svg>
         </div>
+        <!-- *** 수정된 부분: transition-colors, duration-200, group-hover:bg-gray-300 추가 *** -->
         <input
           placeholder="Search"
-          class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+          class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal transition-colors duration-200 group-hover:bg-gray-300"
           value=""
         />
       </div>
