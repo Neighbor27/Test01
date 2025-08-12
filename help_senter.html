@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
   <head>
+    <meta charset="UTF-8" />
+    <!-- *** 수정된 부분: 모바일 반응형을 위한 필수 메타 태그 추가 *** -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link
       rel="stylesheet"
@@ -20,17 +24,14 @@
         
         <div id="header-placeholder"></div>
 
-        <!-- *** 수정된 부분: 모바일 반응형을 위해 좌우 여백(padding) 조정 *** -->
         <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div class="flex flex-wrap justify-between gap-3 p-4">
               <div class="flex min-w-72 flex-col gap-3">
-                <!-- *** 수정된 부분: 모바일 반응형을 위해 폰트 크기 조정 *** -->
                 <p class="text-[#111418] tracking-light text-2xl md:text-[32px] font-bold leading-tight">고객 지원 센터</p>
                 <p class="text-[#60758a] text-sm font-normal leading-normal">자주 묻는 질문에 대한 답변을 찾거나, 지원이 필요하시면 문의해주세요.</p>
               </div>
             </div>
-            <!-- *** 수정된 부분: 모바일 반응형을 위해 폰트 크기 조정 *** -->
             <h2 class="text-[#111418] text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">자주 묻는 질문</h2>
             <div class="flex flex-col p-4 gap-3">
               <details class="flex flex-col rounded-lg border border-[#dbe0e6] bg-white px-[15px] py-[7px] group" open="">
@@ -73,7 +74,6 @@
                 </p>
               </details>
             </div>
-            <!-- *** 수정된 부분: 모바일 반응형을 위해 폰트 크기 조정 *** -->
             <h2 class="text-[#111418] text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">문의하기</h2>
             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label class="flex flex-col min-w-40 flex-1">
@@ -105,14 +105,12 @@
               </label>
             </div>
             <div class="flex px-4 py-3 justify-end">
-              <!-- *** 수정된 부분: 제출 버튼 색상 및 호버 효과를 로그인 버튼과 통일 *** -->
               <button
                 class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-all duration-200 ease-out hover:bg-[#1a73c8]"
               >
                 <span class="truncate">제출</span>
               </button>
             </div>
-            <!-- *** 수정된 부분: 모바일 반응형을 위해 폰트 크기 조정 *** -->
             <h2 class="text-[#111418] text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">FAQ 카테고리</h2>
             <div class="flex gap-3 p-3 flex-wrap pr-4">
               <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#f0f2f5] pl-4 pr-4">
