@@ -23,12 +23,10 @@
         background-color: #fff;
         z-index: 1;
       }
-      @media (hover: hover) and (pointer: fine) {
-        .card:not(.selected):hover {
-          transform: translateY(-4px);
-          border-color: #a0a8b1;
-          box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-        }
+      .card:not(.selected):hover {
+        transform: translateY(-4px);
+        border-color: #a0a8b1;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
       }
       .card.selected {
         animation: subtle-light-pulse 3s infinite alternate ease-in-out;
@@ -167,8 +165,3 @@
     <script src="loadComponents.js"></script>
   </body>
 </html>
-      @media (hover: none) and (pointer: coarse) {
-        .card.selected {
-          transform: translateY(0) !important;
-        }
-      }
