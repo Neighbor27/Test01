@@ -29,18 +29,44 @@
       <style>
         .card {
           border: 1px solid #dce0e5;
-          transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.3s ease-out;
+          transition: transform 0.2s ease-out, border-color 0.2s ease-out;
           cursor: pointer;
+          position: relative;
+          overflow: hidden; /* 가상 요소가 밖으로 나가지 않도록 함 */
+          z-index: 1;
         }
-        .card.selected {
-          box-shadow: 0 0 6px 1.5px #1574c1;
-          border-color: #a0a8b1;
+        
+        /* 빛 효과를 담당할 가상 요소 */
+        .card::before {
+          content: '';
+          position: absolute;
+          top: -4px; left: -4px; right: -4px; bottom: -4px;
+          background: #1574c1;
+          filter: blur(6px);
+          z-index: -1; /* 내용물보다 뒤에 위치 */
+          opacity: 0;
+          /* 취소 시 안으로 빨려 들어가는 효과를 위해 scale 사용 */
+          transform: scale(1.05); 
+          transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
+
+        /* 선택되었을 때, 가상 요소를 보이게 하고 애니메이션 적용 */
+        .card.selected::before {
+          opacity: 0.8;
+          transform: scale(1.05); /* 카드보다 약간 큰 상태 유지 */
+          animation: subtle-glow-pulse 3s infinite alternate ease-in-out;
+        }
+        
+        /* 선택이 풀릴 때, 가상 요소는 투명해지고 카드보다 작아지면서 사라짐 */
+        .card:not(.selected)::before {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
         @media (hover: hover) and (pointer: fine) {
           .card:not(.selected):hover {
             transform: translateY(-4px);
             border-color: #a0a8b1;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
           }
           .card.selected:hover {
             transform: translateY(-4px);
@@ -50,6 +76,12 @@
           .card.selected {
             transform: translateY(-4px) !important;
           }
+        }
+
+        /* 빛이 부드럽게 깜빡이는 효과 */
+        @keyframes subtle-glow-pulse {
+          from { opacity: 0.6; }
+          to { opacity: 0.9; }
         }
       </style>
 
