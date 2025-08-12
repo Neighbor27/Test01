@@ -23,9 +23,13 @@
     animation: placeholder-wave 4s linear infinite;
   }
 
-  /* *** 추가된 부분: 메뉴가 활성화되었을 때 버튼 스타일 *** */
   #mobile-menu-button.active {
     @apply bg-gray-200 text-blue-600;
+  }
+
+  /* *** 추가된 부분: 로고 폰트를 명시적으로 지정 *** */
+  .logo-font {
+    font-family: "Spline Sans", "Noto Sans", sans-serif;
   }
 </style>
 
@@ -42,10 +46,11 @@
         ></path>
       </svg>
     </div>
-    <h2 class="sm:hidden text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
+    <!-- *** 수정된 부분: logo-font 클래스 추가 *** -->
+    <h2 class="logo-font sm:hidden text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
       Ga&Co
     </h2>
-    <h2 class="hidden sm:block text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
+    <h2 class="logo-font hidden sm:block text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
       Grace & Connect
     </h2>
   </a>
