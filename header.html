@@ -79,41 +79,25 @@
         </div>
       </button>
 
-      <!-- 알림 드롭다운 패널 -->
+      <!-- *** 알림 드롭다운 패널 수정 *** -->
       <div
         id="notification-panel"
-        class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-10"
+        class="hidden absolute top-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-10 left-4 right-4 md:left-auto md:right-0 md:w-80"
       >
         <div class="p-4 border-b">
           <p class="font-bold text-[#141414]">Notifications</p>
         </div>
         
-        <!-- *** 수정된 부분: 알림 목록 컨테이너에 ID 추가 *** -->
         <div id="notification-list" class="max-h-96 overflow-y-auto">
-          <!-- 
-            알림이 있을 경우, 이 안에 아래와 같은 <a> 태그를 동적으로 추가하면 됩니다.
-            '알림 없음' 상태를 테스트하기 위해 예시 알림은 주석 처리합니다.
-          
-          <a href="#" class="flex items-start gap-3 p-4 hover:bg-gray-50 transition-colors">
-            <div class="w-2 h-2 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
-            <div class="flex-1">
-              <p class="text-sm text-[#141414] font-medium">
-                New message from <span class="font-bold">Jane Doe</span>
-              </p>
-              <p class="text-xs text-gray-500 mt-1">2 minutes ago</p>
-            </div>
-          </a>
-          -->
+          <!-- 알림 목록이 여기에 동적으로 추가됩니다. -->
         </div>
 
-        <!-- *** 수정된 부분: 알림이 없을 때 표시될 UI 추가 *** -->
         <div id="notification-empty-state" class="hidden text-center py-12 px-4">
             <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 256 256"><path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path></svg>
             <h3 class="mt-2 text-sm font-medium text-gray-900">새로운 알림이 없습니다</h3>
             <p class="mt-1 text-sm text-gray-500">모든 내용을 확인했습니다.</p>
         </div>
         
-        <!-- *** 수정된 부분: 푸터에 ID 추가 *** -->
         <div id="notification-footer" class="p-2 border-t">
           <a href="#" class="block text-center text-sm text-blue-600 hover:underline">
             View all notifications
