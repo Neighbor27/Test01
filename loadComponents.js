@@ -55,8 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
           mobileMenu.classList.add('hidden');
           mobileMenuButton.classList.remove('active'); // 버튼 비활성화 (불 끄기)
           document.body.style.overflow = '';
-
-          mobileMenuButton.blur();
         }
       });
     }
