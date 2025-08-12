@@ -57,7 +57,7 @@
                     value=""
                   />
                   <div class="flex border-none bg-[#f0f2f5] items-center justify-center pr-4 rounded-r-xl border-l-0 !pr-2">
-                    <div class="flex items-center gap-4 justify-end">
+                    <div class="flex items-center gap-2 justify-end">
                       <div class="flex items-center gap-1">
                         <button class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
                           <div class="text-[#60758a]" data-icon="Image" data-size="20px" data-weight="regular">
@@ -78,9 +78,14 @@
                           </div>
                         </button>
                       </div>
+                      <!-- 모바일용 보내기 아이콘 버튼 -->
+                      <button id="send-icon-button" class="flex items-center justify-center rounded-full h-8 w-8 bg-[#1466b8] text-white transition-colors duration-200 ease-out hover:bg-[#1a73c8] @[480px]:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M200,56v88a56.06,56.06,0,0,1-56,56H62.34l18.83-18.83a8,8,0,1,0-11.32-11.32L28.17,211.51a8,8,0,0,0,0,11.32l41.68,41.68a8,8,0,0,0,11.32-11.32L62.34,234H144a40,40,0,0,0,40-40V56a8,8,0,0,0-16,0Z" transform="rotate(180, 128, 128)"></path></svg>
+                      </button>
+                      <!-- 데스크톱용 보내기 텍스트 버튼 -->
                       <button
                         id="send-button"
-                        class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#1466b8] text-white text-sm font-medium leading-normal hidden @[480px]:block transition-all duration-200 ease-out hover:bg-[#1a73c8]"
+                        class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#1466b8] text-white text-sm font-medium leading-normal hidden @[480px]:flex transition-all duration-200 ease-out hover:bg-[#1a73c8]"
                       >
                         <span class="truncate">Send</span>
                       </button>
@@ -103,12 +108,12 @@
         const chatInput = document.getElementById('chat-input');
         const sendButton = document.getElementById('send-button');
         const micButton = document.getElementById('mic-button');
+        const sendIconButton = document.getElementById('send-icon-button'); // 모바일 아이콘 버튼 추가
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition;
         let isListening = false;
         let final_transcript = '';
-        // *** 수정된 부분: 제안해주신 재시작 제어 플래그 ***
         let shouldRestart = false; 
 
         const addMessage = (message, isUser = false) => {
@@ -146,7 +151,6 @@
           }, 1000);
         };
 
-        // *** 수정된 부분: 제안해주신 sendMessage 로직 ***
         const sendMessage = () => {
           const message = chatInput.value.trim();
           if (message) {
@@ -157,13 +161,13 @@
 
             if (isListening && recognition) {
               shouldRestart = true;
-              isListening = false;
               recognition.stop();
             }
           }
         };
 
         sendButton.addEventListener('click', sendMessage);
+        sendIconButton.addEventListener('click', sendMessage); // 모바일 아이콘 버튼에도 클릭 이벤트 추가
         
         chatInput.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' && !event.isComposing) {
@@ -182,21 +186,21 @@
           recognition.continuous = true;
 
           recognition.onstart = () => {
+            isListening = true; // onstart에서 isListening 상태를 true로 설정
             micButton.classList.add('bg-blue-100');
             micIconDiv.classList.remove('text-[#60758a]');
             micIconDiv.classList.add('text-blue-600');
           };
 
-          // *** 수정된 부분: 제안해주신 onend 로직 ***
           recognition.onend = () => {
+            isListening = false; // onend에서 isListening 상태를 false로 설정
+            micButton.classList.remove('bg-blue-100');
+            micIconDiv.classList.add('text-[#60758a]');
+            micIconDiv.classList.remove('text-blue-600');
+            
             if (shouldRestart) {
               shouldRestart = false;
-              isListening = true; 
               recognition.start();
-            } else {
-              micButton.classList.remove('bg-blue-100');
-              micIconDiv.classList.add('text-[#60758a]');
-              micIconDiv.classList.remove('text-blue-600');
             }
           };
 
@@ -221,12 +225,10 @@
 
           micButton.addEventListener('click', () => {
             if (isListening) {
-              isListening = false;
               recognition.stop();
             } else {
-              isListening = true;
-              chatInput.value = '';
               final_transcript = '';
+              chatInput.value = '';
               recognition.start();
               chatInput.focus();
             }
