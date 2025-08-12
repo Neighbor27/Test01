@@ -54,11 +54,8 @@
               <label class="flex flex-col min-w-40 flex-1">
                 <div class="flex w-full flex-1 items-center rounded-xl bg-[#f0f2f5] px-4 py-2">
                   <div class="flex flex-col w-full">
-                    <!-- *** 파일 미리보기 영역 수정 *** -->
                     <div id="file-preview-container" class="hidden items-center justify-between gap-2 mb-2">
-                      <!-- 이미지 썸네일 -->
                       <img id="file-preview-image" class="hidden w-12 h-12 object-cover rounded-md" src="" alt="Image preview">
-                      <!-- 파일 이름 (이미지가 아닐 경우) -->
                       <span id="file-preview-name" class="hidden text-sm text-gray-700 truncate"></span>
                       <button id="remove-file-button" class="p-0.5 rounded-full hover:bg-gray-400 self-start">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
@@ -85,8 +82,11 @@
                               </div>
                             </button>
                           </div>
+                          <!-- *** 모바일용 보내기 아이콘 수정 *** -->
                           <button id="send-icon-button" class="flex items-center justify-center rounded-full h-8 w-8 bg-[#1466b8] text-white transition-colors duration-200 ease-out hover:bg-[#1a73c8] @[480px]:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M200,56v88a56.06,56.06,0,0,1-56,56H62.34l18.83-18.83a8,8,0,1,0-11.32-11.32L28.17,211.51a8,8,0,0,0,0,11.32l41.68,41.68a8,8,0,0,0,11.32-11.32L62.34,234H144a40,40,0,0,0,40-40V56a8,8,0,0,0-16,0Z" transform="rotate(180, 128, 128)"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                              <path d="M205.66,117.66a8,8,0,0,1-11.32,0L136,59.31V216a8,8,0,0,1-16,0V59.31L61.66,117.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0l72,72A8,8,0,0,1,205.66,117.66Z"></path>
+                            </svg>
                           </button>
                           <button
                             id="send-button"
@@ -125,7 +125,7 @@
         const removeFileButton = document.getElementById('remove-file-button');
 
         let selectedFile = null;
-        let imagePreviewUrl = null; // 이미지 미리보기 URL을 저장할 변수
+        let imagePreviewUrl = null;
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition;
@@ -174,11 +174,10 @@
 
           let messageContent = '';
 
-          // *** 파일이 이미지일 경우와 아닐 경우를 분기하여 처리 ***
           if (selectedFile) {
-            if (imagePreviewUrl) { // 이미지가 있을 경우
+            if (imagePreviewUrl) {
               messageContent += `<img src="${imagePreviewUrl}" alt="${selectedFile.name}" class="max-w-[200px] rounded-lg mb-2">`;
-            } else { // 이미지가 아닌 파일일 경우
+            } else {
               messageContent += `<div class="flex items-center gap-2 p-2 bg-black bg-opacity-20 rounded-lg mb-2">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"></path></svg>
                                   <span>${selectedFile.name}</span>
@@ -187,7 +186,6 @@
           }
 
           if (textMessage) {
-            // HTML 태그를 이스케이프하여 안전하게 표시
             const escapedTextMessage = textMessage.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             messageContent += `<div>${escapedTextMessage}</div>`;
           }
@@ -230,7 +228,6 @@
           fileInput.click();
         });
 
-        // *** 파일 선택 시 이미지 미리보기 로직 ***
         fileInput.addEventListener('change', (event) => {
           const file = event.target.files[0];
           if (!file) return;
@@ -261,7 +258,6 @@
           removeFile();
         });
 
-        // 음성 인식 기능 (기존 코드 유지)
         if (micButton && SpeechRecognition) {
           recognition = new SpeechRecognition();
           const micIconDiv = micButton.querySelector('div');
