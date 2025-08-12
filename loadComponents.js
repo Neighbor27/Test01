@@ -27,30 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    // 터치(pointer) 로 버튼 누를 때, 포커스가 남지 않도록 blur()
-    if (mobileMenuButton) {
-      mobileMenuButton.addEventListener('pointerdown', (e) => {
-        if (e.pointerType === 'touch') {
-          mobileMenuButton.blur();
-        }
-      });
-    }
-
-    // 모바일 메뉴 토글 (aria-expanded 기반)
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', () => {
-        const isOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-
-        mobileMenu.classList.toggle('hidden', isOpen);
-        document.body.style.overflow = isOpen ? '' : 'hidden';
-        mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
-
-        if (!isOpen && notificationPanel) {
-          notificationPanel.classList.add('hidden');
-        }
-      });
-    }
-
     // 알림 관련 요소
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
     const notificationButtonMobile = document.getElementById('notification-button-mobile');
@@ -59,12 +35,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyState = document.getElementById('notification-empty-state');
     const notificationFooter = document.getElementById('notification-footer');
 
-    // 2. 알림 상태 체크 함수
+    // *** 수정된 부분: 햄버거 메뉴 토글 기능을 더 확실한 방식으로 변경 ***
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        // 현재 메뉴가 숨겨져 있는지 확인
+        const isCurrentlyHidden = mobileMenu.classList.contains('hidden');
+
+        if (isCurrentlyHidden) {
+          // 메뉴를 연다
+          mobileMenu.classList.remove('hidden');
+          mobileMenuButton.classList.add('active'); // 버튼 활성화
+          document.body.style.overflow = 'hidden';
+          
+          if (notificationPanel) {
+            notificationPanel.classList.add('hidden');
+          }
+        } else {
+          // 메뉴를 닫는다
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.classList.remove('active'); // 버튼 비활성화 (불 끄기)
+          document.body.style.overflow = '';
+        }
+      });
+    }
+
+    // 2. 알림 상태 체크 함수 (기존과 동일)
     const checkNotifications = () => {
       if (!notificationList || !emptyState || !notificationFooter) return;
-      const count = notificationList.children.length;
+      const notificationItemsCount = notificationList.children.length;
 
-      if (count > 0) {
+      if (notificationItemsCount > 0) {
         emptyState.classList.add('hidden');
         notificationFooter.classList.remove('hidden');
       } else {
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    // 3. 데스크톱 알림창 토글
+    // 3. 알림창 토글 기능 (데스크톱) (기존과 동일)
     if (notificationButtonDesktop && notificationPanel) {
       notificationButtonDesktop.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -84,33 +84,33 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 4. 모바일 메뉴 안에서 알림창 열기
+    // 4. 알림창 열기 기능 (모바일 메뉴 안에서)
     if (notificationButtonMobile && notificationPanel) {
       notificationButtonMobile.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-
+        
+        // 모바일 메뉴 닫기 및 버튼 활성 상태 제거
         if (mobileMenu && mobileMenuButton) {
           mobileMenu.classList.add('hidden');
-          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenuButton.classList.remove('active'); 
           document.body.style.overflow = '';
         }
-
+        
+        // 알림창 열기
         notificationPanel.classList.remove('hidden');
         checkNotifications();
       });
     }
 
-    // 5. 외부 클릭 시 알림창 닫기
+    // 5. 외부 클릭 시 패널 닫기 (기존과 동일)
     document.addEventListener('click', (event) => {
-      if (
-        notificationPanel &&
-        !notificationPanel.classList.contains('hidden') &&
-        !notificationPanel.contains(event.target) &&
-        !notificationButtonDesktop.contains(event.target) &&
-        !notificationButtonMobile.contains(event.target)
-      ) {
-        notificationPanel.classList.add('hidden');
+      if (notificationPanel && !notificationPanel.classList.contains('hidden')) {
+        if (!notificationPanel.contains(event.target) && 
+            !notificationButtonDesktop.contains(event.target) &&
+            !notificationButtonMobile.contains(event.target)) {
+          notificationPanel.classList.add('hidden');
+        }
       }
     });
 
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 헤더 기능 초기화 종료 ---
 
-    // 모든 컴포넌트 로드 완료 알림
+    // 모든 컴포넌트 로드가 완료되었음을 알림
     document.dispatchEvent(new Event('componentsLoaded'));
   });
 });
