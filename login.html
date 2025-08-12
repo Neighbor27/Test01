@@ -3,7 +3,6 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- 수정 1: Google Fonts 링크 교체 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -13,7 +12,6 @@
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <!-- 수정 2: Tailwind CSS 폰트 설정 스크립트 추가 -->
     <script>
       tailwind.config = {
         theme: {
@@ -40,7 +38,6 @@
       }
     </style>
   </head>
-  <!-- 수정 3: body의 인라인 스타일 제거 및 font-sans 클래스 추가 -->
   <body class="font-sans">
     <div
       class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
@@ -61,8 +58,9 @@
             <!-- 검색창 -->
             <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
               <div class="group flex w-full flex-1 items-stretch rounded-lg h-full">
+                <!-- *** 수정: 호버 효과 클래스 추가 *** -->
                 <div
-                  class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414]"
+                  class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414] group-hover:bg-gray-200"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
                     <path
@@ -70,20 +68,20 @@
                     ></path>
                   </svg>
                 </div>
+                <!-- *** 수정: 호버 효과 클래스 추가 *** -->
                 <input
                   placeholder="Search"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal transition-colors duration-200 group-hover:bg-gray-200"
                   value=""
                 />
               </div>
             </label>
             
-            <!-- 수정 4: 알림 아이콘 제거됨 -->
-
-            <!-- 수정 5: 고객센터 아이콘에 링크 추가 -->
+            <!-- 고객센터 아이콘 -->
             <a href="help_center.html">
+              <!-- *** 수정: 호버 효과를 hover:bg-gray-200으로 통일 *** -->
               <button
-                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-300"
+                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200"
               >
                 <div class="text-[#141414]" data-icon="Headset" data-size="20px" data-weight="regular">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
