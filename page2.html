@@ -1,80 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- <head> 부분은 여전히 각 페이지마다 필요합니다. -->
+    <!-- <head> 부분은 그대로 유지합니다 (폰트, 스타일 등) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <title>Stitch Design</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
-      tailwind.config = {
-        theme: {
-          fontFamily: {
-            sans: ['Montserrat', 'Noto Sans KR', 'sans-serif'],
-          }
-        }
-      }
+      tailwind.config = { /* ... */ }
     </script>
     <style>
-      /* ... 페이지 2의 고유 스타일 ... */
+      /* ... 페이지 2 고유 스타일 ... */
     </style>
   </head>
   <body>
-    <!-- 👇 이 곳에 레이아웃이 로드됩니다. 👇 -->
+    <!-- 1. 레이아웃이 로드될 빈 껍데기만 남겨둡니다. -->
     <div id="layout-placeholder"></div>
 
-    <script>
-      // 페이지 로드 후, 고유 콘텐츠를 레이아웃 안으로 이동시키는 로직
-      document.addEventListener('DOMContentLoaded', () => {
-        const pageContent = document.getElementById('page-unique-content');
-        const mainPlaceholder = document.getElementById('main-content-placeholder');
-        
-        // mainPlaceholder가 로드될 때까지 기다립니다.
-        const observer = new MutationObserver((mutations, obs) => {
-          const mainPlaceholder = document.getElementById('main-content-placeholder');
-          if (mainPlaceholder) {
-            mainPlaceholder.appendChild(pageContent);
-            obs.disconnect(); // 작업 완료 후 관찰 중단
-            initializePage(); // 페이지 기능 초기화
-          }
-        });
-
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      });
-    </script>
-
-    <!-- 👇 이 부분이 이 페이지의 '알맹이' 입니다. 👇 -->
-    <div id="page-unique-content" style="display: none;">
-      <div class="layout-content-container flex flex-col w-full max-w-[700px] self-center">
-        <div class="pb-5 px-4 md:px-0">
-          <h2 class="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#111418] leading-tight">
-            마음 가는 상대는?
-          </h2>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 md:p-0 md:mt-5 justify-items-center">
-          <!-- 카드 아이템들... -->
-          <div class="card ...">...</div>
-          <div class="card ...">...</div>
-          <!-- ... -->
-        </div>
-        <div class="flex px-4 md:px-0 py-4 justify-end">
-          <div id="next-button-placeholder"></div>
+    <!-- 2. 이 페이지의 진짜 내용물(알맹이)은 아래에 숨겨둡니다. -->
+    <div id="page-content" class="hidden">
+      <div class="flex flex-1 flex-col py-8 px-4 md:px-40 md:py-16">
+        <div class="layout-content-container flex flex-col w-full max-w-[700px] self-center">
+          <div class="pb-5 px-4 md:px-0">
+            <h2 class="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#111418] leading-tight">
+              마음 가는 상대는?
+            </h2>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 md:p-0 md:mt-5 justify-items-center">
+            <!-- ... 카드 아이템들 ... -->
+            <div class="card ...">...</div>
+            <div class="card ...">...</div>
+          </div>
+          <div class="flex px-4 md:px-0 py-4 justify-end">
+            <div id="next-button-placeholder"></div>
+          </div>
         </div>
       </div>
     </div>
-    
-    <!-- 기존 스크립트 (initializePage) -->
+
+    <!-- 3. 페이지별 기능 스크립트 (기존과 동일) -->
     <script>
+      // 이 스크립트는 'componentsLoaded' 이벤트 이후에 실행됩니다.
       const initializePage = () => {
+        const cards = document.querySelectorAll('.card');
+        const nextButton = document.getElementById('next-button');
+
         // ... 기존 카드 선택 및 버튼 로직 ...
       };
+
+      document.addEventListener('componentsLoaded', initializePage);
     </script>
+    
+    <!-- 4. 공통 컴포넌트 로더 (기존과 동일) -->
     <script src="loadComponents.js"></script>
   </body>
 </html>
