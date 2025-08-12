@@ -67,7 +67,6 @@
                             </svg>
                           </div>
                         </button>
-                        <!-- *** 수정된 부분: 마이크 버튼에 id="mic-button" 추가 *** -->
                         <button id="mic-button" class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
                           <div class="text-[#60758a]" data-icon="Microphone" data-size="20px" data-weight="regular">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
@@ -102,8 +101,13 @@
         const chatContainer = document.getElementById('chat-container');
         const chatInput = document.getElementById('chat-input');
         const sendButton = document.getElementById('send-button');
-        // *** 수정된 부분: 마이크 버튼 요소 가져오기 ***
         const micButton = document.getElementById('mic-button');
+
+        // 음성 인식을 위한 변수 선언
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition;
+        let isListening = false;
+        let final_transcript = '';
 
         const addMessage = (message, isUser = false) => {
           const messageWrapper = document.createElement('div');
@@ -145,6 +149,8 @@
           if (message) {
             addMessage(message, true);
             chatInput.value = '';
+            // *** 수정된 부분: 메시지 전송 후, 음성 인식 텍스트 버퍼도 초기화 ***
+            final_transcript = ''; 
             aiResponse();
           }
         };
@@ -152,27 +158,67 @@
         sendButton.addEventListener('click', sendMessage);
         
         chatInput.addEventListener('keydown', (event) => {
+          // *** 수정된 부분: Enter 키는 마이크 상태에 영향을 주지 않음 ***
           if (event.key === 'Enter' && !event.isComposing) {
+            event.preventDefault();
             sendMessage();
           }
         });
 
-        // *** 수정된 부분: 마이크 버튼 클릭 시 권한 요청 기능 ***
-        if (micButton) {
-          micButton.addEventListener('click', () => {
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-              navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(stream => {
-                  alert('마이크 접근이 허용되었습니다!');
-                  stream.getTracks().forEach(track => track.stop());
-                })
-                .catch(err => {
-                  console.error(`마이크 접근 오류: ${err}`);
-                  alert('마이크 접근이 거부되었거나 오류가 발생했습니다.');
-                });
-            } else {
-              alert('사용하시는 브라우저는 음성 입력을 지원하지 않습니다.');
+        // 음성 인식 기능
+        if (micButton && SpeechRecognition) {
+          recognition = new SpeechRecognition();
+          const micIconDiv = micButton.querySelector('div');
+
+          recognition.lang = 'ko-KR';
+          recognition.interimResults = true;
+          recognition.continuous = true;
+
+          recognition.onstart = () => {
+            micButton.classList.add('bg-blue-100');
+            micIconDiv.classList.remove('text-[#60758a]');
+            micIconDiv.classList.add('text-blue-600');
+          };
+
+          recognition.onend = () => {
+            micButton.classList.remove('bg-blue-100');
+            micIconDiv.classList.add('text-[#60758a]');
+            micIconDiv.classList.remove('text-blue-600');
+            isListening = false;
+          };
+
+          recognition.onresult = (event) => {
+            let interim_transcript = '';
+            final_transcript = ''; // 결과를 받을 때마다 초기화하여 누적 방지
+            for (let i = 0; i < event.results.length; ++i) {
+              if (event.results[i].isFinal) {
+                final_transcript += event.results[i][0].transcript;
+              } else {
+                interim_transcript += event.results[i][0].transcript;
+              }
             }
+            chatInput.value = final_transcript + interim_transcript;
+          };
+
+          recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            isListening = false;
+          };
+
+          micButton.addEventListener('click', () => {
+            if (isListening) {
+              recognition.stop();
+            } else {
+              chatInput.value = '';
+              final_transcript = '';
+              recognition.start();
+            }
+            isListening = !isListening;
+          });
+
+        } else if (micButton) {
+          micButton.addEventListener('click', () => {
+            alert('사용하시는 브라우저는 음성 인식을 지원하지 않습니다.');
           });
         }
       });
