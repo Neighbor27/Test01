@@ -4,47 +4,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-        <script>
+    <script>
       tailwind.config = {
         theme: {
           fontFamily: {
-            sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
+            sans: ['Montserrat', 'Noto Sans KR', 'sans-serif'],
           }
         }
       }
     </script>
-   <style>
+    <style>
       .hidden { display: none; }
 
-      /* *** 수정된 부분 1: 버튼을 위한 새로운 광원 애니메이션 추가 *** */
+      /* *** 수정된 부분 1: 광원 애니메이션 강화 *** */
       @keyframes subtle-button-glow {
         from {
-          /* 은은한 시작: blur 10px, spread 0px, 투명도 40% */
-          box-shadow: 0 0 10px 0px rgba(80, 158, 237, 0.4);
+          /* 시작 상태를 더 강하게: blur 12px, spread 1px, 투명도 50% */
+          box-shadow: 0 0 12px 1px rgba(80, 158, 237, 0.5);
         }
         to {
-          /* 가장 밝은 상태: blur 16px, spread 2px, 투명도 70% */
-          box-shadow: 0 0 16px 2px rgba(80, 158, 237, 0.7);
+          /* 가장 밝은 상태를 훨씬 더 강하게: blur 20px, spread 4px, 투명도 80% */
+          box-shadow: 0 0 20px 4px rgba(80, 158, 237, 0.8);
         }
       }
 
-      /* *** 수정된 부분 2: 버튼에 새로운 애니메이션 적용 *** */
       #select-match-button {
         transition: transform 0.2s ease-out, background-color 0.2s ease-out;
-        /* 기존 애니메이션을 새로운 글로우 애니메이션으로 교체 */
-        animation: subtle-button-glow 4s ease-in-out infinite alternate;
+        /* *** 수정된 부분 2: 애니메이션 주기를 3초로 단축 *** */
+        animation: subtle-button-glow 3s ease-in-out infinite alternate;
       }
 
       #select-match-button:hover {
         transform: translateY(-3px);
         background-color: #1a73c8;
-        animation-play-state: paused; /* 호버 시 애니메이션 멈춤 (기존 유지) */
+        animation-play-state: paused;
       }
       
       #hero-card {
@@ -68,45 +65,37 @@
       }
     </style>
   </head>
-  <body>
-    <div
-  class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+  <body class="font-sans">
+    <!-- 레이아웃을 불러올 자리 -->
+    <div id="layout-placeholder"></div>
 
-    >
-      <div class="layout-container flex h-full grow flex-col">
-        <div id="header-placeholder"></div>
-        <div class="flex flex-1 justify-center py-5 px-4 md:px-40">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div class="@container">
-              <div class="@[480px]:p-4">
-                <div
-                  id="hero-card"
-                  class="flex min-h-[480px] flex-col gap-6 @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4"
-                >
-                  <div class="flex flex-col gap-1 text-center">
-                    <h1 class="text-white text-4xl font-bold leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-bold @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                      Connect with Emotion
-                    </h1>
-                    <h2 class="text-white text-sm font-medium leading-normal @[480px]:text-base @[480px]:font-medium @[480px]:leading-normal">
-                      속마음. 함께 알아볼까요?
-                    </h2>
-                  </div>
-                  <a href="page2.html">
-                    <button
-                      id="select-match-button"
-                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
-                    >
-                      <span class="truncate">Select Match</span>
-                    </button>
-                  </a>
+    <!-- 페이지 고유 콘텐츠 -->
+    <div id="page-content" class="hidden">
+      <div class="flex flex-1 justify-center py-5 px-4 md:px-40">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+          <div class="@container">
+            <div class="@[480px]:p-4">
+              <div id="hero-card" class="flex min-h-[480px] flex-col gap-6 @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4">
+                <div class="flex flex-col gap-1 text-center">
+                  <h1 class="text-white text-4xl font-bold leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:leading-tight">
+                    Connect with Emotion
+                  </h1>
+                  <h2 class="text-white text-sm font-medium leading-normal @[480px]:text-base">
+                    속마음. 함께 알아볼까요?
+                  </h2>
                 </div>
+                <a href="page2.html">
+                  <button id="select-match-button" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#1466b8] text-white text-sm font-bold leading-normal @[480px]:text-base">
+                    <span class="truncate">Select Match</span>
+                  </button>
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <div id="footer-placeholder"></div>
       </div>
     </div>
+    
     <script src="loadComponents.js"></script>
   </body>
 </html>
