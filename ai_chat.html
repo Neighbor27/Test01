@@ -1,25 +1,35 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Spline+Sans%3Awght%40400%3B500%3B700"
-    />
     
+    <!-- 수정 1: Google Fonts 링크 교체 (Montserrat 추가) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Spline+Sans:wght@400;700&display=swap" rel="stylesheet">
 
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- 수정 2: Tailwind CSS 폰트 설정 스크립트 추가 -->
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Montserrat', 'Noto Sans KR', 'sans-serif'],
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <!-- 파일 선택을 위한 숨겨진 input 요소 -->
     <input type="file" id="file-input" accept="image/*,video/*" style="display: none;" />
 
-    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Spline Sans", "Noto Sans", sans-serif;'>
+    <!-- 수정 3: 인라인 style 속성 제거 및 font-sans 클래스 추가 -->
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden font-sans">
       <div class="layout-container flex h-full grow flex-col">
         
         <div id="header-placeholder"></div>
@@ -68,7 +78,6 @@
                         value=""
                       />
                       <div class="flex items-center justify-center pl-2">
-                        <!-- *** 반응형 간격 수정 *** -->
                         <div class="flex items-center gap-0.5 @[480px]:gap-2 justify-end">
                           <div class="flex items-center gap-0">
                             <button id="image-button" class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
@@ -322,6 +331,4 @@
       });
     </script>
   </body>
-</html>
-
-
+</html>```
