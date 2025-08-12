@@ -3,21 +3,19 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Google Fonts 링크 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans:wght@400;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Noto+Sans+KR:wght@400;600;700&family=Spline+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
 
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <!-- Tailwind CSS 폰트 설정 -->
     <script>
       tailwind.config = {
         theme: {
           fontFamily: {
-            sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
+            sans: ['Montserrat', 'Noto Sans KR', 'sans-serif'],
           }
         }
       }
@@ -84,7 +82,8 @@
             <!-- 상대방 정보 섹션 -->
             <div>
               <div class="px-4 md:px-0 pb-5">
-                <h2 class="text-[28px] sm:text-[32px] md:text-[43px] font-bold leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                <!-- *** 수정: whitespace-nowrap 제거 및 반응형 폰트 크기 조정 *** -->
+                <h2 class="text-[28px] sm:text-[32px] md:text-[38px] lg:text-[43px] font-bold leading-tight">
                   <span id="target-name">상대방</span>의 정보를 선택하세요
                 </h2>
               </div>
@@ -94,16 +93,16 @@
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">성별</h3>
                 </div>
                 <div class="flex flex-wrap gap-4 p-4 md:p-0">
-                  <!-- *** 수정: font-medium -> font-bold *** -->
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <!-- *** 수정: font-bold -> font-semibold 로 변경하여 밸런스 조정 *** -->
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     남성
                     <input type="radio" class="absolute invisible" name="target_gender" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     여성
                     <input type="radio" class="absolute invisible" name="target_gender" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     그 외
                     <input type="radio" class="absolute invisible" name="target_gender" />
                   </label>
@@ -115,23 +114,23 @@
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나이</h3>
                 </div>
                 <div class="flex flex-wrap justify-start gap-4 p-4 md:p-0">
-                  <!-- *** 수정: font-medium -> font-bold *** -->
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <!-- *** 수정: font-bold -> font-semibold 로 변경하여 밸런스 조정 *** -->
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     10대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     20대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     30대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     40대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     50대 <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     60+ <input type="radio" class="absolute invisible" name="target_age" />
                   </label>
                 </div>
@@ -143,7 +142,8 @@
             <!-- 나의 정보 섹션 -->
             <div class="pt-2">
               <div class="px-4 md:px-0 pb-5">
-                <h2 class="text-[28px] sm:text-[32px] md:text-[43px] font-bold leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                <!-- *** 수정: whitespace-nowrap 제거 및 반응형 폰트 크기 조정 *** -->
+                <h2 class="text-[28px] sm:text-[32px] md:text-[38px] lg:text-[43px] font-bold leading-tight">
                   나의 정보를 선택하세요
                 </h2>
               </div>
@@ -153,14 +153,14 @@
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">성별</h3>
                 </div>
                 <div class="flex flex-wrap gap-4 p-4 md:p-0">
-                  <!-- *** 수정: font-medium -> font-bold *** -->
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <!-- *** 수정: font-bold -> font-semibold 로 변경하여 밸런스 조정 *** -->
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     남성 <input type="radio" class="absolute invisible" name="my_gender" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     여성 <input type="radio" class="absolute invisible" name="my_gender" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     그 외 <input type="radio" class="absolute invisible" name="my_gender" />
                   </label>
                 </div>
@@ -171,23 +171,23 @@
                     <h3 class="text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">나이</h3>
                 </div>
                 <div class="flex flex-wrap justify-start gap-4 p-4 md:p-0">
-                  <!-- *** 수정: font-medium -> font-bold *** -->
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <!-- *** 수정: font-bold -> font-semibold 로 변경하여 밸런스 조정 *** -->
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     10대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     20대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     30대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     40대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     50대 <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
-                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-bold leading-normal text-[#111418] md:h-14 md:text-lg">
+                  <label class="card relative flex h-12 w-24 cursor-pointer items-center justify-center rounded-lg text-base font-semibold leading-normal text-[#111418] md:h-14 md:text-lg">
                     60+ <input type="radio" class="absolute invisible" name="my_age" />
                   </label>
                 </div>
