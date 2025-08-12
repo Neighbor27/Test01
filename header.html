@@ -9,7 +9,6 @@
     }
   }
 
-  /* 그룹에 호버했을 때, 내부의 input placeholder에 애니메이션 적용 */
   .group:hover input::placeholder {
     background-image: linear-gradient(
       90deg,
@@ -48,7 +47,6 @@
     <!-- 검색창 -->
     <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
       <div class="group flex w-full flex-1 items-stretch rounded-lg h-full">
-        <!-- *** 수정된 부분: group-hover:bg-gray-300 추가 *** -->
         <div
           class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414] group-hover:bg-gray-200"
         >
@@ -58,7 +56,6 @@
             ></path>
           </svg>
         </div>
-        <!-- *** 수정된 부분: transition-colors, duration-200, group-hover:bg-gray-300 추가 *** -->
         <input
           placeholder="Search"
           class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal transition-colors duration-200 group-hover:bg-gray-200"
@@ -67,18 +64,69 @@
       </div>
     </label>
 
-    <!-- 알림 아이콘 -->
-    <button
-      class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200"
-    >
-      <div class="text-[#141414]" data-icon="Bell" data-size="20px" data-weight="regular">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-          <path
-            d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
-          ></path>
-        </svg>
+    <!-- *** 수정된 부분: 알림 버튼과 드롭다운 패널을 감싸는 컨테이너 추가 *** -->
+    <div class="relative">
+      <!-- 알림 아이콘 버튼 -->
+      <button
+        id="notification-button"
+        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200"
+      >
+        <div class="text-[#141414]" data-icon="Bell" data-size="20px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
+            ></path>
+          </svg>
+        </div>
+      </button>
+
+      <!-- 알림 드롭다운 패널 -->
+      <div
+        id="notification-panel"
+        class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-10"
+      >
+        <div class="p-4 border-b">
+          <p class="font-bold text-[#141414]">Notifications</p>
+        </div>
+        <div class="max-h-96 overflow-y-auto">
+          <!-- 알림 항목 (읽지 않음) -->
+          <a href="#" class="flex items-start gap-3 p-4 hover:bg-gray-50 transition-colors">
+            <div class="w-2 h-2 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
+            <div class="flex-1">
+              <p class="text-sm text-[#141414] font-medium">
+                New message from <span class="font-bold">Jane Doe</span>
+              </p>
+              <p class="text-xs text-gray-500 mt-1">2 minutes ago</p>
+            </div>
+          </a>
+          <!-- 알림 항목 (읽지 않음) -->
+          <a href="#" class="flex items-start gap-3 p-4 hover:bg-gray-50 transition-colors border-t">
+            <div class="w-2 h-2 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
+            <div class="flex-1">
+              <p class="text-sm text-[#141414] font-medium">
+                Your profile has been updated.
+              </p>
+              <p class="text-xs text-gray-500 mt-1">1 hour ago</p>
+            </div>
+          </a>
+          <!-- 알림 항목 (읽음) -->
+          <a href="#" class="flex items-start gap-3 p-4 hover:bg-gray-50 transition-colors border-t">
+            <div class="w-2 h-2 bg-transparent rounded-full mt-1.5 flex-shrink-0"></div>
+            <div class="flex-1">
+              <p class="text-sm text-gray-600">
+                Server maintenance is scheduled for tomorrow.
+              </p>
+              <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+            </div>
+          </a>
+        </div>
+        <div class="p-2 border-t">
+          <a href="#" class="block text-center text-sm text-blue-600 hover:underline">
+            View all notifications
+          </a>
+        </div>
       </div>
-    </button>
+    </div>
 
     <!-- 고객센터 아이콘 -->
     <a href="help_senter.html">
@@ -105,3 +153,29 @@
     </a>
   </div>
 </header>
+
+<!-- *** 수정된 부분: 알림창 토글 기능을 위한 스크립트 *** -->
+<script>
+  // DOM이 완전히 로드된 후에 스크립트를 실행합니다.
+  document.addEventListener('DOMContentLoaded', () => {
+    const notificationButton = document.getElementById('notification-button');
+    const notificationPanel = document.getElementById('notification-panel');
+
+    if (notificationButton && notificationPanel) {
+      // 알림 버튼 클릭 시 패널을 보여주거나 숨깁니다.
+      notificationButton.addEventListener('click', (event) => {
+        notificationPanel.classList.toggle('hidden');
+        // 이벤트가 document까지 전파되는 것을 막아, 바로 닫히는 현상을 방지합니다.
+        event.stopPropagation();
+      });
+
+      // 문서의 다른 곳을 클릭하면 패널을 닫습니다.
+      document.addEventListener('click', (event) => {
+        // 패널이 열려 있고, 클릭된 곳이 패널 내부나 알림 버튼이 아닐 경우
+        if (!notificationPanel.classList.contains('hidden') && !notificationPanel.contains(event.target) && !notificationButton.contains(event.target)) {
+          notificationPanel.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>
