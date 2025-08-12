@@ -1,54 +1,46 @@
 <!-- header.html -->
+<!-- header.html -->
 <style>
-  @keyframes placeholder-wave {
-    from {
-      background-position: 200% center;
-    }
-    to {
-      background-position: 0% center;
-    }
-  }
+  @keyframes placeholder-wave {
+    from {
+      background-position: 200% center;
+    }
+    to {
+      background-position: 0% center;
+    }
+  }
 
-  .group:hover input::placeholder {
-    background-image: linear-gradient(
-      90deg,
-      #757575,
-      #141414,
-      #757575
-    );
-    background-size: 200% 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: placeholder-wave 4s linear infinite;
-  }
+  .group:hover input::placeholder {
+    background-image: linear-gradient(
+      90deg,
+      #757575,
+      #141414,
+      #757575
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: placeholder-wave 4s linear infinite;
+  }
 
-  #mobile-menu-button.active {
-    @apply bg-gray-200 text-blue-600;
-  }
-  
-/* header.html의 <style> 안 */
-
-.logo-font {
-  font-family: 'Poppins', sans-serif !important; /* ✨ !important 추가 ✨ */
-}
+  #mobile-menu-button.active {
+    @apply bg-gray-200 text-blue-600;
+  }
+  
+  .logo-font {
+    font-family: 'Poppins', sans-serif !important;
+  }
 </style>
 
-
-<header
-  class="relative flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f2f2f2] px-4 py-3 md:px-10"
->
+<header class="relative flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f2f2f2] px-4 py-3 md:px-10">
   <!-- 로고 -->
   <a class="flex items-center gap-4 text-[#141414] cursor-pointer z-30" href="index.html">
     <div class="size-4">
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
-          fill="currentColor"
-        ></path>
+        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
       </svg>
     </div>
-    <!-- *** 수정된 부분: logo-font 클래스 추가 *** -->
     <h2 class="logo-font sm:hidden text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
       Ga&Co
     </h2>
@@ -56,7 +48,7 @@
       Grace & Connect
     </h2>
   </a>
-
+  
   <!-- 데스크톱 메뉴 (모바일에서는 숨김) -->
   <div class="hidden md:flex flex-1 items-center justify-end gap-2 md:gap-4">
     <!-- 검색창 -->
