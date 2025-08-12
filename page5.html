@@ -27,7 +27,7 @@
     <div id="page-content" class="hidden">
       <!-- 이 페이지에서만 사용하는 스타일 -->
       <style>
-        .mbti-tab { text-align: center; flex: 1; cursor: pointer; flex-basis: 50%; max-width: 50%; transition: color 0.2s ease-out; }
+        .mbti-tab { text-align: center; flex: 1; cursor: pointer; padding: 0 0.5rem; flex-basis: 50%; max-width: 50%; transition: color 0.2s ease-out; }
         .mbti-tab p { transition: transform 0.2s ease-out; }
         .mbti-tab.w-full { flex-basis: 100%; max-width: 100%; }
         .mbti-tab-group .mbti-tab.active { border-bottom-color: #111418; color: #111418; }
@@ -45,38 +45,77 @@
       <!-- 페이지 실제 내용 -->
       <div class="flex flex-1 flex-col justify-center py-8 px-4 md:px-40 md:py-16">
         <div class="layout-content-container mx-auto flex w-full max-w-[700px] flex-col">
-          <h2 class="px-4 pb-3 text-center text-[36px] font-bold leading-tight text-[#111418]">MBTI</h2>
-          <h3 class="px-4 pb-2 pt-6 text-xl font-bold leading-tight text-[#111418]">
+          <h2 class="px-4 pb-3 text-center text-[36px] font-bold leading-tight tracking-light text-[#111418]">MBTI</h2>
+          <h3 class="px-4 pb-2 pt-6 text-xl font-bold leading-tight tracking-[-0.015em] text-[#111418]">
             <span id="target-name">상대방</span>의 MBTI
           </h3>
           <div class="mbti-tab-group pb-3" data-mbti-group="target_1">
             <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
-              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] py-3" href="#" data-mbti-value="E"><p class="text-base font-bold">E</p></a>
-              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] py-3" href="#" data-mbti-value="I"><p class="text-base font-bold">I</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="E"><p class="text-base font-bold">E</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="I"><p class="text-base font-bold">I</p></a>
             </div>
           </div>
-          <!-- ... 나머지 MBTI 탭 그룹들 ... -->
+          <div class="mbti-tab-group pb-3" data-mbti-group="target_2">
+            <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="S"><p class="text-base font-bold">S</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="N"><p class="text-base font-bold">N</p></a>
+            </div>
+          </div>
+          <div class="mbti-tab-group pb-3" data-mbti-group="target_3">
+            <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="T"><p class="text-base font-bold">T</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="F"><p class="text-base font-bold">F</p></a>
+            </div>
+          </div>
+          <div class="mbti-tab-group pb-3" data-mbti-group="target_4">
+            <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="J"><p class="text-base font-bold">J</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="P"><p class="text-base font-bold">P</p></a>
+            </div>
+          </div>
           <div class="mbti-tab-group pb-3" data-mbti-group="target_unknown">
             <div class="flex gap-8 border-b border-[#dce0e5] px-4">
-              <a class="mbti-tab flex w-full flex-col items-center justify-center border-b-[3px] py-3" href="#" data-mbti-value="unknown"><p class="text-base font-bold">아직 모름</p></a>
+              <a class="mbti-tab flex w-full flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="unknown"><p class="text-base font-bold">아직 모름</p></a>
             </div>
           </div>
           <h3 class="px-4 pb-2 pt-8 text-xl font-bold leading-tight text-[#111418]">나의 MBTI</h3>
-          <!-- ... 나의 MBTI 탭 그룹들 ... -->
+          <div class="mbti-tab-group pb-3" data-mbti-group="my_1">
+            <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="E"><p class="text-base font-bold">E</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="I"><p class="text-base font-bold">I</p></a>
+            </div>
+          </div>
+          <div class="mbti-tab-group pb-3" data-mbti-group="my_2">
+            <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="S"><p class="text-base font-bold">S</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="N"><p class="text-base font-bold">N</p></a>
+            </div>
+          </div>
+          <div class="mbti-tab-group pb-3" data-mbti-group="my_3">
+            <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="T"><p class="text-base font-bold">T</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="F"><p class="text-base font-bold">F</p></a>
+            </div>
+          </div>
+          <div class="mbti-tab-group pb-3" data-mbti-group="my_4">
+            <div class="flex justify-center gap-8 border-b border-[#dce0e5] px-4">
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="J"><p class="text-base font-bold">J</p></a>
+              <a class="mbti-tab flex flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="P"><p class="text-base font-bold">P</p></a>
+            </div>
+          </div>
           <div class="mbti-tab-group pb-3" data-mbti-group="my_unknown">
             <div class="flex gap-8 border-b border-[#dce0e5] px-4">
-              <a class="mbti-tab flex w-full flex-col items-center justify-center border-b-[3px] py-3" href="#" data-mbti-value="unknown"><p class="text-base font-bold">아직 모름</p></a>
+              <a class="mbti-tab flex w-full flex-col items-center justify-center border-b-[3px] pb-3 pt-4" href="#" data-mbti-value="unknown"><p class="text-base font-bold">아직 모름</p></a>
             </div>
           </div>
           <div class="flex justify-between px-4 py-4">
             <button id="learn-mbti-button" class="flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#f0f2f4] px-5 text-base font-bold text-[#111418]"><span class="truncate">내 MBTI 알아보기</span></button>
-            <button id="next-button" class="flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#1466b8] px-5 text-base font-bold text-white"><span class="truncate">다음</span></button>
+            <div id="next-button-placeholder"></div>
           </div>
         </div>
       </div>
     </div>
     
-    <!-- *** 수정된 부분: 스크립트 실행 시점을 componentsLoaded로 변경 *** -->
     <script>
       const initializePage = () => {
         const nextButton = document.getElementById('next-button');
@@ -86,19 +125,12 @@
 
         const getParamsFromUrl = () => {
             const params = new URLSearchParams(window.location.search);
-            return {
-                name: params.get('name'),
-                myMbti: params.get('mbti')
-            };
+            return { name: params.get('name'), myMbti: params.get('mbti') };
         };
 
         const { name, myMbti } = getParamsFromUrl();
+        if (name) targetNameElement.textContent = name;
 
-        if (name) {
-            targetNameElement.textContent = name;
-        }
-        
-        // --- 이하 모든 자바스크립트 로직은 기존과 동일 ---
         const saveTargetMbtiSelections = () => { /* ... */ };
         const restoreTargetMbtiSelections = () => { /* ... */ };
         const activateMyMbtiTabs = (mbtiString) => { /* ... */ };
@@ -107,7 +139,31 @@
         restoreTargetMbtiSelections();
 
         mbtiTabGroups.forEach(group => {
-            // ... 탭 클릭 이벤트 로직 ...
+            const tabs = group.querySelectorAll('.mbti-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const groupName = group.getAttribute('data-mbti-group');
+                    
+                    if (groupName === 'my_unknown') { /* ... */ }
+
+                    const isUnknownTab = tab.getAttribute('data-mbti-value') === 'unknown';
+                    const groupPrefix = groupName.split('_')[0];
+
+                    if (isUnknownTab) {
+                        const mainGroups = document.querySelectorAll(`.mbti-tab-group[data-mbti-group^="${groupPrefix}_"]:not([data-mbti-group$="unknown"])`);
+                        mainGroups.forEach(mainGroup => {
+                            mainGroup.querySelectorAll('.mbti-tab').forEach(mainTab => mainTab.classList.remove('active'));
+                        });
+                        group.querySelector('.mbti-tab[data-mbti-value="unknown"]').classList.add('active');
+                    } else {
+                        tab.closest('.mbti-tab-group').querySelectorAll('.mbti-tab').forEach(siblingTab => siblingTab.classList.remove('active'));
+                        const unknownGroup = document.querySelector(`.mbti-tab-group[data-mbti-group="${groupPrefix}_unknown"]`);
+                        unknownGroup?.querySelector('.mbti-tab.active')?.classList.remove('active');
+                        tab.classList.add('active');
+                    }
+                });
+            });
         });
 
         if (nextButton) {
