@@ -51,52 +51,51 @@
 
             <!-- 메시지 입력창 -->
             <div class="flex items-center px-4 py-3 gap-3 @container">
-              <label class="flex flex-col min-w-40 h-12 flex-1">
-                <div class="flex w-full flex-1 items-center rounded-xl h-full bg-[#f0f2f5] px-4">
-                  <!-- *** 파일 미리보기 영역 (신규 추가) *** -->
-                  <div id="file-preview-container" class="hidden items-center gap-2 bg-gray-300 rounded-full pl-3 pr-1 py-1 mr-2 flex-shrink-0">
-                    <span id="file-preview-name" class="text-sm text-gray-700 max-w-[100px] truncate"></span>
-                    <button id="remove-file-button" class="p-0.5 rounded-full hover:bg-gray-400">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
-                    </button>
-                  </div>
-                  <input
-                    id="chat-input"
-                    placeholder="Type your message..."
-                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-[#111418] focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-[#60758a] p-0 text-base font-normal leading-normal"
-                    value=""
-                  />
-                  <div class="flex items-center justify-center pl-2">
-                    <div class="flex items-center gap-2 justify-end">
-                      <div class="flex items-center gap-1">
-                        <button id="image-button" class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
-                          <div class="text-[#60758a]" data-icon="Image" data-size="20px" data-weight="regular">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                              <path
-                                d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"
-                              ></path>
-                            </svg>
+              <label class="flex flex-col min-w-40 flex-1">
+                <div class="flex w-full flex-1 items-center rounded-xl bg-[#f0f2f5] px-4 py-2">
+                  <div class="flex flex-col w-full">
+                    <!-- *** 파일 미리보기 영역 수정 *** -->
+                    <div id="file-preview-container" class="hidden items-center justify-between gap-2 mb-2">
+                      <!-- 이미지 썸네일 -->
+                      <img id="file-preview-image" class="hidden w-12 h-12 object-cover rounded-md" src="" alt="Image preview">
+                      <!-- 파일 이름 (이미지가 아닐 경우) -->
+                      <span id="file-preview-name" class="hidden text-sm text-gray-700 truncate"></span>
+                      <button id="remove-file-button" class="p-0.5 rounded-full hover:bg-gray-400 self-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+                      </button>
+                    </div>
+                    <div class="flex items-center">
+                      <input
+                        id="chat-input"
+                        placeholder="Type your message..."
+                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-[#111418] focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-[#60758a] p-0 text-base font-normal leading-normal"
+                        value=""
+                      />
+                      <div class="flex items-center justify-center pl-2">
+                        <div class="flex items-center gap-2 justify-end">
+                          <div class="flex items-center gap-1">
+                            <button id="image-button" class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
+                              <div class="text-[#60758a]" data-icon="Image" data-size="20px" data-weight="regular">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"></path></svg>
+                              </div>
+                            </button>
+                            <button id="mic-button" class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
+                              <div class="text-[#60758a]" data-icon="Microphone" data-size="20px" data-weight="regular">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"></path></svg>
+                              </div>
+                            </button>
                           </div>
-                        </button>
-                        <button id="mic-button" class="flex items-center justify-center p-1.5 rounded-full transition-colors duration-200 hover:bg-gray-200">
-                          <div class="text-[#60758a]" data-icon="Microphone" data-size="20px" data-weight="regular">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                              <path
-                                d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"
-                              ></path>
-                            </svg>
-                          </div>
-                        </button>
+                          <button id="send-icon-button" class="flex items-center justify-center rounded-full h-8 w-8 bg-[#1466b8] text-white transition-colors duration-200 ease-out hover:bg-[#1a73c8] @[480px]:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M200,56v88a56.06,56.06,0,0,1-56,56H62.34l18.83-18.83a8,8,0,1,0-11.32-11.32L28.17,211.51a8,8,0,0,0,0,11.32l41.68,41.68a8,8,0,0,0,11.32-11.32L62.34,234H144a40,40,0,0,0,40-40V56a8,8,0,0,0-16,0Z" transform="rotate(180, 128, 128)"></path></svg>
+                          </button>
+                          <button
+                            id="send-button"
+                            class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#1466b8] text-white text-sm font-medium leading-normal hidden @[480px]:flex transition-all duration-200 ease-out hover:bg-[#1a73c8]"
+                          >
+                            <span class="truncate">Send</span>
+                          </button>
+                        </div>
                       </div>
-                      <button id="send-icon-button" class="flex items-center justify-center rounded-full h-8 w-8 bg-[#1466b8] text-white transition-colors duration-200 ease-out hover:bg-[#1a73c8] @[480px]:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M200,56v88a56.06,56.06,0,0,1-56,56H62.34l18.83-18.83a8,8,0,1,0-11.32-11.32L28.17,211.51a8,8,0,0,0,0,11.32l41.68,41.68a8,8,0,0,0,11.32-11.32L62.34,234H144a40,40,0,0,0,40-40V56a8,8,0,0,0-16,0Z" transform="rotate(180, 128, 128)"></path></svg>
-                      </button>
-                      <button
-                        id="send-button"
-                        class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#1466b8] text-white text-sm font-medium leading-normal hidden @[480px]:flex transition-all duration-200 ease-out hover:bg-[#1a73c8]"
-                      >
-                        <span class="truncate">Send</span>
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -120,12 +119,13 @@
         const imageButton = document.getElementById('image-button');
         const fileInput = document.getElementById('file-input');
         
-        // *** 파일 미리보기 관련 요소 ***
         const filePreviewContainer = document.getElementById('file-preview-container');
+        const filePreviewImage = document.getElementById('file-preview-image');
         const filePreviewName = document.getElementById('file-preview-name');
         const removeFileButton = document.getElementById('remove-file-button');
 
-        let selectedFile = null; // 선택된 파일을 저장할 변수
+        let selectedFile = null;
+        let imagePreviewUrl = null; // 이미지 미리보기 URL을 저장할 변수
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition;
@@ -140,7 +140,7 @@
             messageWrapper.className = 'flex items-end gap-3 justify-end';
             messageWrapper.innerHTML = `
               <div class="flex flex-1 flex-col gap-1 items-end">
-                <div class="text-base font-normal leading-normal flex max-w-[360px] rounded-xl px-4 py-3 bg-[#1466b8] text-white">
+                <div class="text-base font-normal leading-normal max-w-[360px] rounded-xl px-3 py-2 bg-[#1466b8] text-white">
                   ${message}
                 </div>
               </div>
@@ -168,33 +168,32 @@
           }, 1000);
         };
 
-        // *** sendMessage 로직 수정 ***
         const sendMessage = () => {
           const textMessage = chatInput.value.trim();
-
-          // 보낼 텍스트나 파일이 없으면 함수 종료
-          if (!textMessage && !selectedFile) {
-            return;
-          }
+          if (!textMessage && !selectedFile) return;
 
           let messageContent = '';
 
-          // 파일이 있으면 파일 정보 추가
+          // *** 파일이 이미지일 경우와 아닐 경우를 분기하여 처리 ***
           if (selectedFile) {
-            messageContent += `<div class="flex items-center gap-2 p-2 bg-black bg-opacity-20 rounded-lg mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"></path></svg>
-                                <span>${selectedFile.name}</span>
-                              </div>`;
+            if (imagePreviewUrl) { // 이미지가 있을 경우
+              messageContent += `<img src="${imagePreviewUrl}" alt="${selectedFile.name}" class="max-w-[200px] rounded-lg mb-2">`;
+            } else { // 이미지가 아닌 파일일 경우
+              messageContent += `<div class="flex items-center gap-2 p-2 bg-black bg-opacity-20 rounded-lg mb-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"></path></svg>
+                                  <span>${selectedFile.name}</span>
+                                </div>`;
+            }
           }
 
-          // 텍스트 메시지가 있으면 추가
           if (textMessage) {
-            messageContent += `<div>${textMessage}</div>`;
+            // HTML 태그를 이스케이프하여 안전하게 표시
+            const escapedTextMessage = textMessage.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            messageContent += `<div>${escapedTextMessage}</div>`;
           }
 
           addMessage(messageContent, true);
           
-          // 입력창 및 파일 상태 초기화
           chatInput.value = '';
           final_transcript = '';
           removeFile();
@@ -207,12 +206,14 @@
           }
         };
 
-        // *** 파일 제거 함수 (신규 추가) ***
         const removeFile = () => {
           selectedFile = null;
-          fileInput.value = ''; // input의 내부 값을 비워야 같은 파일을 다시 선택 가능
+          imagePreviewUrl = null;
+          fileInput.value = '';
           filePreviewContainer.classList.add('hidden');
-          filePreviewContainer.classList.remove('flex');
+          filePreviewImage.classList.add('hidden');
+          filePreviewName.classList.add('hidden');
+          filePreviewImage.src = '';
         };
 
         sendButton.addEventListener('click', sendMessage);
@@ -225,23 +226,38 @@
           }
         });
 
-        // *** 파일 선택 로직 수정 ***
         imageButton.addEventListener('click', () => {
           fileInput.click();
         });
 
+        // *** 파일 선택 시 이미지 미리보기 로직 ***
         fileInput.addEventListener('change', (event) => {
-          const files = event.target.files;
-          if (files.length > 0) {
-            selectedFile = files[0];
+          const file = event.target.files[0];
+          if (!file) return;
+
+          selectedFile = file;
+
+          if (selectedFile.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              imagePreviewUrl = e.target.result;
+              filePreviewImage.src = imagePreviewUrl;
+              filePreviewImage.classList.remove('hidden');
+              filePreviewName.classList.add('hidden');
+              filePreviewContainer.classList.remove('hidden');
+            };
+            reader.readAsDataURL(selectedFile);
+          } else {
+            imagePreviewUrl = null;
             filePreviewName.textContent = selectedFile.name;
+            filePreviewName.classList.remove('hidden');
+            filePreviewImage.classList.add('hidden');
             filePreviewContainer.classList.remove('hidden');
-            filePreviewContainer.classList.add('flex');
           }
         });
 
         removeFileButton.addEventListener('click', (event) => {
-          event.stopPropagation(); // 이벤트 버블링 방지
+          event.stopPropagation();
           removeFile();
         });
 
