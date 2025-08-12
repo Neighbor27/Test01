@@ -36,28 +36,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const notificationFooter = document.getElementById('notification-footer');
 
     // *** 수정된 부분: 햄버거 메뉴 토글 기능을 더 확실한 방식으로 변경 ***
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', () => {
-        // 현재 메뉴가 숨겨져 있는지 확인
-        const isCurrentlyHidden = mobileMenu.classList.contains('hidden');
+if (mobileMenuButton && mobileMenu) {
+  mobileMenuButton.addEventListener('click', () => {
+    // 현재 열림 상태
+    const isOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
 
-        if (isCurrentlyHidden) {
-          // 메뉴를 연다
-          mobileMenu.classList.remove('hidden');
-          mobileMenuButton.classList.add('active'); // 버튼 활성화
-          document.body.style.overflow = 'hidden';
-          
-          if (notificationPanel) {
-            notificationPanel.classList.add('hidden');
-          }
-        } else {
-          // 메뉴를 닫는다
-          mobileMenu.classList.add('hidden');
-          mobileMenuButton.classList.remove('active'); // 버튼 비활성화 (불 끄기)
-          document.body.style.overflow = '';
-        }
-      });
+    // 메뉴 열기/닫기
+    mobileMenu.classList.toggle('hidden', isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+
+    // aria-expanded 토글
+    mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
+
+    // 알림 패널은 닫아두기
+    if (!isOpen && notificationPanel) {
+      notificationPanel.classList.add('hidden');
     }
+  });
+}
+
 
     // 2. 알림 상태 체크 함수 (기존과 동일)
     const checkNotifications = () => {
