@@ -11,3 +11,6 @@ package-lock.json
 
 # 백업 폴더 무시
 /backup
+
+# 메모장
+notes.md
