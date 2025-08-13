@@ -27,40 +27,45 @@
     <div id="page-content" class="hidden">
       <!-- 이 페이지에서만 사용하는 스타일 -->
       <style>
-        .card {
-          border: 1px solid #dce0e5;
-          transition: transform 0.2s ease-out, border-color 0.2s ease-out;
-          cursor: pointer;
-          position: relative;
-        }
-        .card-content-wrapper {
-          position: relative;
-          z-index: 2;
-          width: 100%;
-          height: 100%;
-          background-color: white;
-          border-radius: inherit; /* 부모의 둥근 모서리를 따라감 */
-          overflow: hidden;
-        }
-        .card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          border-radius: inherit;
-          z-index: 1;
-          opacity: 0;
-          transition: box-shadow 0.4s ease-in-out, opacity 0.4s ease-in-out;
-          box-shadow: 0 0 0px 0px #1574c1;
-        }
-        .card.selected::before {
-          opacity: 1;
-          box-shadow: 0 0 8px 2px #1574c1;
-          animation: subtle-glow-pulse 3s infinite alternate ease-in-out;
-        }
-        @media (hover: hover) and (pointer: fine) {
-          .card:not(.selected):hover { transform: translateY(-4px); border-color: #a0a8b1; }
-          .card.selected:hover { transform: translateY(-4px); }
-        }
+          .card {
+            border: 1px solid #dce0e5;
+            /* 스르륵 올라오는 효과는 웹/모바일 공통 */
+            transition: transform 0.2s ease-out, border-color 0.2s ease-out;
+            cursor: pointer;
+            position: relative;
+          }
+          .card-content-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border-radius: inherit;
+            overflow: hidden;
+          }
+          .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            z-index: 1;
+            opacity: 0;
+            box-shadow: 0 0 0px 0px #1574c1;
+
+            /* ⬇️⬇️ 1. 웹(기본) 버전의 속도를 0.4초 -> 0.2초로 수정 ⬇️⬇️ */
+            transition: box-shadow 0.2s ease-in-out, opacity 0.2s ease-in-out;
+          }
+          .card.selected::before {
+            opacity: 1;
+            box-shadow: 0 0 8px 2px #1574c1;
+            animation: subtle-glow-pulse 3s infinite alternate ease-in-out;
+          }
+          
+          /* 데스크톱 (호버) 환경 스타일 */
+          @media (hover: hover) and (pointer: fine) {
+            .card:not(.selected):hover { transform: translateY(-4px); border-color: #a0a8b1; }
+            .card.selected:hover { transform: translateY(-4px); }
+          }
            @media (hover: none) and (pointer: coarse) {
       /* 모바일에서는 '스르륵' 올라오는 효과를 더 빠르게 */
       .card {
