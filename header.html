@@ -1,8 +1,6 @@
-<!-- header.html (최종 완성본) -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Spline+Sans:wght@400;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<!-- header.html -->
 
-
+<!-- Solution 1: Tailwind 기본 폰트 스택을 커스터마이징 -->
 <script>
   tailwind.config = {
     theme: {
@@ -15,32 +13,117 @@
   }
 </script>
 
+<!-- header.html (최종 완성본) -->
+
 <style>
-  /* (스타일 부분은 변경 없음) */
-  @keyframes placeholder-wave { from { background-position: 200% center; } to { background-position: 0% center; } }
-  .group:hover input::placeholder { background-image: linear-gradient(90deg, #757575, #141414, #757575); background-size: 200% 100%; background-clip: text; -webkit-background-clip: text; color: transparent; animation: placeholder-wave 4s linear infinite; }
-  .menu-icon-button { display: flex; justify-content: center; align-items: center; background-color: transparent; }
-  .hamburger-box { width: 24px; height: 24px; display: inline-block; position: relative; }
-  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after { width: 24px; height: 2px; background-color: #111827; position: absolute; border-radius: 2px; transition: transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19); }
-  .hamburger-inner::before, .hamburger-inner::after { content: ''; display: block; }
-  .hamburger-inner { top: 50%; transform: translateY(-50%); transition-delay: 0.18s; transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
-  .hamburger-inner::before { top: -8px; transition: top 0.15s 0.3s ease-in, opacity 0.15s ease-in; }
-  .hamburger-inner::after { bottom: -8px; transition: bottom 0.15s 0.3s ease-in, transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19); }
-  .menu-icon-button.is-active .hamburger-inner { transform: rotate(225deg); transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); transition-delay: 0.18s; }
-  .menu-icon-button.is-active .hamburger-inner::before { top: 0; opacity: 0; transition: top 0.15s ease-out, opacity 0.15s 0.18s ease-out; }
-  .menu-icon-button.is-active .hamburger-inner::after { bottom: 0; transform: rotate(-90deg); transition: bottom 0.15s ease-out, transform 0.4s 0.18s cubic-bezier(0.215, 0.61, 0.355, 1); }
-  #mobile-menu-panel { transition: transform 0.3s ease-in-out; }
-  .menu-open { transform: translateX(0); }
-  .menu-closed { transform: translateX(-100%); }
+  /* 검색창 플레이스홀더 애니메이션 */
+  @keyframes placeholder-wave {
+    from {
+      background-position: 200% center;
+    }
+    to {
+      background-position: 0% center;
+    }
+  }
+
+  .group:hover input::placeholder {
+    background-image: linear-gradient(
+      90deg,
+      #757575,
+      #141414,
+      #757575
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: placeholder-wave 4s linear infinite;
+  }
+
+  /* 햄버거 메뉴 아이콘 애니메이션을 위한 CSS */
+  .menu-icon-button {
+    /* position: relative; width: 40px; height: 40px; */ /* 삭제 -> 패딩으로 대체 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* 클릭 시 배경 효과 제거 */
+  }
+  
+  .hamburger-box {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    width: 24px;
+    height: 2px;
+    background-color: #111827; /* 2. 색상을 진한 검은색으로 통일 */
+    position: absolute;
+    border-radius: 2px;
+    /* 3. 속도를 0.3s -> 0.4s로 조정 */
+    transition: transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    content: '';
+    display: block;
+  }
+
+  /* 3개 선의 기본 위치 설정 (속도 및 딜레이 조정) */
+  .hamburger-inner {
+    top: 50%;
+    transform: translateY(-50%);
+    transition-delay: 0.18s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .hamburger-inner::before {
+    top: -8px;
+    transition: top 0.15s 0.3s ease-in, opacity 0.15s ease-in;
+  }
+  .hamburger-inner::after {
+    bottom: -8px;
+    transition: bottom 0.15s 0.3s ease-in, transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  /* 활성 상태 (메뉴 열렸을 때) 애니메이션 (속도 및 딜레이 조정) */
+  .menu-icon-button.is-active .hamburger-inner {
+    transform: rotate(225deg);
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition-delay: 0.18s;
+  }
+  
+  .menu-icon-button.is-active .hamburger-inner::before {
+    top: 0;
+    opacity: 0;
+    transition: top 0.15s ease-out, opacity 0.15s 0.18s ease-out;
+  }
+  
+  .menu-icon-button.is-active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: bottom 0.15s ease-out, transform 0.4s 0.18s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
 </style>
 
 <header
   class="relative flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f5f5f7] px-4 py-3 md:px-10 font-sans"
 >
-  <!-- 로고 -->
+  <!-- 로고로고-->
   <a class="flex items-center gap-4 text-[#141414] cursor-pointer z-30" href="index.html">
-    <!-- [수정] 로고 아이콘(SVG)을 감싸는 div 전체 삭제 -->
-    <h2 class="sm:hidden text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em] pl-2">
+    <div class="size-4">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </div>
+    <h2 class="sm:hidden text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
       GaCo
     </h2>
     <h2 class="hidden sm:block text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
@@ -50,18 +133,45 @@
 
   <!-- 데스크톱 메뉴 (모바일에서는 숨김) -->
   <div class="hidden md:flex flex-1 items-center justify-end gap-2 md:gap-4">
-    <!-- (내부 코드 변경 없음) -->
+    <!-- 검색창 -->
     <label class="flex flex-col min-w-40 !h-10 max-w-64">
       <div class="group flex w-full flex-1 items-stretch rounded-lg h-full">
-        <div class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414] group-hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg></div>
-        <input placeholder="Search" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal transition-colors duration-200 group-hover:bg-gray-200" value=""/>
+        <div
+          class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414] group-hover:bg-gray-200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+            ></path>
+          </svg>
+        </div>
+        <input
+          placeholder="Search"
+          class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal transition-colors duration-200 group-hover:bg-gray-200"
+          value=""
+        />
       </div>
     </label>
+
+    <!-- 알림 버튼 컨테이너 -->
     <div class="relative">
-      <button id="notification-button-desktop" class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200">
-        <div class="text-[#141414]" data-icon="Bell" data-size="20px" data-weight="regular"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path></svg></div>
+      <button
+        id="notification-button-desktop"
+        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200"
+      >
+        <div class="text-[#141414]" data-icon="Bell" data-size="20px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
+            ></path>
+          </svg>
+        </div>
       </button>
-      <div id="notification-panel" class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+      <!-- 알림 패널 -->
+      <div
+        id="notification-panel"
+        class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-10"
+      >
         <div class="p-4 border-b"><p class="font-bold text-[#141414]">Notifications</p></div>
         <div id="notification-list" class="max-h-96 overflow-y-auto"></div>
         <div id="notification-empty-state" class="hidden text-center py-12 px-4">
@@ -72,9 +182,12 @@
         <div id="notification-footer" class="p-2 border-t"><a href="#" class="block text-center text-sm text-blue-600 hover:underline">View all notifications</a></div>
       </div>
     </div>
+
     <a href="help_center.html">
       <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200">
-        <div class="text-[#141414]" data-icon="Headset" data-size="20px" data-weight="regular"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M201.89,54.66A103.43,103.43,0,0,0,128.79,24H128A104,104,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"></path></svg></div>
+        <div class="text-[#141414]" data-icon="Headset" data-size="20px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M201.89,54.66A103.43,103.43,0,0,0,128.79,24H128A104,104,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"></path></svg>
+        </div>
       </button>
     </a>
     <a href="login.html">
@@ -85,8 +198,8 @@
   </div>
 
   <!-- 모바일 햄버거 메뉴 버튼 (데스크톱에서는 숨김) -->
-  <!-- [수정] 햄버거 버튼 컨테이너에 mr-2를 추가하여 오른쪽 여백 생성 -->
-  <div class="md:hidden z-30 mr-2">
+  <div class="md:hidden z-30">
+    <!-- 1. 원래 버튼의 크기/위치를 위한 클래스 복원 -->
     <button id="mobile-menu-button" class="p-2 rounded-lg menu-icon-button">
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
@@ -94,32 +207,21 @@
     </button>
   </div>
 
-  <!-- 모바일 메뉴 패널 (HTML 구조 변경 없음) -->
-  <div id="mobile-menu-panel" class="md:hidden fixed top-0 left-0 w-full max-w-xs h-full bg-white z-20 shadow-xl p-6 menu-closed">
-    <!-- (내부 코드 변경 없음) -->
-    <div class="flex items-center justify-between mb-8">
-        <a class="flex items-center gap-4 text-[#141414] cursor-pointer" href="index.html">
-          <div class="size-6 text-blue-600">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path></svg>
-          </div>
-          <h2 class="text-[#141414] text-xl font-bold">Grace & Connect</h2>
-        </a>
-        <button id="close-menu-button" class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100">
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-        </button>
-    </div>
-    <div class="flex flex-col gap-4">
-      <label class="w-full">
+  <!-- 모바일 메뉴 패널 -->
+  <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-white z-20 pt-20">
+    <div class="flex flex-col items-center gap-4 p-4">
+      <!-- 모바일용 검색창 -->
+      <label class="w-full max-w-sm">
         <div class="group flex w-full flex-1 items-stretch rounded-lg h-10">
           <div class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg></div>
           <input placeholder="Search" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" value="">
         </div>
       </label>
-      <nav class="flex flex-col space-y-2 border-t border-gray-200 mt-4 pt-4">
-        <a href="#" id="notification-button-mobile" class="text-lg text-gray-700 hover:text-blue-600 w-full py-2 rounded-md hover:bg-gray-100 px-2">Notifications</a>
-        <a href="help_center.html" class="text-lg text-gray-700 hover:text-blue-600 w-full py-2 rounded-md hover:bg-gray-100 px-2">Help Center</a>
-        <a href="login.html" class="text-lg text-gray-700 hover:text-blue-600 w-full py-2 rounded-md hover:bg-gray-100 px-2">Login</a>
-      </nav>
+      
+      <!-- 모바일용 메뉴 링크 -->
+      <a href="#" id="notification-button-mobile" class="text-lg text-gray-700 hover:text-blue-600 w-full text-center py-2">Notifications</a>
+      <a href="help_center.html" class="text-lg text-gray-700 hover:text-blue-600 w-full text-center py-2">Help Center</a>
+      <a href="login.html" class="text-lg text-gray-700 hover:text-blue-600 w-full text-center py-2">Login</a>
     </div>
   </div>
 </header>
