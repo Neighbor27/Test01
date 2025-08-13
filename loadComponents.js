@@ -17,12 +17,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const notificationFooter = document.getElementById('notification-footer');
 
     // 1. 햄버거 메뉴 토글 기능
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        mobileMenuButton.classList.toggle('active', !isHidden);
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
         document.body.style.overflow = isHidden ? '' : 'hidden';
-        
+          if (hamburgerIcon && closeIcon) {
+        hamburgerIcon.classList.toggle('hidden', !isHidden); // 메뉴가 열리면(isHidden=false) 햄버거 숨김
+        closeIcon.classList.toggle('hidden', isHidden);     // 메뉴가 열리면(isHidden=false) X 아이콘 표시
+      }
+
         // 메뉴 열 때 다른 패널(알림창)은 닫기
         if (!isHidden && notificationPanel) {
           notificationPanel.classList.add('hidden');
