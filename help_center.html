@@ -4,15 +4,15 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Customer Support</title>
-  
-  <!-- 수정 1: Google Fonts 링크 교체 (Montserrat 추가) -->
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?display=swap&family=Montserrat:wght@400;500;700&family=Noto+Sans:wght@400;500;700&family=Spline+Sans:wght@400;500;700" rel="stylesheet"/>
 
+  <!-- Tailwind CSS with forms & container-queries plugin -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-  <!-- 수정 2: Tailwind CSS 폰트 설정 스크립트 추가 -->
   <script>
     tailwind.config = {
       theme: {
@@ -24,72 +24,65 @@
       }
     }
   </script>
-
-  <style type="text/tailwindcss">
-    /* 수정 3: body의 font-family 제거. Tailwind config가 처리하도록 함 */
-    .orin-link {
-      @apply text-sm text-gray-800 hover:text-[#0071e3] hover:underline;
-    }
-    .orin-icon-link {
-      @apply flex flex-col items-center text-center gap-2 text-gray-800 hover:text-[#0071e3];
-    }
-    .orin-icon-link svg {
-      @apply w-12 h-12;
-    }
-    .orin-icon-link span {
-      @apply text-sm font-medium;
-    }
-  </style>
 </head>
-<body class="bg-white font-sans"> <!-- 수정 4: body에 font-sans 클래스 추가로 명시적 적용 -->
+<body class="bg-white font-sans">
   <div class="flex flex-col min-h-screen">
-    
+
     <div id="header-placeholder"></div>
 
     <main class="flex-grow">
+
+      <!-- Hero Section -->
       <section class="bg-[#f5f5f7] py-16 sm:py-24">
         <div class="container mx-auto px-6 text-center">
           <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
             How can we help?
           </h1>
-          <div class="max-w-xl mx-auto">
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" fill-rule="evenodd"></path>
-                </svg>
-              </div>
-              <input class="w-full pl-11 pr-4 py-3.5 rounded-full border-none bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-[#0071e3] focus:ring-opacity-50" placeholder="Search Support" type="search"/>
+          <div class="max-w-xl mx-auto relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" fill-rule="evenodd"></path>
+              </svg>
             </div>
+            <input
+              type="search"
+              placeholder="Search Support"
+              class="w-full pl-11 pr-4 py-3.5 rounded-full border-none bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-[#0071e3] focus:ring-opacity-50"
+            />
           </div>
         </div>
       </section>
+
+      <!-- Icon Links Section -->
       <section class="py-16 sm:py-24">
         <div class="container mx-auto px-6">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            <a class="orin-icon-link" href="#">
-              <svg class="text-[#0071e3]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+            <a href="#" class="flex flex-col items-center gap-2 text-gray-800 hover:text-[#0071e3]">
+              <svg class="w-12 h-12 text-[#0071e3]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
                 <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"></path>
                 <line x1="7" x2="7" y1="7" y2="7"></line>
               </svg>
-              <span>Orders &amp; Shipping</span>
+              <span class="text-sm font-medium">Orders &amp; Shipping</span>
             </a>
-            <a class="orin-icon-link" href="#">
-              <svg class="text-[#0071e3]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+            <a href="#" class="flex flex-col items-center gap-2 text-gray-800 hover:text-[#0071e3]">
+              <svg class="w-12 h-12 text-[#0071e3]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              <span>Account</span>
+              <span class="text-sm font-medium">Account</span>
             </a>
-            <a class="orin-icon-link" href="#">
-              <svg class="text-[#0071e3]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+            <a href="#" class="flex flex-col items-center gap-2 text-gray-800 hover:text-[#0071e3]">
+              <svg class="w-12 h-12 text-[#0071e3]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
                 <path d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"></path>
               </svg>
-              <span>Payment</span>
+              <span class="text-sm font-medium">Payment</span>
             </a>
-            <a class="orin-icon-link" href="help_center001.html">
+
+            <a href="help_center001.html" class="flex flex-col items-center gap-2 text-gray-800 hover:text-[#0071e3]">
               <div class="relative w-12 h-12">
-                <svg class="text-[#0071e3] absolute inset-0 w-full h-full" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="absolute inset-0 w-full h-full text-[#0071e3]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
                   <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 13.8214 2.48697 15.5291 3.33782 17L2 22L7 20.6622C8.47087 21.513 10.1786 22 12 22Z"></path>
                 </svg>
                 <div class="absolute inset-0 flex items-center justify-center space-x-0.5">
@@ -98,31 +91,32 @@
                   <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
                 </div>
               </div>
-              <span>1:1 Support</span>
+              <span class="text-sm font-medium">1:1 Support</span>
             </a>
           </div>
         </div>
       </section>
+
+      <!-- Explore More Topics Section -->
       <section class="bg-[#f5f5f7] py-16 sm:py-24">
         <div class="container mx-auto px-6">
           <h2 class="text-3xl font-semibold text-gray-900 mb-10 text-center">
             Explore more topics
           </h2>
-          <div class="max-w-4xl mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
-              <a class="orin-link" href="#">Get Support</a>
-              <a class="orin-link" href="#">Service &amp; Repair</a>
-              <a class="orin-link" href="#">Security &amp; Privacy</a>
-              <a class="orin-link" href="#">Worldwide Contacts</a>
-              <a class="orin-link" href="#">Billing &amp; Subscriptions</a>
-              <a class="orin-link" href="#">Product Documentation</a>
-              <a class="orin-link" href="#">Warranty Information</a>
-              <a class="orin-link" href="#">Software Downloads</a>
-              <a class="orin-link" href="#">Contact Us</a>
-            </div>
+          <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 text-gray-800">
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Get Support</a>
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Service &amp; Repair</a>
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Security &amp; Privacy</a>
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Worldwide Contacts</a>
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Billing &amp; Subscriptions</a>
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Product Documentation</a>
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Warranty Information</a>
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Software Downloads</a>
+            <a href="#" class="text-sm hover:text-[#0071e3] hover:underline">Contact Us</a>
           </div>
         </div>
       </section>
+
     </main>
 
     <div id="footer-placeholder"></div>
