@@ -1,4 +1,4 @@
-// loadComponents.js
+// loadComponents.js (최종 수정본)
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 모바일 메뉴 관련 요소
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    // 아이콘 변수 선언 추가
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
 
     // 알림 관련 요소
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
@@ -17,14 +20,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const notificationFooter = document.getElementById('notification-footer');
 
     // 1. 햄버거 메뉴 토글 기능
-  if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-      const isHidden = mobileMenu.classList.toggle('hidden');
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
         document.body.style.overflow = isHidden ? '' : 'hidden';
-          if (hamburgerIcon && closeIcon) {
-        hamburgerIcon.classList.toggle('hidden', !isHidden); // 메뉴가 열리면(isHidden=false) 햄버거 숨김
-        closeIcon.classList.toggle('hidden', isHidden);     // 메뉴가 열리면(isHidden=false) X 아이콘 표시
-      }
+        
+        // 아이콘 토글 로직
+        if (hamburgerIcon && closeIcon) {
+          hamburgerIcon.classList.toggle('hidden', !isHidden);
+          closeIcon.classList.toggle('hidden', isHidden);
+        }
 
         // 메뉴 열 때 다른 패널(알림창)은 닫기
         if (!isHidden && notificationPanel) {
@@ -60,8 +65,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         if (mobileMenu && mobileMenuButton) {
           mobileMenu.classList.add('hidden');
-          mobileMenuButton.classList.remove('active'); 
           document.body.style.overflow = '';
+
+          // 메뉴를 닫았으니 아이콘을 원래대로 되돌립니다.
+          if (hamburgerIcon && closeIcon) {
+            hamburgerIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+          }
         }
         
         notificationPanel.classList.remove('hidden');
