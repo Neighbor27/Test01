@@ -4,14 +4,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- 헤더의 모든 기능을 초기화하는 함수 ---
   const initializeHeader = () => {
-    // --- ▼▼▼ 데스크톱 햄버거 메뉴 로직 (수정됨) ▼▼▼ ---
+    // --- 데스크톱 햄버거 메뉴 로직 (수정 없음, 정상 작동) ---
     const desktopHamburgerButton = document.getElementById('desktop-hamburger-button');
+    const closeDesktopMenuButton = document.getElementById('close-desktop-menu-button');
     const desktopMenu = document.getElementById('desktop-aside-menu');
-    
-    // 'X' 버튼이 HTML에서 제거되었으므로 관련 코드 삭제
-    // const closeDesktopMenuButton = document.getElementById('close-desktop-menu-button');
 
-    // 메뉴를 토글하는 함수 (내용 변경 없음)
     const toggleDesktopMenu = () => {
         if (desktopMenu) {
             desktopMenu.classList.toggle('desktop-menu-open');
@@ -19,52 +16,44 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    // 햄버거 버튼 클릭 시 메뉴 토글
     if (desktopHamburgerButton) {
-        desktopHamburgerButton.addEventListener('click', (event) => {
-            // 이벤트 전파를 막아 document의 클릭 리스너에 영향 주지 않도록 함
-            event.stopPropagation(); 
-            toggleDesktopMenu();
-        });
+        desktopHamburgerButton.addEventListener('click', toggleDesktopMenu);
+    }
+    if (closeDesktopMenuButton) {
+        closeDesktopMenuButton.addEventListener('click', toggleDesktopMenu);
     }
 
-    // 'X' 버튼 이벤트 리스너 삭제
-    // if (closeDesktopMenuButton) { ... }
 
-    // --- ▼▼▼ 외부 클릭 시 데스크톱 메뉴 닫기 (새로 추가) ▼▼▼ ---
-    document.addEventListener('click', (event) => {
-        if (desktopMenu && !desktopMenu.classList.contains('desktop-menu-closed')) {
-            // 메뉴가 열려있고, 클릭된 곳이 메뉴나 햄버거 버튼이 아닐 때
-            if (!desktopMenu.contains(event.target) && !desktopHamburgerButton.contains(event.target)) {
-                // 메뉴를 닫음
-                desktopMenu.classList.remove('desktop-menu-open');
-                desktopMenu.classList.add('desktop-menu-closed');
-            }
-        }
-    });
-    // --- ▲▲▲ 외부 클릭 시 데스크톱 메뉴 닫기 (새로 추가) ▲▲▲ ---
-
-
-    // --- 모바일 메뉴 로직 (수정 없음) ---
+    // --- 모바일 메뉴 로직 (애니메이션에 맞게 수정) ---
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
+    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 수정된 부분 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+    // 더 이상 사용되지 않는 아이콘 변수 삭제
+    // const hamburgerIcon = document.getElementById('hamburger-icon');
+    // const closeIcon = document.getElementById('close-icon');
+
     if (mobileMenuButton && mobileMenu) {
       mobileMenuButton.addEventListener('click', () => {
+        // 메뉴 패널을 토글
         mobileMenu.classList.toggle('hidden');
-        document.body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
-        mobileMenuButton.classList.toggle('is-active');
         
-        // 모바일 메뉴 열 때 데스크톱 알림 패널이 있다면 닫기
-        const notificationPanel = document.getElementById('notification-panel');
+        // body 스크롤 방지
+        document.body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
+        
+        // 버튼 자체에 'is-active' 클래스를 토글하여 CSS 애니메이션을 트리거
+        mobileMenuButton.classList.toggle('is-active');
+
+        // 알림 패널이 열려있다면 닫기
         if (!mobileMenu.classList.contains('hidden') && notificationPanel) {
           notificationPanel.classList.add('hidden');
         }
       });
     }
+    // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 수정된 부분 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 
-    // --- 알림 관련 로직 (수정 없음) ---
+    // --- 알림 관련 로직 (일부 수정) ---
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
     const notificationButtonMobile = document.getElementById('notification-button-mobile');
     const notificationPanel = document.getElementById('notification-panel');
@@ -95,9 +84,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         event.stopPropagation();
         
         if (mobileMenu && mobileMenuButton) {
+          // 메뉴 패널 닫기
           mobileMenu.classList.add('hidden');
           document.body.style.overflow = '';
+          
+          // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 추가된 부분 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+          // 메뉴를 닫았으므로 햄버거 아이콘 상태를 원래대로 복원
           mobileMenuButton.classList.remove('is-active');
+          // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 추가된 부분 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
         }
         
         notificationPanel.classList.remove('hidden');
@@ -105,7 +99,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // 알림 패널 외부 클릭 시 닫기 (기존 로직 유지)
     document.addEventListener('click', (event) => {
       if (notificationPanel && !notificationPanel.classList.contains('hidden')) {
         if (!notificationPanel.contains(event.target) && 
