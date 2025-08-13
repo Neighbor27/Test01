@@ -3,25 +3,53 @@
   <head>
     <!-- head에는 모든 페이지 공통 설정만 남깁니다 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Spline+Sans:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    
-    <!-- 
-    
-    -->
-    <link href="dist/output.css" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Montserrat', 'Noto Sans KR', 'sans-serif'],
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <!-- 레이아웃을 불러올 자리 -->
     <div id="layout-placeholder"></div>
 
-    <!-- 페이지 고유 콘텐츠 -->
+    <!-- 페이지 고유 콘텐츠 (스타일 포함) -->
     <div id="page-content" class="hidden">
-      
+      <!-- 이 페이지에서만 사용하는 스타일 -->
+      <style>
+        .card {
+          border: 1px solid #dce0e5;
+          transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+          cursor: pointer;
+        }
+        .card:not(.selected):hover {
+          transform: translateY(-4px);
+          border-color: #a0a8b1;
+          box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+        .card.selected {
+          animation: subtle-light-pulse 3s infinite alternate ease-in-out;
+        }
+        /* 선택 시 올라가는 효과는 제거하여 원래 디자인으로 복구 */
+        .card.selected:hover {
+           transform: translateY(-4px);
+        }
+        @keyframes subtle-light-pulse {
+          from { box-shadow: 0 0 8px 1px #1466b8; }
+          to { box-shadow: 0 0 4px 2px #1574c1; }
+        }
+      </style>
+
       <!-- 페이지 실제 내용 -->
       <div class="flex flex-1 flex-col py-8 px-4 md:px-40 md:py-16">
         <div class="layout-content-container flex flex-col w-full max-w-[700px] self-center">
