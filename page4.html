@@ -61,14 +61,26 @@
           .card:not(.selected):hover { transform: translateY(-4px); border-color: #a0a8b1; }
           .card.selected:hover { transform: translateY(-4px); }
         }
-        @media (hover: none) and (pointer: coarse) {
-          .card.selected { transform: translateY(-4px) !important; }
-        }
-        @keyframes subtle-glow-pulse {
-          from { box-shadow: 0 0 8px 1px #1466b8; }
-          to { box-shadow: 0 0 4px 2px #1574c1; }
-        }
-      </style>
+           @media (hover: none) and (pointer: coarse) {
+      /* 모바일에서는 '스르륵' 올라오는 효과를 더 빠르게 */
+      .card {
+        transition-duration: 0.15s; 
+      }
+      /* 모바일에서는 '발광' 효과를 즉각적으로 보이게 */
+      .card::before {
+        transition-duration: 0.15s; /* 0.4초 -> 0.15초로 대폭 단축 */
+      }
+      
+      .card.selected { 
+        transform: translateY(-4px) !important;
+      }
+    }
+
+    @keyframes subtle-glow-pulse {
+      from { box-shadow: 0 0 8px 1px #1466b8; }
+      to { box-shadow: 0 0 4px 2px #1574c1; }
+    }
+  </style>
 
       <!-- 페이지 실제 내용 -->
       <div class="flex flex-col flex-1 py-8 px-4 md:px-40 md:py-16">
