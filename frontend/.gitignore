@@ -1,17 +1,13 @@
 # macOS 시스템 파일
 .DS_Store
 
-
 # 다운로드한 실행 파일 (Git으로 관리할 필요 없음)
 /tailwindcss-macos-arm64
 
 # npm 관련 파일 (Git으로 관리할 필요 없음)
 /node_modules
-package-lock.json
+# package-lock.json  <- 이 줄을 삭제하거나 주석 처리하세요.
 
-# 백업 폴더 무시
-/backup
-
-# 메모장
+# 메모장 (개인적인 파일이라면 그대로 두어도 좋습니다)
 notes.md
 1.md
