@@ -9,7 +9,11 @@
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     
-    <!-- 이전 CDN 스크립트를 삭제하고, 빌드된 CSS 파일을 연결합니다. -->
+    <!-- 
+      [수정됨] 
+      이전의 CDN 스크립트 두 개를 모두 삭제하고, 
+      우리가 직접 빌드한 CSS 파일 하나를 연결합니다.
+    -->
     <link href="/dist/output.css" rel="stylesheet">
 
   </head>
@@ -17,10 +21,13 @@
     <!-- 레이아웃을 불러올 자리 -->
     <div id="layout-placeholder"></div>
 
-    <!-- 페이지 고유 콘텐츠 (스타일은 외부 CSS 파일로 분리되었습니다) -->
+    <!-- 
+      [수정됨]
+      페이지 고유 콘텐츠에서 <style> 태그를 제거했습니다.
+      이 스타일은 이제 src/input.css 파일에서 관리됩니다.
+    -->
     <div id="page-content" class="hidden">
-      <!-- 이 페이지에서만 사용하던 <style> 태그는 삭제되었습니다. -->
-
+      
       <!-- 페이지 실제 내용 -->
       <div class="flex flex-1 flex-col py-8 px-4 md:px-40 md:py-16">
         <div class="layout-content-container flex flex-col w-full max-w-[700px] self-center">
