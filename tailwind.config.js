@@ -7,8 +7,7 @@ module.exports = {
    theme: {
     extend: {
       fontFamily: { // ⬇️⬇️ 이 부분을 추가하세요! ⬇️⬇️
-        sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
-      },
+sans: ['Montserrat', 'Spline Sans', 'Noto Sans KR', 'sans-serif'],      },
     },
   },
   plugins: [],
