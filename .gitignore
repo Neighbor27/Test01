@@ -1,8 +1,6 @@
 # macOS 시스템 파일
 .DS_Store
 
-# 빌드 결과물 (Git으로 관리할 필요 없음)
-/dist
 
 # 다운로드한 실행 파일 (Git으로 관리할 필요 없음)
 /tailwindcss-macos-arm64
