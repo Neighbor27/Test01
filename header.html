@@ -13,7 +13,10 @@
   }
 </script>
 
+<!-- header.html (최종 수정본) -->
+
 <style>
+  /* 검색창 플레이스홀더 애니메이션 */
   @keyframes placeholder-wave {
     from {
       background-position: 200% center;
@@ -37,6 +40,47 @@
     animation: placeholder-wave 4s linear infinite;
   }
 
+  /* 햄버거 메뉴 아이콘 애니메이션을 위한 CSS */
+  .menu-icon-button {
+    position: relative;
+    width: 40px;  /* 2.5rem */
+    height: 40px; /* 2.5rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* 클릭 시 배경 효과 제거 */
+  }
+  
+  /* 두 아이콘(햄버거, X)의 공통 스타일 */
+  .menu-icon-button svg {
+    position: absolute; /* 아이콘들을 같은 위치에 겹치게 함 */
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    stroke-width: 2;
+    height: 1.5rem; /* 24px */
+    width: 1.5rem;  /* 24px */
+  }
+
+  /* 기본 상태 (메뉴 닫혔을 때) */
+  #hamburger-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+    color: #4B5563; /* text-gray-600 */
+  }
+  #close-icon {
+    opacity: 0;
+    transform: rotate(-90deg); /* 왼쪽으로 90도 돌려서 숨겨둠 */
+    color: #111827; /* text-gray-900 (진한 검은색) */
+  }
+
+  /* 활성 상태 (메뉴 열렸을 때) */
+  .menu-icon-button.is-active #hamburger-icon {
+    opacity: 0;
+    transform: rotate(90deg); /* 오른쪽으로 90도 돌면서 사라짐 */
+  }
+  .menu-icon-button.is-active #close-icon {
+    opacity: 1;
+    transform: rotate(0deg); /* 원래 각도로 돌아오면서 나타남 */
+  }
 </style>
 
 <header
@@ -127,19 +171,16 @@
   </div>
 
   <!-- 모바일 햄버거 메뉴 버튼 (데스크톱에서는 숨김) -->
-<div class="md:hidden z-30">
-  <!-- active: 클래스를 추가하여 클릭하는 순간에만 효과가 나타나도록 수정 -->
-  <button id="mobile-menu-button" class="p-2 rounded-lg text-gray-600 transition-colors duration-200 hover:bg-gray-100 active:bg-gray-200 active:text-blue-600">
-    <!-- 기본 햄버거 아이콘 -->
-    <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-    <!-- 숨겨진 X 아이콘 (새로 추가) -->
-    <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
-</div>
+  <div class="md:hidden z-30">
+    <button id="mobile-menu-button" class="menu-icon-button">
+      <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
 
   <!-- 모바일 메뉴 패널 -->
   <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-white z-20 pt-20">

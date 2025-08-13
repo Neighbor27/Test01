@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 모바일 메뉴 관련 요소
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-    // 아이콘 변수 선언 추가
-    const hamburgerIcon = document.getElementById('hamburger-icon');
-    const closeIcon = document.getElementById('close-icon');
 
     // 알림 관련 요소
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
@@ -25,11 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const isHidden = mobileMenu.classList.toggle('hidden');
         document.body.style.overflow = isHidden ? '' : 'hidden';
         
-        // 아이콘 토글 로직
-        if (hamburgerIcon && closeIcon) {
-          hamburgerIcon.classList.toggle('hidden', !isHidden);
-          closeIcon.classList.toggle('hidden', isHidden);
-        }
+        // 버튼에 is-active 클래스를 토글하여 CSS 애니메이션을 제어
+        mobileMenuButton.classList.toggle('is-active', !isHidden);
 
         // 메뉴 열 때 다른 패널(알림창)은 닫기
         if (!isHidden && notificationPanel) {
@@ -67,11 +61,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           mobileMenu.classList.add('hidden');
           document.body.style.overflow = '';
 
-          // 메뉴를 닫았으니 아이콘을 원래대로 되돌립니다.
-          if (hamburgerIcon && closeIcon) {
-            hamburgerIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-          }
+          // 메뉴를 닫았으니 is-active 클래스 제거하여 아이콘을 원래대로
+          mobileMenuButton.classList.remove('is-active');
         }
         
         notificationPanel.classList.remove('hidden');
@@ -95,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
 
-  // --- 컴포넌트 로딩 로직 (이전과 동일) ---
+  // --- 컴포넌트 로딩 로직 ---
   const loadComponent = (url, elementId) => {
     const element = document.getElementById(elementId);
     if (!element) return Promise.resolve();
