@@ -4,9 +4,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- 헤더의 모든 기능을 초기화하는 함수 ---
   const initializeHeader = () => {
-    // 모바일 메뉴 관련 요소
+    // [수정] 모바일 메뉴 관련 요소 선택 변경
     const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuPanel = document.getElementById('mobile-menu-panel'); // ID 변경
+    const closeMenuButton = document.getElementById('close-menu-button'); // 닫기 버튼 추가
 
     // 알림 관련 요소
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
@@ -16,21 +17,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     const emptyState = document.getElementById('notification-empty-state');
     const notificationFooter = document.getElementById('notification-footer');
 
-    // 1. 햄버거 메뉴 토글 기능
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        document.body.style.overflow = isHidden ? '' : 'hidden';
-        
-        // 버튼에 is-active 클래스를 토글하여 CSS 애니메이션을 제어
-        mobileMenuButton.classList.toggle('is-active', !isHidden);
+    // --- [수정] 1. 슬라이딩 메뉴 토글 기능 ---
+    if (mobileMenuButton && mobileMenuPanel && closeMenuButton) {
+      const toggleMenu = () => {
+        // 클래스를 토글하여 메뉴 패널을 열고 닫음
+        mobileMenuPanel.classList.toggle('menu-open');
+        mobileMenuPanel.classList.toggle('menu-closed');
+
+        // 햄버거 아이콘 애니메이션을 위한 클래스 토글
+        mobileMenuButton.classList.toggle('is-active');
+
+        // 메뉴가 열려있으면 본문 스크롤을 막고, 닫혀있으면 풀어줌
+        const isOpen = mobileMenuPanel.classList.contains('menu-open');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
 
         // 메뉴 열 때 다른 패널(알림창)은 닫기
-        if (!isHidden && notificationPanel) {
+        if (isOpen && notificationPanel) {
           notificationPanel.classList.add('hidden');
         }
-      });
+      };
+
+      // 햄버거 버튼과 닫기 버튼에 클릭 이벤트 할당
+      mobileMenuButton.addEventListener('click', toggleMenu);
+      closeMenuButton.addEventListener('click', toggleMenu);
     }
+    // --- [수정] 끝 ---
+
 
     // 2. 알림 상태 체크 함수
     const checkNotifications = () => {
@@ -51,20 +63,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // 4. 알림창 열기 기능 (모바일 메뉴 안에서)
+    // [수정] 4. 알림창 열기 기능 (모바일 메뉴 안에서) - 기존 로직은 메뉴 구조 변경으로 불필요하여 제거
     if (notificationButtonMobile && notificationPanel) {
       notificationButtonMobile.addEventListener('click', (event) => {
-        event.preventDefault();
+        event.preventDefault(); // 링크의 기본 동작 방지
         event.stopPropagation();
         
-        if (mobileMenu && mobileMenuButton) {
-          mobileMenu.classList.add('hidden');
-          document.body.style.overflow = '';
-
-          // 메뉴를 닫았으니 is-active 클래스 제거하여 아이콘을 원래대로
-          mobileMenuButton.classList.remove('is-active');
+        // 메뉴 패널을 닫음 (만약 열려있다면)
+        if (mobileMenuPanel && mobileMenuPanel.classList.contains('menu-open')) {
+          closeMenuButton.click(); // 닫기 버튼을 프로그래밍적으로 클릭하여 메뉴 닫기
         }
         
+        // 알림창을 보여줌
         notificationPanel.classList.remove('hidden');
         checkNotifications();
       });
@@ -86,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
 
-  // --- 컴포넌트 로딩 로직 ---
+  // --- 컴포넌트 로딩 로직 (기존과 동일) ---
   const loadComponent = (url, elementId) => {
     const element = document.getElementById(elementId);
     if (!element) return Promise.resolve();
