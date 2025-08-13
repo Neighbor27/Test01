@@ -1,0 +1,17 @@
+# Virtual Environment
+venv/
+.venv/
+
+# Database file
+gaco_database.db
+*.sqlite3
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE / Editor specific
+.idea/
+.vscode/
