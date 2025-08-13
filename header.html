@@ -13,7 +13,7 @@
   }
 </script>
 
-<!-- header.html (최종 수정본) -->
+<!-- header.html (최종 완성본) -->
 
 <style>
   /* 검색창 플레이스홀더 애니메이션 */
@@ -40,16 +40,13 @@
     animation: placeholder-wave 4s linear infinite;
   }
 
-  /* 햄버거 메뉴 아이콘 애니메이션을 위한 CSS (업그레이드) */
+  /* 햄버거 메뉴 아이콘 애니메이션을 위한 CSS */
   .menu-icon-button {
-    position: relative;
-    width: 40px;
-    height: 40px;
+    /* position: relative; width: 40px; height: 40px; */ /* 삭제 -> 패딩으로 대체 */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
-    cursor: pointer;
+    background-color: transparent; /* 클릭 시 배경 효과 제거 */
   }
   
   .hamburger-box {
@@ -64,10 +61,11 @@
   .hamburger-inner::after {
     width: 24px;
     height: 2px;
-    background-color: #4B5563; /* 기본 아이콘 색상 (text-gray-600) */
+    background-color: #111827; /* 2. 색상을 진한 검은색으로 통일 */
     position: absolute;
     border-radius: 2px;
-    transition: transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    /* 3. 속도를 0.3s -> 0.4s로 조정 */
+    transition: transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
   
   .hamburger-inner::before,
@@ -76,48 +74,39 @@
     display: block;
   }
 
-  /* 3개 선의 기본 위치 설정 */
+  /* 3개 선의 기본 위치 설정 (속도 및 딜레이 조정) */
   .hamburger-inner {
     top: 50%;
     transform: translateY(-50%);
-    transition-delay: 0.12s;
+    transition-delay: 0.18s;
     transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   .hamburger-inner::before {
     top: -8px;
-    transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
+    transition: top 0.15s 0.3s ease-in, opacity 0.15s ease-in;
   }
   .hamburger-inner::after {
     bottom: -8px;
-    transition: bottom 0.1s 0.25s ease-in, transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition: bottom 0.15s 0.3s ease-in, transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
 
-  /* 활성 상태 (메뉴 열렸을 때) 애니메이션 */
-  .menu-icon-button.is-active .hamburger-inner,
-  .menu-icon-button.is-active .hamburger-inner::before,
-  .menu-icon-button.is-active .hamburger-inner::after {
-    background-color: #111827; /* 활성 시 아이콘 색상 (text-gray-900) */
-  }
-
+  /* 활성 상태 (메뉴 열렸을 때) 애니메이션 (속도 및 딜레이 조정) */
   .menu-icon-button.is-active .hamburger-inner {
-    /* 중간 선은 오른쪽으로 회전하면서 X의 한 축이 됨 */
-    transform: rotate(225deg); /* 45도 + 180도 */
+    transform: rotate(225deg);
     transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    transition-delay: 0.12s;
+    transition-delay: 0.18s;
   }
   
   .menu-icon-button.is-active .hamburger-inner::before {
-    /* 위쪽 선은 중앙으로 이동 후 투명해짐 */
     top: 0;
     opacity: 0;
-    transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
+    transition: top 0.15s ease-out, opacity 0.15s 0.18s ease-out;
   }
   
   .menu-icon-button.is-active .hamburger-inner::after {
-    /* 아래쪽 선은 중앙으로 이동 후 반대방향으로 회전하여 X의 나머지 축이 됨 */
     bottom: 0;
-    transform: rotate(-90deg); /* 225도 - 315도 = -90도 */
-    transition: bottom 0.1s ease-out, transform 0.3s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: rotate(-90deg);
+    transition: bottom 0.15s ease-out, transform 0.4s 0.18s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
 </style>
 
@@ -210,7 +199,8 @@
 
   <!-- 모바일 햄버거 메뉴 버튼 (데스크톱에서는 숨김) -->
   <div class="md:hidden z-30">
-    <button id="mobile-menu-button" class="menu-icon-button">
+    <!-- 1. 원래 버튼의 크기/위치를 위한 클래스 복원 -->
+    <button id="mobile-menu-button" class="p-2 rounded-lg menu-icon-button">
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
       </span>
