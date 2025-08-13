@@ -10,22 +10,18 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     
     <!-- 
-      [수정됨] 
-      이전의 CDN 스크립트 두 개를 모두 삭제하고, 
-      우리가 직접 빌드한 CSS 파일 하나를 연결합니다.
+      [최종 수정] 
+      CSS 파일 경로를 절대 경로("/dist/...")에서 상대 경로("dist/...")로 변경했습니다.
+      이렇게 하면 대부분의 서버 환경에서 문제를 해결할 수 있습니다.
     -->
-    <link href="/dist/output.css" rel="stylesheet">
+    <link href="dist/output.css" rel="stylesheet">
 
   </head>
   <body>
     <!-- 레이아웃을 불러올 자리 -->
     <div id="layout-placeholder"></div>
 
-    <!-- 
-      [수정됨]
-      페이지 고유 콘텐츠에서 <style> 태그를 제거했습니다.
-      이 스타일은 이제 src/input.css 파일에서 관리됩니다.
-    -->
+    <!-- 페이지 고유 콘텐츠 -->
     <div id="page-content" class="hidden">
       
       <!-- 페이지 실제 내용 -->
