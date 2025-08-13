@@ -1,144 +1,202 @@
-// loadComponents.js (최종 수정본)
+<!-- header.html -->
 
-document.addEventListener("DOMContentLoaded", async () => {
-
-  // --- 헤더의 모든 기능을 초기화하는 함수 ---
-  const initializeHeader = () => {
-    // [수정] 모바일 메뉴 관련 요소 선택 변경
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenuPanel = document.getElementById('mobile-menu-panel'); // ID 변경
-    const closeMenuButton = document.getElementById('close-menu-button'); // 닫기 버튼 추가
-
-    // 알림 관련 요소
-    const notificationButtonDesktop = document.getElementById('notification-button-desktop');
-    const notificationButtonMobile = document.getElementById('notification-button-mobile');
-    const notificationPanel = document.getElementById('notification-panel');
-    const notificationList = document.getElementById('notification-list');
-    const emptyState = document.getElementById('notification-empty-state');
-    const notificationFooter = document.getElementById('notification-footer');
-
-    // --- [수정] 1. 슬라이딩 메뉴 토글 기능 ---
-    if (mobileMenuButton && mobileMenuPanel && closeMenuButton) {
-      const toggleMenu = () => {
-        // 클래스를 토글하여 메뉴 패널을 열고 닫음
-        mobileMenuPanel.classList.toggle('menu-open');
-        mobileMenuPanel.classList.toggle('menu-closed');
-
-        // 햄버거 아이콘 애니메이션을 위한 클래스 토글
-        mobileMenuButton.classList.toggle('is-active');
-
-        // 메뉴가 열려있으면 본문 스크롤을 막고, 닫혀있으면 풀어줌
-        const isOpen = mobileMenuPanel.classList.contains('menu-open');
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-
-        // 메뉴 열 때 다른 패널(알림창)은 닫기
-        if (isOpen && notificationPanel) {
-          notificationPanel.classList.add('hidden');
-        }
-      };
-
-      // 햄버거 버튼과 닫기 버튼에 클릭 이벤트 할당
-      mobileMenuButton.addEventListener('click', toggleMenu);
-      closeMenuButton.addEventListener('click', toggleMenu);
-    }
-    // --- [수정] 끝 ---
-
-
-    // 2. 알림 상태 체크 함수
-    const checkNotifications = () => {
-      if (!notificationList || !emptyState || !notificationFooter) return;
-      const notificationItemsCount = notificationList.children.length;
-      emptyState.classList.toggle('hidden', notificationItemsCount > 0);
-      notificationFooter.classList.toggle('hidden', notificationItemsCount === 0);
-    };
-
-    // 3. 알림창 토글 기능 (데스크톱)
-    if (notificationButtonDesktop && notificationPanel) {
-      notificationButtonDesktop.addEventListener('click', (event) => {
-        event.stopPropagation();
-        notificationPanel.classList.toggle('hidden');
-        if (!notificationPanel.classList.contains('hidden')) {
-          checkNotifications();
-        }
-      });
-    }
-
-    // [수정] 4. 알림창 열기 기능 (모바일 메뉴 안에서) - 기존 로직은 메뉴 구조 변경으로 불필요하여 제거
-    if (notificationButtonMobile && notificationPanel) {
-      notificationButtonMobile.addEventListener('click', (event) => {
-        event.preventDefault(); // 링크의 기본 동작 방지
-        event.stopPropagation();
-        
-        // 메뉴 패널을 닫음 (만약 열려있다면)
-        if (mobileMenuPanel && mobileMenuPanel.classList.contains('menu-open')) {
-          closeMenuButton.click(); // 닫기 버튼을 프로그래밍적으로 클릭하여 메뉴 닫기
-        }
-        
-        // 알림창을 보여줌
-        notificationPanel.classList.remove('hidden');
-        checkNotifications();
-      });
-    }
-
-    // 5. 외부 클릭 시 알림창 닫기
-    document.addEventListener('click', (event) => {
-      if (notificationPanel && !notificationPanel.classList.contains('hidden')) {
-        if (!notificationPanel.contains(event.target) && 
-            !notificationButtonDesktop.contains(event.target) &&
-            !notificationButtonMobile.contains(event.target)) {
-          notificationPanel.classList.add('hidden');
+<!-- Solution 1: Tailwind 기본 폰트 스택을 커스터마이징 -->
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Montserrat', 'Spline Sans', 'Noto Sans', 'sans-serif'],
         }
       }
-    });
+    }
+  }
+</script>
 
-    // 초기 로드 시 알림 상태 확인 (필요 시)
-    checkNotifications();
-  };
+<!-- header.html (최종 수정본) -->
 
-
-  // --- 컴포넌트 로딩 로직 (기존과 동일) ---
-  const loadComponent = (url, elementId) => {
-    const element = document.getElementById(elementId);
-    if (!element) return Promise.resolve();
-    
-    return fetch(url)
-      .then(response => response.ok ? response.text() : Promise.reject(`Failed to load ${url}`))
-      .then(data => { element.innerHTML = data; })
-      .catch(error => console.error(error));
-  };
-  
-  // 1. 레이아웃 로드
-  const layoutPlaceholder = document.getElementById('layout-placeholder');
-  if (layoutPlaceholder) {
-    try {
-      const response = await fetch('layout.html');
-      if (!response.ok) throw new Error('Layout fetch failed');
-      const layoutHtml = await response.text();
-      layoutPlaceholder.outerHTML = layoutHtml;
-    } catch (error) {
-      console.error("Could not load layout:", error);
-      return;
+<style>
+  /* 검색창 플레이스홀더 애니메이션 */
+  @keyframes placeholder-wave {
+    from {
+      background-position: 200% center;
+    }
+    to {
+      background-position: 0% center;
     }
   }
 
-  // 2. 페이지 콘텐츠 삽입
-  const pageContent = document.getElementById('page-content');
-  const mainPlaceholder = document.getElementById('main-content-placeholder');
-  if (pageContent && mainPlaceholder) {
-    mainPlaceholder.append(...pageContent.children);
-    pageContent.remove();
+  .group:hover input::placeholder {
+    background-image: linear-gradient(
+      90deg,
+      #757575,
+      #141414,
+      #757575
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: placeholder-wave 4s linear infinite;
+  }
+
+  /* 햄버거 메뉴 아이콘 애니메이션을 위한 CSS */
+  .menu-icon-button {
+    position: relative;
+    width: 40px;  /* 2.5rem */
+    height: 40px; /* 2.5rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* 클릭 시 배경 효과 제거 */
   }
   
-  // 3. 나머지 컴포넌트(헤더, 푸터, 버튼) 로드
-  Promise.all([
-    loadComponent("header.html", "header-placeholder"),
-    loadComponent("footer.html", "footer-placeholder"),
-    loadComponent("next-button.html", "next-button-placeholder"),
-  ]).then(() => {
-    // 4. 모든 부품이 로드된 후, 헤더 기능 초기화
-    initializeHeader();
-    
-    // 5. 페이지별 스크립트 실행 신호
-    document.dispatchEvent(new Event('componentsLoaded'));
-  });
-});
+  /* 두 아이콘(햄버거, X)의 공통 스타일 */
+  .menu-icon-button svg {
+    position: absolute; /* 아이콘들을 같은 위치에 겹치게 함 */
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    stroke-width: 2;
+    height: 1.5rem; /* 24px */
+    width: 1.5rem;  /* 24px */
+  }
+
+  /* 기본 상태 (메뉴 닫혔을 때) */
+  #hamburger-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+    color: #4B5563; /* text-gray-600 */
+  }
+  #close-icon {
+    opacity: 0;
+    transform: rotate(-90deg); /* 왼쪽으로 90도 돌려서 숨겨둠 */
+    color: #111827; /* text-gray-900 (진한 검은색) */
+  }
+
+  /* 활성 상태 (메뉴 열렸을 때) */
+  .menu-icon-button.is-active #hamburger-icon {
+    opacity: 0;
+    transform: rotate(90deg); /* 오른쪽으로 90도 돌면서 사라짐 */
+  }
+  .menu-icon-button.is-active #close-icon {
+    opacity: 1;
+    transform: rotate(0deg); /* 원래 각도로 돌아오면서 나타남 */
+  }
+</style>
+
+<header
+  class="relative flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f2f2f2] px-4 py-3 md:px-10 font-sans"
+>
+  <!-- 로고로고-->
+  <a class="flex items-center gap-4 text-[#141414] cursor-pointer z-30" href="index.html">
+    <div class="size-4">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </div>
+    <h2 class="sm:hidden text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
+      GaCo
+    </h2>
+    <h2 class="hidden sm:block text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
+      Grace & Connect
+    </h2>
+  </a>
+
+  <!-- 데스크톱 메뉴 (모바일에서는 숨김) -->
+  <div class="hidden md:flex flex-1 items-center justify-end gap-2 md:gap-4">
+    <!-- 검색창 -->
+    <label class="flex flex-col min-w-40 !h-10 max-w-64">
+      <div class="group flex w-full flex-1 items-stretch rounded-lg h-full">
+        <div
+          class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0 transition-colors duration-200 group-hover:text-[#141414] group-focus-within:text-[#141414] group-hover:bg-gray-200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+            ></path>
+          </svg>
+        </div>
+        <input
+          placeholder="Search"
+          class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal transition-colors duration-200 group-hover:bg-gray-200"
+          value=""
+        />
+      </div>
+    </label>
+
+    <!-- 알림 버튼 컨테이너 -->
+    <div class="relative">
+      <button
+        id="notification-button-desktop"
+        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200"
+      >
+        <div class="text-[#141414]" data-icon="Bell" data-size="20px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
+            ></path>
+          </svg>
+        </div>
+      </button>
+      <!-- 알림 패널 -->
+      <div
+        id="notification-panel"
+        class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-10"
+      >
+        <div class="p-4 border-b"><p class="font-bold text-[#141414]">Notifications</p></div>
+        <div id="notification-list" class="max-h-96 overflow-y-auto"></div>
+        <div id="notification-empty-state" class="hidden text-center py-12 px-4">
+            <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 256 256"><path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path></svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">새로운 알림이 없습니다</h3>
+            <p class="mt-1 text-sm text-gray-500">모든 내용을 확인했습니다.</p>
+        </div>
+        <div id="notification-footer" class="p-2 border-t"><a href="#" class="block text-center text-sm text-blue-600 hover:underline">View all notifications</a></div>
+      </div>
+    </div>
+
+    <a href="help_center.html">
+      <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200">
+        <div class="text-[#141414]" data-icon="Headset" data-size="20px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M201.89,54.66A103.43,103.43,0,0,0,128.79,24H128A104,104,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"></path></svg>
+        </div>
+      </button>
+    </a>
+    <a href="login.html">
+      <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1466b8] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-all duration-200 ease-out hover:bg-[#1a73c8]">
+        <span class="truncate">Login</span>
+      </button>
+    </a>
+  </div>
+
+  <!-- 모바일 햄버거 메뉴 버튼 (데스크톱에서는 숨김) -->
+  <div class="md:hidden z-30">
+    <button id="mobile-menu-button" class="menu-icon-button">
+      <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- 모바일 메뉴 패널 -->
+  <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-white z-20 pt-20">
+    <div class="flex flex-col items-center gap-4 p-4">
+      <!-- 모바일용 검색창 -->
+      <label class="w-full max-w-sm">
+        <div class="group flex w-full flex-1 items-stretch rounded-lg h-10">
+          <div class="text-[#757575] flex border-none bg-[#f2f2f2] items-center justify-center pl-4 rounded-l-lg border-r-0"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg></div>
+          <input placeholder="Search" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#141414] focus:outline-0 focus:ring-0 border-none bg-[#f2f2f2] focus:border-none h-full placeholder:text-[#757575] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" value="">
+        </div>
+      </label>
+      
+      <!-- 모바일용 메뉴 링크 -->
+      <a href="#" id="notification-button-mobile" class="text-lg text-gray-700 hover:text-blue-600 w-full text-center py-2">Notifications</a>
+      <a href="help_center.html" class="text-lg text-gray-700 hover:text-blue-600 w-full text-center py-2">Help Center</a>
+      <a href="login.html" class="text-lg text-gray-700 hover:text-blue-600 w-full text-center py-2">Login</a>
+    </div>
+  </div>
+</header>
