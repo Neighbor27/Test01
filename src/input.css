@@ -18,3 +18,25 @@
   /* ... */
 }
 
+/* --- page2.html에서 가져온 스타일 --- */
+.card {
+  border: 1px solid #dce0e5;
+  transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+  cursor: pointer;
+}
+.card:not(.selected):hover {
+  transform: translateY(-4px);
+  border-color: #a0a8b1;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+.card.selected {
+  animation: subtle-light-pulse 3s infinite alternate ease-in-out;
+}
+/* 선택 시 올라가는 효과는 제거하여 원래 디자인으로 복구 */
+.card.selected:hover {
+   transform: translateY(-4px);
+}
+@keyframes subtle-light-pulse {
+  from { box-shadow: 0 0 8px 1px #1466b8; }
+  to { box-shadow: 0 0 4px 2px #1574c1; }
+}

@@ -8,47 +8,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <title>Stitch Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          fontFamily: {
-            sans: ['Montserrat', 'Noto Sans KR', 'sans-serif'],
-          }
-        }
-      }
-    </script>
+    
+    <!-- 이전 CDN 스크립트를 삭제하고, 빌드된 CSS 파일을 연결합니다. -->
+    <link href="/dist/output.css" rel="stylesheet">
+
   </head>
   <body>
     <!-- 레이아웃을 불러올 자리 -->
     <div id="layout-placeholder"></div>
 
-    <!-- 페이지 고유 콘텐츠 (스타일 포함) -->
+    <!-- 페이지 고유 콘텐츠 (스타일은 외부 CSS 파일로 분리되었습니다) -->
     <div id="page-content" class="hidden">
-      <!-- 이 페이지에서만 사용하는 스타일 -->
-      <style>
-        .card {
-          border: 1px solid #dce0e5;
-          transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
-          cursor: pointer;
-        }
-        .card:not(.selected):hover {
-          transform: translateY(-4px);
-          border-color: #a0a8b1;
-          box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-        }
-        .card.selected {
-          animation: subtle-light-pulse 3s infinite alternate ease-in-out;
-        }
-        /* 선택 시 올라가는 효과는 제거하여 원래 디자인으로 복구 */
-        .card.selected:hover {
-           transform: translateY(-4px);
-        }
-        @keyframes subtle-light-pulse {
-          from { box-shadow: 0 0 8px 1px #1466b8; }
-          to { box-shadow: 0 0 4px 2px #1574c1; }
-        }
-      </style>
+      <!-- 이 페이지에서만 사용하던 <style> 태그는 삭제되었습니다. -->
 
       <!-- 페이지 실제 내용 -->
       <div class="flex flex-1 flex-col py-8 px-4 md:px-40 md:py-16">
