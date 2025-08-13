@@ -1,4 +1,4 @@
-<!-- header.html -->
+<!-- header.html (최종 수정본) -->
 
 <!-- Solution 1: Tailwind 기본 폰트 스택을 커스터마이징 -->
 <script>
@@ -12,8 +12,6 @@
     }
   }
 </script>
-
-<!-- header.html (최종 완성본) -->
 
 <style>
   /* 검색창 플레이스홀더 애니메이션 */
@@ -40,41 +38,34 @@
     animation: placeholder-wave 4s linear infinite;
   }
 
-  /* 햄버거 메뉴 아이콘 애니메이션을 위한 CSS */
+  /* --- 기존 모바일 햄버거 메뉴 아이콘 애니메이션 (수정 없음) --- */
   .menu-icon-button {
-    /* position: relative; width: 40px; height: 40px; */ /* 삭제 -> 패딩으로 대체 */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent; /* 클릭 시 배경 효과 제거 */
+    background-color: transparent;
   }
-  
   .hamburger-box {
     width: 24px;
     height: 24px;
     display: inline-block;
     position: relative;
   }
-  
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
     width: 24px;
     height: 2px;
-    background-color: #111827; /* 2. 색상을 진한 검은색으로 통일 */
+    background-color: #111827;
     position: absolute;
     border-radius: 2px;
-    /* 3. 속도를 0.3s -> 0.4s로 조정 */
     transition: transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
-  
   .hamburger-inner::before,
   .hamburger-inner::after {
     content: '';
     display: block;
   }
-
-  /* 3개 선의 기본 위치 설정 (속도 및 딜레이 조정) */
   .hamburger-inner {
     top: 50%;
     transform: translateY(-50%);
@@ -89,40 +80,73 @@
     bottom: -8px;
     transition: bottom 0.15s 0.3s ease-in, transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
-
-  /* 활성 상태 (메뉴 열렸을 때) 애니메이션 (속도 및 딜레이 조정) */
   .menu-icon-button.is-active .hamburger-inner {
     transform: rotate(225deg);
     transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
     transition-delay: 0.18s;
   }
-  
   .menu-icon-button.is-active .hamburger-inner::before {
     top: 0;
     opacity: 0;
     transition: top 0.15s ease-out, opacity 0.15s 0.18s ease-out;
   }
-  
   .menu-icon-button.is-active .hamburger-inner::after {
     bottom: 0;
     transform: rotate(-90deg);
     transition: bottom 0.15s ease-out, transform 0.4s 0.18s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
+
+  /* --- 데스크톱용 사이드 메뉴 스타일 (새로 추가) --- */
+  #desktop-aside-menu {
+      transition: transform 0.3s ease-in-out;
+  }
+  .desktop-menu-open {
+      transform: translateX(0);
+  }
+  .desktop-menu-closed {
+      transform: translateX(-100%);
+  }
 </style>
+
+<!-- ======================================================= -->
+<!-- ========= 데스크톱용 사이드 메뉴 패널 (새로 추가) ========= -->
+<!-- ======================================================= -->
+<aside class="fixed top-0 left-0 z-50 h-screen w-64 bg-white shadow-xl desktop-menu-closed" id="desktop-aside-menu">
+    <div class="p-6">
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-4 text-gray-800">
+                <h2 class="text-xl font-bold">Acme Co</h2>
+            </div>
+            <button class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100" id="close-desktop-menu-button">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-4">
+            <a class="text-base font-medium text-gray-800 hover:text-blue-600" href="#">Home</a>
+            <a class="text-base font-medium text-gray-800 hover:text-blue-600" href="#">About</a>
+            <a class="text-base font-medium text-gray-800 hover:text-blue-600" href="#">Services</a>
+            <a class="text-base font-medium text-gray-800 hover:text-blue-600" href="#">Contact</a>
+        </nav>
+    </div>
+</aside>
+
 
 <header
   class="relative flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f5f5f7] px-4 py-3 md:px-10 font-sans"
 >
-  <!-- 로고로고-->
+  <!-- 로고 & 데스크톱 햄버거 버튼 -->
   <a class="flex items-center gap-4 text-[#141414] cursor-pointer z-30" href="index.html">
-    <div class="size-4">
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
-          fill="currentColor"
-        ></path>
-      </svg>
-    </div>
+    <!-- =================================================================== -->
+    <!-- ========= 로고 아이콘 삭제 -> 데스크톱 햄버거 버튼으로 교체 ========= -->
+    <!-- =================================================================== -->
+    <button id="desktop-hamburger-button" class="hidden md:block p-2 rounded-lg text-gray-800 hover:bg-gray-100 -ml-2">
+         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+             <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+         </svg>
+    </button>
+
     <h2 class="sm:hidden text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">
       GaCo
     </h2>
@@ -186,7 +210,7 @@
     <a href="help_center.html">
       <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f2f2f2] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors duration-200 hover:bg-gray-200">
         <div class="text-[#141414]" data-icon="Headset" data-size="20px" data-weight="regular">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M201.89,54.66A103.43,103.43,0,0,0,128.79,24H128A104,104,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M201.89,54.66A103.43,103.43,0,0,0,128.79,24H128A104,104,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8-8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"></path></svg>
         </div>
       </button>
     </a>
@@ -197,9 +221,8 @@
     </a>
   </div>
 
-  <!-- 모바일 햄버거 메뉴 버튼 (데스크톱에서는 숨김) -->
+  <!-- 모바일 햄버거 메뉴 버튼 (데스크톱에서는 숨김, 수정 없음) -->
   <div class="md:hidden z-30 mr-2">
-    <!-- 1. 원래 버튼의 크기/위치를 위한 클래스 복원 -->
     <button id="mobile-menu-button" class="p-2 rounded-lg menu-icon-button">
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
@@ -207,7 +230,7 @@
     </button>
   </div>
 
-  <!-- 모바일 메뉴 패널 -->
+  <!-- 모바일 메뉴 패널 (수정 없음) -->
   <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-white z-20 pt-20">
     <div class="flex flex-col items-center gap-4 p-4">
       <!-- 모바일용 검색창 -->

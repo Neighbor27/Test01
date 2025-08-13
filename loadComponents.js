@@ -1,17 +1,52 @@
-// loadComponents.js (최종 수정본)
+// loadComponents.js
 
 document.addEventListener("DOMContentLoaded", async () => {
 
   // --- 헤더의 모든 기능을 초기화하는 함수 ---
   const initializeHeader = () => {
-    // 모바일 메뉴 관련 요소
+    // --- 데스크톱 햄버거 메뉴 로직 (새로 추가) ---
+    const desktopHamburgerButton = document.getElementById('desktop-hamburger-button');
+    const closeDesktopMenuButton = document.getElementById('close-desktop-menu-button');
+    const desktopMenu = document.getElementById('desktop-aside-menu');
+
+    const toggleDesktopMenu = () => {
+        if (desktopMenu) {
+            desktopMenu.classList.toggle('desktop-menu-open');
+            desktopMenu.classList.toggle('desktop-menu-closed');
+        }
+    };
+
+    if (desktopHamburgerButton) {
+        desktopHamburgerButton.addEventListener('click', toggleDesktopMenu);
+    }
+    if (closeDesktopMenuButton) {
+        closeDesktopMenuButton.addEventListener('click', toggleDesktopMenu);
+    }
+
+
+    // --- 기존 모바일 메뉴 로직 (변경 없음) ---
     const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    // 아이콘 변수 선언 추가
+    const mobileMenu = document.getElementById('mobile-menu'); // 모바일 메뉴는 별도로 존재해야 합니다.
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const closeIcon = document.getElementById('close-icon');
 
-    // 알림 관련 요소
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden'); // 또는 menu-open/menu-closed 사용
+        document.body.style.overflow = isHidden ? '' : 'hidden';
+        
+        if (hamburgerIcon && closeIcon) {
+          hamburgerIcon.classList.toggle('hidden', !isHidden);
+          closeIcon.classList.toggle('hidden', isHidden);
+        }
+        
+        if (!isHidden && notificationPanel) {
+          notificationPanel.classList.add('hidden');
+        }
+      });
+    }
+
+    // --- 알림 관련 로직 (기존과 동일) ---
     const notificationButtonDesktop = document.getElementById('notification-button-desktop');
     const notificationButtonMobile = document.getElementById('notification-button-mobile');
     const notificationPanel = document.getElementById('notification-panel');
@@ -19,26 +54,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const emptyState = document.getElementById('notification-empty-state');
     const notificationFooter = document.getElementById('notification-footer');
 
-    // 1. 햄버거 메뉴 토글 기능
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        document.body.style.overflow = isHidden ? '' : 'hidden';
-        
-        // 아이콘 토글 로직
-        if (hamburgerIcon && closeIcon) {
-          hamburgerIcon.classList.toggle('hidden', !isHidden);
-          closeIcon.classList.toggle('hidden', isHidden);
-        }
-
-        // 메뉴 열 때 다른 패널(알림창)은 닫기
-        if (!isHidden && notificationPanel) {
-          notificationPanel.classList.add('hidden');
-        }
-      });
-    }
-
-    // 2. 알림 상태 체크 함수
     const checkNotifications = () => {
       if (!notificationList || !emptyState || !notificationFooter) return;
       const notificationItemsCount = notificationList.children.length;
@@ -46,7 +61,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       notificationFooter.classList.toggle('hidden', notificationItemsCount === 0);
     };
 
-    // 3. 알림창 토글 기능 (데스크톱)
     if (notificationButtonDesktop && notificationPanel) {
       notificationButtonDesktop.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -57,7 +71,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // 4. 알림창 열기 기능 (모바일 메뉴 안에서)
     if (notificationButtonMobile && notificationPanel) {
       notificationButtonMobile.addEventListener('click', (event) => {
         event.preventDefault();
@@ -67,7 +80,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           mobileMenu.classList.add('hidden');
           document.body.style.overflow = '';
 
-          // 메뉴를 닫았으니 아이콘을 원래대로 되돌립니다.
           if (hamburgerIcon && closeIcon) {
             hamburgerIcon.classList.remove('hidden');
             closeIcon.classList.add('hidden');
@@ -79,23 +91,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // 5. 외부 클릭 시 알림창 닫기
     document.addEventListener('click', (event) => {
       if (notificationPanel && !notificationPanel.classList.contains('hidden')) {
         if (!notificationPanel.contains(event.target) && 
-            !notificationButtonDesktop.contains(event.target) &&
-            !notificationButtonMobile.contains(event.target)) {
+            notificationButtonDesktop && !notificationButtonDesktop.contains(event.target) &&
+            notificationButtonMobile && !notificationButtonMobile.contains(event.target)) {
           notificationPanel.classList.add('hidden');
         }
       }
     });
 
-    // 초기 로드 시 알림 상태 확인 (필요 시)
     checkNotifications();
   };
 
 
-  // --- 컴포넌트 로딩 로직 (이전과 동일) ---
+  // --- 컴포넌트 로딩 로직 (기존과 동일) ---
   const loadComponent = (url, elementId) => {
     const element = document.getElementById(elementId);
     if (!element) return Promise.resolve();
@@ -106,7 +116,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       .catch(error => console.error(error));
   };
   
-  // 1. 레이아웃 로드
   const layoutPlaceholder = document.getElementById('layout-placeholder');
   if (layoutPlaceholder) {
     try {
@@ -120,7 +129,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // 2. 페이지 콘텐츠 삽입
   const pageContent = document.getElementById('page-content');
   const mainPlaceholder = document.getElementById('main-content-placeholder');
   if (pageContent && mainPlaceholder) {
@@ -128,16 +136,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     pageContent.remove();
   }
   
-  // 3. 나머지 컴포넌트(헤더, 푸터, 버튼) 로드
   Promise.all([
     loadComponent("header.html", "header-placeholder"),
     loadComponent("footer.html", "footer-placeholder"),
     loadComponent("next-button.html", "next-button-placeholder"),
   ]).then(() => {
-    // 4. 모든 부품이 로드된 후, 헤더 기능 초기화
     initializeHeader();
-    
-    // 5. 페이지별 스크립트 실행 신호
     document.dispatchEvent(new Event('componentsLoaded'));
   });
 });
