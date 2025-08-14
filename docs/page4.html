@@ -91,7 +91,7 @@
       <div class="flex flex-col flex-1 py-8 px-4 md:px-40 md:py-16">
         <div class="layout-content-container flex w-full max-w-[700px] flex-col self-center">
           <div class="pb-5 px-4 md:px-0">
-            <h2 id="target-name" class="text-[28px] sm:text-[32px] md:text-[43px] font-bold leading-tight">상대방의 관심사는?</h2>
+            <h2 id="target-name" class="text-[28px] sm:text-[32px] md:text-[43px] font-bold leading-tight">상대방의 관심사는</h2>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 md:p-0 md:mt-5 justify-items-center">
             
@@ -170,7 +170,7 @@
       document.addEventListener('componentsLoaded', () => {
         const targetNameElement = document.getElementById('target-name');
         const selectedTargetName = localStorage.getItem('selectedTarget') || '상대방';
-        targetNameElement.textContent = `${selectedTargetName}의 관심사는?`;
+        targetNameElement.textContent = `${selectedTargetName}의 관심사는`;
 
         const cards = document.querySelectorAll('.card');
         const nextButton = document.getElementById('next-button');
